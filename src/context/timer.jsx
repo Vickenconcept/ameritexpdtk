@@ -1,5 +1,5 @@
 import {useState, createContext, useContext, useCallback} from "react"
-import { useNotification, notification_types } from "./notification.js"
+import { useNotification, notification_types } from "./notification.jsx"
 
 const timerUserContext = createContext()
 export const useTimerUser = () => useContext(timerUserContext)

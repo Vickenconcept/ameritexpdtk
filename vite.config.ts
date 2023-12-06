@@ -6,7 +6,6 @@ export default defineConfig({
   plugins: [react()],
   esbuild: {
     jsxInject: `import React from 'react'`,
-    // loader: "{ '.js': 'jsx' }",
   },
   // jsx: 'react',
 })

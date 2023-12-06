@@ -22,10 +22,10 @@ import {
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-import { getMediaType, getMediaPreview, getMediaUrl } from "./MediaUtils.js"
+import { getMediaType, getMediaPreview, getMediaUrl } from "./MediaUtils.jsx"
 
 import "components//modal.scss"
-import MediaList from '../components/MediaList.jsx'
+import MediaList from './MediaList.jsx'
 
 const PartEditModal = (props) => {
 
