@@ -2,17 +2,17 @@ import "./style.scss"
 import { formatSeconds } from "../../../helpers/functions"
 import { useState } from "react"
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { deleteProductAction } from "actions/timer";
+import { deleteProductAction } from "../../../actions/timer";
 
-import {getMediaType, getMediaPreview, getMediaUrl} from "./MediaUtils"
+import { getMediaType, getMediaPreview, getMediaUrl } from "./MediaUtils"
 
 import { connect } from "react-redux"
-import {useNetStatus} from "context/net"
+import { useNetStatus } from "../../../context/net"
 
 const Machine = (props) => {
 
-  const {user} = props
-  const {isOnline} = useNetStatus()
+  const { user } = props
+  const { isOnline } = useNetStatus()
 
   const [pause, setPause] = useState(false)
   const [moreMenu, setMoreMenu] = useState(false)
@@ -45,17 +45,17 @@ const Machine = (props) => {
             </DropdownToggle>
             <DropdownMenu>
               <DropdownItem onClick={showMachine}>Show</DropdownItem>
-              {isOnline && 
-              <>
-                <DropdownItem onClick={removeMachine}>Remove</DropdownItem>
-                <DropdownItem onClick={editMachine}>Edit</DropdownItem>
-              </>}
+              {isOnline &&
+                <>
+                  <DropdownItem onClick={removeMachine}>Remove</DropdownItem>
+                  <DropdownItem onClick={editMachine}>Edit</DropdownItem>
+                </>}
             </DropdownMenu>
           </Dropdown>
         }
       </div>
-      <div className="product-preview" onClick={showMachine} style={{cursor:"pointer"}} >
-        <img src={props.preview?getMediaPreview(props.preview):"/placeholder.png"}  className="w-100 h-100" />
+      <div className="product-preview" onClick={showMachine} style={{ cursor: "pointer" }} >
+        <img src={props.preview ? getMediaPreview(props.preview) : "/placeholder.png"} className="w-100 h-100" />
       </div>
       <div className="product-info">
         <div className="product-name w-100">
@@ -76,4 +76,4 @@ const mapStatetoProps = state => {
   return { user }
 }
 
-export default connect(mapStatetoProps,{})(Machine)
+export default connect(mapStatetoProps, {})(Machine)

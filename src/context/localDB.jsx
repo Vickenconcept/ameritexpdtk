@@ -1,17 +1,17 @@
 import { useState, useEffect, createContext, useMemo, useContext } from "react";
 import { useNetStatus } from "./net";
-import { cities } from "helpers/globals";
-import { initDB, insertData, putData, clearStore, getStoreData } from "helpers/offlineDB";
+import { cities } from "../helpers/globals";
+import { initDB, insertData, putData, clearStore, getStoreData } from "../helpers/offlineDB";
 
-import { getProducts, getTimerLogsOfMachine, uploadMigrationData, getLastUpdated, getLocalLastUpdated } from "actions/timer";
-import { getJobsForMP } from "actions/job";
+import { getProducts, getTimerLogsOfMachine, uploadMigrationData, getLastUpdated, getLocalLastUpdated } from "../actions/timer";
+import { getJobsForMP } from "../actions/job";
 
 const LocalDBContext = createContext();
 
 export const useLocalDB = () => useContext(LocalDBContext);
 
 export const LocalDBProvider = (props) => {
-    const {user, userLoading} = props
+    const { user, userLoading } = props
     const { isOnline } = useNetStatus();
     const [localDBStatus, setLocalDBStatus] = useState(null);
     const [isDBLoading, setIsDBLoading] = useState(false);
@@ -21,9 +21,9 @@ export const LocalDBProvider = (props) => {
     const isDBReady = useMemo(() => {
         if (localDBStatus) {
             let tmpCities = []
-            if (user.role === "Admin") 
+            if (user.role === "Admin")
                 tmpCities = cities;
-            else if (cities.indexOf(user.location) !== -1) 
+            else if (cities.indexOf(user.location) !== -1)
                 tmpCities = [user.location];
             for (let i = 0; i < tmpCities.length; i++) {
                 if (!localDBStatus[tmpCities[i]]) {
@@ -33,7 +33,7 @@ export const LocalDBProvider = (props) => {
             return true && !isDBLoading;
         }
         return false;
-    },[localDBStatus, isDBLoading])
+    }, [localDBStatus, isDBLoading])
 
     const dbStatus = useMemo(() => {
         if (isOnline && isDBReady) return "Synced"
@@ -46,7 +46,7 @@ export const LocalDBProvider = (props) => {
         //     isDBLoading, isDBReady, isOnline, uploading, downloading
         // })
         return "Error"
-    },[isDBLoading, isDBReady, isOnline, uploading, downloading])
+    }, [isDBLoading, isDBReady, isOnline, uploading, downloading])
 
     const fillStore = async (city, type, params) => {
         try {
@@ -54,15 +54,15 @@ export const LocalDBProvider = (props) => {
             const localLastUpdated = await getLocalLastUpdated(type, city);
             if (lastUpdated === localLastUpdated) {
                 if (type === 'Timer') {
-                    const timers = await getStoreData (city, type);
+                    const timers = await getStoreData(city, type);
                     if (timers && timers.length > 0) {
-                        return {mids: timers.map (timer => timer.machine[0]?._id), pids: timers.map (timer => timer.part[0]?._id)};
+                        return { mids: timers.map(timer => timer.machine[0]?._id), pids: timers.map(timer => timer.part[0]?._id) };
                     }
-                    return {mids:[], pids:[]};
+                    return { mids: [], pids: [] };
                 }
             }
             else {
-                console.log ("there are some changes on backend", city, type, lastUpdated, localLastUpdated)
+                console.log("there are some changes on backend", city, type, lastUpdated, localLastUpdated)
             }
         } catch (error) {
             console.log('Error:', error);
@@ -91,47 +91,47 @@ export const LocalDBProvider = (props) => {
 
         await Promise.all(
             products.map(async (product) => {
-            if (type === 'Timer') {
-                let mid = product.machine[0]._id
-                let pid = product.part[0]._id
-                if (!mids.includes(mid)) {
-                    mids.push(mid)
+                if (type === 'Timer') {
+                    let mid = product.machine[0]._id
+                    let pid = product.part[0]._id
+                    if (!mids.includes(mid)) {
+                        mids.push(mid)
+                    }
+                    if (!pids.includes(pid)) {
+                        pids.push(pid)
+                    }
                 }
-                if (!pids.includes(pid)) {
-                    pids.push(pid)
+                const putRes = await putData(city, type, product);
+                if (!putRes) {
+                    console.log('Error in putData', putRes);
                 }
-            }
-            const putRes = await putData(city, type, product);
-            if (!putRes) {
-                console.log('Error in putData', putRes);
-            }
             })
         );
 
         if (type === 'Timer') {
-            return {mids, pids}
+            return { mids, pids }
         }
         return true;
     };
 
 
     const mgr2local = async (city) => {
-        setDownloading (true)
+        setDownloading(true)
         try {
-            console.log ('mgr2local', city)
-            let {mids, pids} = await fillStore (city, "Timer")
+            console.log('mgr2local', city)
+            let { mids, pids } = await fillStore(city, "Timer")
             if (mids?.length && pids?.length)
-                await fillStore (city, "Job", {mids, pids})
+                await fillStore(city, "Job", { mids, pids })
             else {
                 "No reading jobs because there are no updated timers"
             }
-            await fillStore (city, "TimerLog")
+            await fillStore(city, "TimerLog")
             // await fillStore (city, "Part")
             // await fillStore (city, "Machine")
         } catch (err) {
-            console.log (err)
+            console.log(err)
         } finally {
-            setDownloading (false)
+            setDownloading(false)
         }
     }
 
@@ -144,12 +144,12 @@ export const LocalDBProvider = (props) => {
                     data.push(res[i])
             }
             try {
-                if (data.length){
-                    console.log ('Migrating data '+data.length)
+                if (data.length) {
+                    console.log('Migrating data ' + data.length)
                     let pRes = await uploadMigrationData(city, type, data)
                 }
             } catch (err) {
-                console.log (err)
+                console.log(err)
             } finally {
                 return true;
             }
@@ -159,32 +159,32 @@ export const LocalDBProvider = (props) => {
     }
 
     const mgr2server = async (city) => {
-        setUploading (true)
-        await mgrStore (city, "Timer")
-        await mgrStore (city, "TimerLog")
-        setUploading (false)
+        setUploading(true)
+        await mgrStore(city, "Timer")
+        await mgrStore(city, "TimerLog")
+        setUploading(false)
     }
 
     const initDBs = async () => {
         if (!isOnline) return false;
         setLocalDBStatus(null);
         let tmpCities = []
-        if (user.role === "Admin") 
+        if (user.role === "Admin")
             tmpCities = cities;
-        else if (cities.indexOf(user.location) !== -1) 
+        else if (cities.indexOf(user.location) !== -1)
             tmpCities = [user.location];
         try {
-            for (let i =0; i < tmpCities.length; i++) {
+            for (let i = 0; i < tmpCities.length; i++) {
                 const status = await initDB(tmpCities[i])
                 if (!status) continue;
-                await mgr2server (tmpCities[i])
-                await mgr2local (tmpCities[i])
-                setLocalDBStatus(prev=>{
-                    return {...prev, [tmpCities[i]]: status}
+                await mgr2server(tmpCities[i])
+                await mgr2local(tmpCities[i])
+                setLocalDBStatus(prev => {
+                    return { ...prev, [tmpCities[i]]: status }
                 })
             }
         } catch (e) {
-            console.log (e)
+            console.log(e)
         }
         return;
     }
@@ -195,15 +195,15 @@ export const LocalDBProvider = (props) => {
             try {
                 await initDBs();
             } catch (e) {
-                console.log (e)
+                console.log(e)
             }
             setIsDBLoading(false);
         }
     }, [isOnline, user, userLoading]);
 
-    useEffect (() => {
-        console.log ("isDBReady:", isDBReady)
-    },[isDBReady])
+    useEffect(() => {
+        console.log("isDBReady:", isDBReady)
+    }, [isDBReady])
 
     return (
         <LocalDBContext.Provider value={{

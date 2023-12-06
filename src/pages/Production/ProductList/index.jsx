@@ -3,8 +3,8 @@ import {
   CityVisualSelect,
   FactoryList,
   MachineClassSelect,
-} from "components/Common/Select"
-import { cities, factories } from "helpers/globals"
+} from "../../../components/Common/Select"
+import { cities, factories } from "../../../helpers/globals"
 import { useContext, Fragment, useState, useMemo } from "react"
 import MetaTags from "react-meta-tags"
 import { Container } from "reactstrap"
@@ -16,13 +16,13 @@ import {
   createPartAction,
   editProductAction,
   getProducts,
-} from "actions/timer"
+} from "../../../actions/timer"
 import { useEffect } from "react"
 import SweetAlert from "react-bootstrap-sweetalert"
 
-import Pagination from "components/Common/Pagination"
+import Pagination from "../../../components/Common/Pagination"
 
-import { LoadingContext } from "context/loading"
+import { LoadingContext } from "../../../context/loading"
 
 import PartModal from "../components/PartModal"
 import MachineModal from "../components/MachineModal"
@@ -33,14 +33,14 @@ import PartEditModal from "../components/PartEditModal"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
-import { useNetStatus } from "context/net"
-import { useLocalDB } from "context/localDB"
+import { useNetStatus } from "../../../context/net"
+import { useLocalDB } from "../../../context/localDB"
 import {
   getActiveCities,
   canGetAllCities,
   getActiveFactories,
   canGetAllFactories,
-} from "helpers/user_role"
+} from "../../../helpers/user_role"
 import FactoryFilter from "../components/FactoryFilter"
 
 const ProductList = props => {
@@ -358,7 +358,7 @@ const ProductList = props => {
       _factories = factoryFilters.filter(f => f != "All")
     }
     return _factories
-  },[factoryFilter, factoryFilters])
+  }, [factoryFilter, factoryFilters])
 
   const updateProducts = async (smartRead = false) => {
     setLoading(!smartRead)
@@ -389,7 +389,7 @@ const ProductList = props => {
         })
         setTotalCount(res.totalDocs)
       }
-    } catch (error) {}
+    } catch (error) { }
     setLoading(false)
   }
 
@@ -414,7 +414,7 @@ const ProductList = props => {
   return (
     <div
       className="page-content"
-      // style={{ padding: "86px calc(0.5rem / 2) 60px calc(11.5rem / 2)" }}
+    // style={{ padding: "86px calc(0.5rem / 2) 60px calc(11.5rem / 2)" }}
     >
       <MetaTags>
         <title>Timer Page</title>
@@ -508,9 +508,8 @@ const ProductList = props => {
                         }}
                       >
                         <div
-                          className={`type-selector ${
-                            _type == type ? "active" : ""
-                          }`}
+                          className={`type-selector ${_type == type ? "active" : ""
+                            }`}
                         >
                           <span>{_type}</span>
                           <span>
@@ -565,7 +564,7 @@ const ProductList = props => {
                           onChange={e => updateSearch("machineClass", e)}
                           value={search.machineClass || ""}
                           issearch="true"
-                          factoryFilter = {selectedFactories}
+                          factoryFilter={selectedFactories}
                         />
                       </div>
                     </div>
@@ -579,7 +578,7 @@ const ProductList = props => {
                           onChange={e => updateSearch("searchString", e)}
                           value={search.searchString}
                         ></input>
-                        <input style={{position: "absolute", opacity :"0.0"}}></input>
+                        <input style={{ position: "absolute", opacity: "0.0" }}></input>
                       </div>
                     </div>
                     {/* <div className="col-6 d-flex align-items-end">

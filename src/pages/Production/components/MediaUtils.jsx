@@ -1,4 +1,4 @@
-import { BACKEND, FILE_BACKEND } from "./helpers/axiosConfig"
+import { BACKEND, FILE_BACKEND } from "../../../helpers/axiosConfig"
 
 const getYoutubeId = url => {
   return url.replace("yt:", "")

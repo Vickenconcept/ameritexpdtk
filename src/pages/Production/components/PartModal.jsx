@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 
-import "components/modal.scss";
+import "../../../components/modal.scss";
 import MediaPreview from "./MediaPreview";
 
 import { useNetStatus } from "context/net"

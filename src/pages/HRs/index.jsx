@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React,{useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import MetaTags from 'react-meta-tags';
 import {
   Container,
@@ -13,12 +13,12 @@ import { Link } from "react-router-dom"
 import axios from 'axios';
 import decode from "jwt-decode"
 
-import "chartist/dist/scss/chartist.scss";
+import "../../assets/scss/chartist.scss";
 
 //i18n
 import { withTranslation } from "react-i18next"
 import SweetAlert from 'react-bootstrap-sweetalert';
-import { removeUser, updateUser } from 'actions/auth';
+import { removeUser, updateUser } from '../../actions/auth';
 
 const Users = props => {
 
@@ -33,7 +33,7 @@ const Users = props => {
       setRoles(response.data.users.map(user => user.role))
       setIsAdmin(response.data.isAdmin)
     } catch (err) {
-    
+
     }
   }
 
@@ -43,14 +43,14 @@ const Users = props => {
 
   const [roles, setRoles] = useState([])
   const onChangeRole = (e, index) => {
-    setRoles(roles.map((r, _index) => index==_index ? e.target.value : r))
+    setRoles(roles.map((r, _index) => index == _index ? e.target.value : r))
   }
   const toggleUserProperty = async (index, field) => {
     if (!isAdmin || loading) return
     setLoaing(true)
     const response = updateUser({ id: users[index].id, [field]: !users[index][field] })
     setLoaing(false)
-    setUsers(users.map((user, _index) => index == _index ? {...user, [field]: !user[field]} : user))
+    setUsers(users.map((user, _index) => index == _index ? { ...user, [field]: !user[field] } : user))
   }
   const deleteAccount = async () => {
     if (loading) return
@@ -117,28 +117,28 @@ const Users = props => {
                               <th scope="row">{index + 1}</th>
                               <td>
                                 <div>
-                                  { user.firstName + ' ' + user.lastName}
+                                  {user.firstName + ' ' + user.lastName}
                                 </div>
                               </td>
-                              <td>{ user.email }</td>
-                              <td>{ user.location }</td>
+                              <td>{user.email}</td>
+                              <td>{user.location}</td>
                               <td>
                                 {
-                                  user.role=="admin" ? <select id="role" className="form-select" onChange={v => onChangeRole(v, index)}>
+                                  user.role == "admin" ? <select id="role" className="form-select" onChange={v => onChangeRole(v, index)}>
                                     {
-                                      (user.role=="income"?["income"]:["HR", "Production", "Personnel"]).map(role => <option value={role} key={"user-"+index+"-"+role}>{role}</option>)
+                                      (user.role == "income" ? ["income"] : ["HR", "Production", "Personnel"]).map(role => <option value={role} key={"user-" + index + "-" + role}>{role}</option>)
                                     }
                                   </select> : user.role
                                 }
                               </td>
                               <td>
                                 <span className={`badge cursor-pointer ${user.approved ? "bg-success" : "bg-danger"}`} onClick={() => toggleUserProperty(index, "approved")}>
-                                  { user.approved ? "Approved" : "Under Review" }
+                                  {user.approved ? "Approved" : "Under Review"}
                                 </span>
                               </td>
                               <td>
                                 <span className={`badge cursor-pointer ${user.admin ? "bg-success" : "bg-danger"}`} onClick={() => toggleUserProperty(index, "admin")}>
-                                  { user.admin ? "Yes" : "No" }
+                                  {user.admin ? "Yes" : "No"}
                                 </span>
                               </td>
                               <td>
@@ -151,7 +151,7 @@ const Users = props => {
                                 </Button>
                                 <Button className="text-white bg-info ms-3" onClick={() => {
                                   setSaveAlert(true)
-                                  setSelectedPersonIndex(index)                                  
+                                  setSelectedPersonIndex(index)
                                   setActionType("Archieve")
                                 }}>
                                   Archieve

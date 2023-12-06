@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import { Route, Redirect } from "react-router-dom"
 import decode from "jwt-decode"
-import { roleToNumber } from "common/functions"
+import { roleToNumber } from "../../common/functions"
 
 import { useEffect } from "react"
 
@@ -23,7 +23,7 @@ const Authmiddleware = ({
       {...rest}
       render={props => {
 
-        if (!isAuthProtected){
+        if (!isAuthProtected) {
           return (
             <Layout>
               <Component {...props} />
@@ -38,7 +38,7 @@ const Authmiddleware = ({
             />
           )
         } else if (level < admin && isAuthProtected) {
-          console.log ("here")
+          console.log("here")
           return (
             <Redirect
               to={{ pathname: "/dashboard" }}

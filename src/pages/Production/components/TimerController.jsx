@@ -3,32 +3,32 @@ import {
   startTimerAction,
   stopTimerAction,
   updateTimerAction,
-} from "actions/timer"
-import { BACKEND } from "./helpers/axiosConfig"
+} from "../../../actions/timer"
+import { BACKEND } from "../../../helpers/axiosConfig"
 import { useState, useEffect, forwardRef, useRef, useMemo, useCallback } from "react"
 
 import { formatMSeconds, formatSeconds } from "../../../helpers/functions"
 import { lbsToTons } from "../../../helpers/functions"
 
-import { getJobsForTimer } from "actions/job"
+import { getJobsForTimer } from "../../../actions/job"
 
-import { useLocalDB } from "context/localDB"
-import { useNetStatus } from "context/net"
-import {useTimerUser} from 'context/timer'
+import { useLocalDB } from "../../../context/localDB"
+import { useNetStatus } from "../../../context/net"
+import { useTimerUser } from '../../../context/timer'
 import { useTimerContext } from "../Timer/context"
-import { StoppingReason } from "pages/Production/components/type"
+import { StoppingReason } from "../../../pages/Production/components/type"
 
-const DivideElem = ({status}) => (<span style={{color:status?"#102135":"#fffae5"}}>:</span>)
-const NoughElem = ({status}) => (<span style={{color:status?"#102135":"#fffae5"}}>0</span>)
-const DigitElem = ({digit, status}) => (<span style={{color:status?"#102135":"#fffae5"}}>{digit}</span>)
+const DivideElem = ({ status }) => (<span style={{ color: status ? "#102135" : "#fffae5" }}>:</span>)
+const NoughElem = ({ status }) => (<span style={{ color: status ? "#102135" : "#fffae5" }}>0</span>)
+const DigitElem = ({ digit, status }) => (<span style={{ color: status ? "#102135" : "#fffae5" }}>{digit}</span>)
 
-const getTimeValue = (tt)=>{
-  let t = tt?tt:0
-  let hour = Math.floor (t/3600)
+const getTimeValue = (tt) => {
+  let t = tt ? tt : 0
+  let hour = Math.floor(t / 3600)
   t -= hour * 3600
-  let minute = Math.floor (t/60)
+  let minute = Math.floor(t / 60)
   t -= minute * 60
-  let second = Math.floor (t)
+  let second = Math.floor(t)
   // t -= second * 1000
   return {
     hour,
@@ -38,59 +38,59 @@ const getTimeValue = (tt)=>{
 }
 
 const Clocker = props => {
-  const {time, status} = props
-  const [mm, setMM] = useState (0)
+  const { time, status } = props
+  const [mm, setMM] = useState(0)
   let _timerId = null
 
-  useEffect (()=>{
+  useEffect(() => {
     if (status == 'Started')
-      _timerId = setInterval (()=>{
-        setMM (mm=>{
-          if (mm>=999)
+      _timerId = setInterval(() => {
+        setMM(mm => {
+          if (mm >= 999)
             return 0
-          return mm+130
+          return mm + 130
         })
       }, 130)
-    else{ 
+    else {
       if (_timerId)
         clearInterval(_timerId)
-      setMM (0)
+      setMM(0)
     }
     return () => {
       clearInterval(_timerId)
     }
   }, [status])
 
-  const timeText = useMemo(()=>{
-    let {hour, minute, second, millisecond} = getTimeValue(time)
+  const timeText = useMemo(() => {
+    let { hour, minute, second, millisecond } = getTimeValue(time)
     return <>
-      {hour<10&&<NoughElem status={status=='Started'}/>}
-      {hour==0?
-      <NoughElem status={status=='Started'}/>:
-      <DigitElem status={status=='Started'} digit={hour}/>
+      {hour < 10 && <NoughElem status={status == 'Started'} />}
+      {hour == 0 ?
+        <NoughElem status={status == 'Started'} /> :
+        <DigitElem status={status == 'Started'} digit={hour} />
       }
-      <DivideElem status={status=='Started'} />
-      {minute<10&&<NoughElem status={status=='Started'}/>}
-      {minute==0?<NoughElem status={status=='Started'}/>:
-      <DigitElem status={status=='Started'} digit={minute}/>
+      <DivideElem status={status == 'Started'} />
+      {minute < 10 && <NoughElem status={status == 'Started'} />}
+      {minute == 0 ? <NoughElem status={status == 'Started'} /> :
+        <DigitElem status={status == 'Started'} digit={minute} />
       }
-      <DivideElem status={status=='Started'} />
-      {second<10&&<NoughElem status={status=='Started'}/>}
-      {second==0?<NoughElem status={status=='Started'}/>:
-      <DigitElem status={status=='Started'} digit={second}/>
+      <DivideElem status={status == 'Started'} />
+      {second < 10 && <NoughElem status={status == 'Started'} />}
+      {second == 0 ? <NoughElem status={status == 'Started'} /> :
+        <DigitElem status={status == 'Started'} digit={second} />
       }
     </>
   }, [time, status])
 
-  const mmText = useMemo(()=>{
-    let millisecond = Math.floor((mm%1000)/10)
+  const mmText = useMemo(() => {
+    let millisecond = Math.floor((mm % 1000) / 10)
     return (
       <>
-      <DivideElem status={status=='Started'} />
-      {millisecond<10&&<NoughElem status={status=='Started'}/>}
-      {millisecond==0?<NoughElem status={status=='Started'}/>:
-      <DigitElem status={status=='Started'} digit={millisecond}/>
-      }
+        <DivideElem status={status == 'Started'} />
+        {millisecond < 10 && <NoughElem status={status == 'Started'} />}
+        {millisecond == 0 ? <NoughElem status={status == 'Started'} /> :
+          <DigitElem status={status == 'Started'} digit={millisecond} />
+        }
       </>
     )
   }, [mm, status])
@@ -110,15 +110,15 @@ const Clocker = props => {
 const Controller = props => {
   const { isOnline } = useNetStatus()
   const { isDBReady } = useLocalDB()
-  const [ now, setNow ] = useState(new Date())
-  const [ stoppingReason, setStoppingReason ] = useState('')
+  const [now, setNow] = useState(new Date())
+  const [stoppingReason, setStoppingReason] = useState('')
 
   const {
     getProductionTime: getProductionTimeCtx,
     productionTime: productionTimeCtx,
   } = useTimerUser()
 
-  const {refreshTimer} = useTimerContext()
+  const { refreshTimer } = useTimerContext()
 
   const currentProductionTime = useMemo(() => {
     // const ctx = getProductionTimeCtx(props.city) //start, productionTime
@@ -131,13 +131,13 @@ const Controller = props => {
     }
     if (startForTimer) {
       const startOfDay = new Date();
-      startOfDay.setHours(0,0,0,0);
+      startOfDay.setHours(0, 0, 0, 0);
       if (new Date(startForTimer).getTime() < startOfDay.getTime()) {
         startForTimer = null
       }
     }
-    return {productionTime:null, startForTimer}
-  },[productionTimeCtx, props.city, props.times])
+    return { productionTime: null, startForTimer }
+  }, [productionTimeCtx, props.city, props.times])
 
   const isEndedProductionTime = useMemo(() => {
     if (props.endProductionTime) return true
@@ -146,7 +146,7 @@ const Controller = props => {
     const { startForTimer, productionTime } = currentProductionTime
     if (!productionTime || !startForTimer) return false
     return (now.getTime() - new Date(startForTimer).getTime()) > (productionTime * 3600)
-  },[currentProductionTime, now, props.endProductionTime])
+  }, [currentProductionTime, now, props.endProductionTime])
 
   const productionTimeText = useMemo(() => {
     if (!currentProductionTime || !now) return "00:00:00"
@@ -156,9 +156,9 @@ const Controller = props => {
     // const remain = productionTime * 3600 - diff
     const remainText = formatSeconds(diff)
     return `${remainText}`
-  },[now, currentProductionTime])
+  }, [now, currentProductionTime])
 
-  const {navToStock, canChangeJob} = props
+  const { navToStock, canChangeJob } = props
   const { machine } = props
   const [time, setTime] = useState(0)
   const [timerId, setTimerId] = useState(0)
@@ -207,14 +207,14 @@ const Controller = props => {
     )
     if (_jobs && _jobs.jobs && _jobs.jobs.length > 0)
       setJobs(_jobs.jobs)
-    else if (_jobs && _jobs.stock_jobs && _jobs.stock_jobs.length > 0) 
+    else if (_jobs && _jobs.stock_jobs && _jobs.stock_jobs.length > 0)
       setJobs(_jobs.stock_jobs)
     else
       setJobs([])
   }, [props.status, isOnline])
 
   const appendLog = v => {
-    console.log ('appendLog', v)
+    console.log('appendLog', v)
     setLogText(prev => prev + "\r\n" + timeText.split(" ").join("") + " ---- " + v)
   }
 
@@ -290,9 +290,9 @@ const Controller = props => {
   }, [props.time])
   const make5SecondDisable = () => {
     setIs5Second(true)
-    try{
+    try {
       clearTimeout(timerId5)
-    }catch(e){
+    } catch (e) {
       console.log(e);
     }
     console.log("5second started")
@@ -302,8 +302,8 @@ const Controller = props => {
     }, 5000)
   }
   const startTimerInController = async (controlTimer, needRefresh = true) => {
-    console.log (props)
-    if(!props.canOperate) return;
+    console.log(props)
+    if (!props.canOperate) return;
     make5SecondDisable()
     appendLog("checking the operator and updating...")
     if (props.operator == "") {
@@ -330,7 +330,7 @@ const Controller = props => {
       }
     }
     const res = await startTimerAction(controlTimer, props.city, operator, isOnline)
-    console.log (3, res)
+    console.log(3, res)
     if (res.status == 200)
       if (!res.data.success) {
         appendLog(res.data.msg)
@@ -350,7 +350,7 @@ const Controller = props => {
     }
   }
   const stopTimerInController = async (controlTimer, aParam = '') => {
-    if(!props.canOperate) return;
+    if (!props.canOperate) return;
     make5SecondDisable()
     appendLog("stopping Timer...")
     const res = await stopTimerAction(controlTimer, props.city, isOnline, aParam)
@@ -362,19 +362,19 @@ const Controller = props => {
     } else {
       appendLog(
         props.machine.name +
-          " in " +
-          props.city +
-          " stopping failed. Please try again."
+        " in " +
+        props.city +
+        " stopping failed. Please try again."
       )
     }
   }
   const restartTimerInController = async controlTimer => {
-    if(!props.canOperate) return;
+    if (!props.canOperate) return;
     await stopTimerInController(controlTimer)
     await startTimerInController(controlTimer, false)
   }
   const endTimerInController = async controlTimer => {
-    if(!props.canOperate) return;
+    if (!props.canOperate) return;
     make5SecondDisable()
     const res = await endTimerAction(controlTimer, props.city, isOnline)
     closeEndModal()
@@ -409,7 +409,7 @@ const Controller = props => {
     if (props.canOperate == false) return true
     if (!operator || operator == "") return true
     return false
-  },[jobs, props.canOperate, operator])
+  }, [jobs, props.canOperate, operator])
 
   return (
     <div className="body-container">
@@ -565,40 +565,40 @@ const Controller = props => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '1rem',
-                }}
+              }}
               >
                 {jobs.length > 0 &&
-                <select
-                  className="operator-input"
-                  type="text"
-                  style={{ color: jobs.length ? "black" : "lightgrey" }}
-                  disabled={jobs.length == 0 || !props.canOperate || !canChangeJob}
-                  defaultValue={"Select Stock Job"}
-                >
-                  {canChangeJob && jobs.length == 0 && (
-                    <option value="Select Stock Job" disabled>
-                      Create Job
-                    </option>
-                  )}
-                  {jobs.map(job => {
-                    return <option key={"job_select_"+job._id}>{job.name}</option>
-                  })}
-                </select>
+                  <select
+                    className="operator-input"
+                    type="text"
+                    style={{ color: jobs.length ? "black" : "lightgrey" }}
+                    disabled={jobs.length == 0 || !props.canOperate || !canChangeJob}
+                    defaultValue={"Select Stock Job"}
+                  >
+                    {canChangeJob && jobs.length == 0 && (
+                      <option value="Select Stock Job" disabled>
+                        Create Job
+                      </option>
+                    )}
+                    {jobs.map(job => {
+                      return <option key={"job_select_" + job._id}>{job.name}</option>
+                    })}
+                  </select>
                 }
                 {jobs.length == 0 && (
-                <button 
-                  className="stock-job-navigation"
-                  style={{
-                    backgroundColor: '#1eabaf',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '0.5rem',
-                    height: '30px',
-                  }}
-                  onClick={() => {navToStock()}}
-                >
-                  Create Job
-                </button>
+                  <button
+                    className="stock-job-navigation"
+                    style={{
+                      backgroundColor: '#1eabaf',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '0.5rem',
+                      height: '30px',
+                    }}
+                    onClick={() => { navToStock() }}
+                  >
+                    Create Job
+                  </button>
                 )}
               </div>
             </div>
@@ -609,7 +609,7 @@ const Controller = props => {
             <div className="main-body-reading-pane" ref={readingPane}>
               {logText.split("\n").map((str, idx) => (
                 <p
-                  key={"paragraph_"+idx}
+                  key={"paragraph_" + idx}
                   style={{
                     textTransform: "none",
                   }}
@@ -627,11 +627,11 @@ const Controller = props => {
             <p className={"clock-start " + ((is5Second || disabled) && "disabled")}>
               <a
                 style={{
-                  color: (is5Second || disabled)? "grey": props.status == "Pending" ? "rgb(204,200,17)" : stopColor,
+                  color: (is5Second || disabled) ? "grey" : props.status == "Pending" ? "rgb(204,200,17)" : stopColor,
                 }}
                 onClick={() => {
                   {
-                    if(is5Second || disabled) return;
+                    if (is5Second || disabled) return;
                     props.status == "Pending"
                       ? startTimerInController(props._id, props.city)
                       : restartTimerInController(props._id, props.city)
@@ -657,7 +657,7 @@ const Controller = props => {
                   {lbsToTons((props.dailyTon / props.productTime).toFixed(3))}
                 </p>
                 <p className="action-units-info">
-                  {lbsToTons(props.dailyTon?props.dailyTon.toFixed(3):'')}
+                  {lbsToTons(props.dailyTon ? props.dailyTon.toFixed(3) : '')}
                 </p>
               </div>
             </div>
@@ -750,17 +750,17 @@ const Controller = props => {
               >
                 STOP
               </a>{" "}
-              <br/>
-              <small style={{lineHeight: "3vw"}}>
+              <br />
+              <small style={{ lineHeight: "3vw" }}>
                 {
-                  Object.values(StoppingReason).map((reason) => 
+                  Object.values(StoppingReason).map((reason) =>
                     <>
                       <input
                         type="checkbox"
                         checked={stoppingReason === reason}
-                        onChange={() => {setStoppingReason(reason)}}
+                        onChange={() => { setStoppingReason(reason) }}
                       />
-                      <label>{reason}</label><br/>
+                      <label>{reason}</label><br />
                     </>
                   )
                 }

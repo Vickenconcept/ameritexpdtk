@@ -2,12 +2,12 @@ import {
   getProducts,
   getTimerLogsOfMachine,
   searchMacheinsAction,
-} from "actions/timer"
+} from "../../../../actions/timer"
 import { machineClasses } from "helpers/globals"
 import React, { useEffect, useMemo, useRef, useState } from "react"
 
 import { formatSeconds, lbsToTons } from "../../../../helpers/functions.js"
-import { useNetStatus } from "context/net"
+import { useNetStatus } from "../../../../context/net"
 
 import PopupWindow from './PopupWindow.jsx'
 import NewWindow from 'react-new-window'

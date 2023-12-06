@@ -13,7 +13,7 @@ import {
   startTimerAction,
   updateTimerAction,
   deleteProductAction,
-} from "actions/timer"
+} from "../../../actions/timer"
 import { useEffect, useMemo, useCallback, useRef, forwardRef } from "react"
 
 import { createPortal } from "react-dom"
@@ -24,16 +24,16 @@ import { withRouter } from "react-router-dom"
 import { lbsToTons } from "../../../helpers/functions"
 import Editable from "react-bootstrap-editable"
 
-import AutoCompleteSelect from "components/Common/AutoCompleteSelect"
+import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
 // import { NewWindow } from "react-window-open"
 
 import TimerController from "./TimerController"
-import { BACKEND } from "./helpers/axiosConfig"
+import { BACKEND } from "../../../helpers/axiosConfig"
 
 import "./timer.scss"
-import { useNetStatus } from "context/net"
-import { useTimerUser } from "context/timer"
-import { canChangeJob, canChangePart } from "helpers/user_role"
+import { useNetStatus } from "../../../context/net"
+import { useTimerUser } from "../../../context/timer"
+import { canChangeJob, canChangePart } from "../../../helpers/user_role"
 import { useTimerContext } from "../Timer/context"
 
 const NewWindow = props => {
@@ -95,7 +95,7 @@ const NewWindow = props => {
 
 const Timer = props => {
 
-  const {startTimer, stopTimer, deleteTimer} = useTimerContext()
+  const { startTimer, stopTimer, deleteTimer } = useTimerContext()
 
   const [isControllerOpen, setIsControllerOpen] = useState(false)
   const [width, setWidth] = useState(1000)
@@ -105,9 +105,9 @@ const Timer = props => {
     props.history.push("/orderflow/production-tracker?stockmodal=true")
   }
 
-  const { 
-    timerRequest, 
-    TIMER_USER, 
+  const {
+    timerRequest,
+    TIMER_USER,
     TIMER_TICK_UNIT,
     getTimerValueCtx,
     setTimerValueCtx,
@@ -145,13 +145,13 @@ const Timer = props => {
 
   const { user } = props
 
-  const getCanChangePart = useMemo (()=>{
+  const getCanChangePart = useMemo(() => {
     return canChangePart(user)
   }, [user])
 
-  const getCanChangeJob = useMemo (()=>{
+  const getCanChangeJob = useMemo(() => {
     return canChangeJob(user)
-  },[user])
+  }, [user])
 
   const [moreMenu, setMoreMenu] = useState(false)
   // const [isExpired, setIsExpired] = useState(false)
@@ -163,7 +163,7 @@ const Timer = props => {
 
   const prevRef = useRef(props.status)
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       if (props.status == "Started" && prevRef.current == null) {
         // setTimeout(() => {
         //   setTime(time + 0.12)
@@ -196,17 +196,17 @@ const Timer = props => {
     )
   }, [props.status, props.times])
 
-  const calcTimeValue = ()=>{
-    return (props.status == "Started" || props.times.length==0)
-                  ? time
-                  : (new Date(props.times[props.times.length - 1].endTime) -
-                      new Date(props.times[props.times.length - 1].startTime)) /
-                      1000
+  const calcTimeValue = () => {
+    return (props.status == "Started" || props.times.length == 0)
+      ? time
+      : (new Date(props.times[props.times.length - 1].endTime) -
+        new Date(props.times[props.times.length - 1].startTime)) /
+      1000
   }
 
-  const timeText = useMemo (()=>{
+  const timeText = useMemo(() => {
     return formatSeconds(calcTimeValue())
-  },[props.status, props.times, time])
+  }, [props.status, props.times, time])
 
   let _timerId = null
 
@@ -222,9 +222,9 @@ const Timer = props => {
     //   // console.log("timer---");
     //   clearTimeout(_timerId)
     // }
-    if (props.status == "Started") 
-      _timerId = setInterval (()=>{
-        setTime (calculateCurrentTime())
+    if (props.status == "Started")
+      _timerId = setInterval(() => {
+        setTime(calculateCurrentTime())
       }, TIMER_TICK_UNIT)
     else if (_timerId)
       clearInterval(_timerId)
@@ -235,12 +235,12 @@ const Timer = props => {
 
   const isExpired = useMemo(() => {
     return (props.status == "Started" || !props.times.length
-        ? time
-        : (new Date(props.times[props.times.length - 1].endTime) -
-            new Date(props.times[props.times.length - 1].startTime)) /
-          1000) <=
-    (props.part.length ? props.part[0].avgTime : props.part.avgTime)
-  },[props.status, props.times, props.part, time])
+      ? time
+      : (new Date(props.times[props.times.length - 1].endTime) -
+        new Date(props.times[props.times.length - 1].startTime)) /
+      1000) <=
+      (props.part.length ? props.part[0].avgTime : props.part.avgTime)
+  }, [props.status, props.times, props.part, time])
 
   const editTimer = () => {
     props.editTimer(props._id)
@@ -271,18 +271,18 @@ const Timer = props => {
       //   props.setLoading(false)
       //   return true
       // }
-      console.log (res)
+      console.log(res)
       // const error = "" + res
       // if (error.includes("403"))
-        // alert(
-        //   "Timer is already started. Please stop it and then change the Part again."
-        // )
+      // alert(
+      //   "Timer is already started. Please stop it and then change the Part again."
+      // )
       // else if (error.includes("500"))
       //   alert("Unknown error, please report to the support team.")
       // props.setLoading(false)
       // return false
     } catch (e) {
-      console.log (e)
+      console.log(e)
     } finally {
       props.setLoading(false)
     }
@@ -315,13 +315,13 @@ const Timer = props => {
   }, [props.dailyUnit])
 
   useEffect(() => {
-    setTimerValueCtx (
-      props.city, 
-      props._id, 
+    setTimerValueCtx(
+      props.city,
+      props._id,
       props.status,
-      calcTimeValue(), 
+      calcTimeValue(),
       {
-        isExpired, 
+        isExpired,
         timeText,
         dailyUnit: (props.dailyUnit - (props.status == "Started")),
         operator: props.operator,
@@ -339,21 +339,21 @@ const Timer = props => {
           </select> */}
           <div style={{ width: "100%" }}>
             <AutoCompleteSelect
-              disabled = {!getCanChangePart}
+              disabled={!getCanChangePart}
               timerChangePart="true"
               option={props.part[0] && props.part[0]._id}
-              placeholder = {props.part[0] && props.part[0].name}
+              placeholder={props.part[0] && props.part[0].name}
               options={props.parts}
               onChange={v => {
                 partChanged(v)
               }}
               loading={props.partsLoading}
-              // placeholder={
-              //   props.part.length
-              //     ? props.part[0] && props.part[0].name
-              //     : props.part && props.part.name
-              // }
-              // value={"default"}
+            // placeholder={
+            //   props.part.length
+            //     ? props.part[0] && props.part[0].name
+            //     : props.part && props.part.name
+            // }
+            // value={"default"}
             />
           </div>
 
@@ -383,13 +383,12 @@ const Timer = props => {
           </h3>
           <div className="timer-name">
             <div
-              className={`time ${
-                props.status == "Pending" && !props.times.length
+              className={`time ${props.status == "Pending" && !props.times.length
                   ? "text-zero"
                   : isExpired
-                  ? "text-success"
-                  : "text-danger"
-              }`}
+                    ? "text-success"
+                    : "text-danger"
+                }`}
             >
               {timeText}
             </div>
@@ -397,8 +396,8 @@ const Timer = props => {
           <div className="production-details">
             <div className="operator-name" style={{ textAlign: "center" }}>
               {props.operator == "" ||
-              props.operator == null ||
-              props.operator == undefined
+                props.operator == null ||
+                props.operator == undefined
                 ? "Please set Operator"
                 : props.operator}
               {/* <Editable
@@ -469,9 +468,9 @@ const Timer = props => {
                   isExpired={isExpired}
                   open={isControllerOpen}
                   canOperate={props.canOperate}
-                  navToStock = {navToStock}
-                  canChangeJob = {getCanChangeJob}
-                  />
+                  navToStock={navToStock}
+                  canChangeJob={getCanChangeJob}
+                />
               </NewWindow>
             )}
             <div className="button-container">

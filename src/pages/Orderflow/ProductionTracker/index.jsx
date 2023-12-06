@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react"
-import { cities, factories } from "helpers/globals"
+import { cities, factories } from "../../../helpers/globals"
 import MetaTags from "react-meta-tags"
 import {
   Container,
@@ -11,9 +11,9 @@ import {
   Label,
 } from "reactstrap"
 import "./style.scss"
-import { CitySelect, FactoryList } from "components/Common/Select"
-import { getProducts } from "actions/timer"
-import AutoCompleteSelect from "components/Common/AutoCompleteSelect"
+import { CitySelect, FactoryList } from "../../../components/Common/Select"
+import { getProducts } from "../../../actions/timer"
+import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
 import { array } from "prop-types"
 import { arraySplice } from "redux-form"
 import { getUsers } from "actions/auth"
@@ -60,7 +60,7 @@ const ProductionTracker = props => {
   const canAllFactories = useMemo(() => {
     return canGetAllFactories(user)
   }, [user])
-  
+
   const userCity = user
     ? user.role == "Admin"
       ? "Seguin"
@@ -73,7 +73,7 @@ const ProductionTracker = props => {
       : user.factory
     : "Pipe And Box"
 
-  const {isOnline} = useNetStatus()
+  const { isOnline } = useNetStatus()
   const { loading, setLoading } = useContext(LoadingContext)
   const [jobModal, setJobModal] = useState(false)
   const [jobDeleteModal, setJobDeleteModal] = useState(false)
@@ -125,10 +125,10 @@ const ProductionTracker = props => {
     return diffDays
   }
 
-  useEffect(()=>{
-    ;(async () => {
-      const _parts = await getProducts("Part", -1, {city: filterCity}, isOnline)
-      const _machines = await getProducts("Machine", -1, {city: filterCity}, isOnline)
+  useEffect(() => {
+    ; (async () => {
+      const _parts = await getProducts("Part", -1, { city: filterCity }, isOnline)
+      const _machines = await getProducts("Machine", -1, { city: filterCity }, isOnline)
       const _users = await getUsers()
 
       setMachines(_machines.products)
@@ -148,7 +148,7 @@ const ProductionTracker = props => {
   const [deleteJobCount, setDeleteJobCount] = useState(0)
   const [resultCount, setResultCount] = useState(0)
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       setLoading(true)
       const getJobData = await getJobsAction(
         page,
@@ -176,15 +176,15 @@ const ProductionTracker = props => {
   })
 
   useEffect(() => {
-    ;(async () => {
-      const _parts = await getProducts("Part", -1, {city: jobParams.city}, isOnline)
+    ; (async () => {
+      const _parts = await getProducts("Part", -1, { city: jobParams.city }, isOnline)
       updateTempJobField("", "part")
       updateTempJobField("", "machine")
       setParts(_parts.products)
     })()
   }, [jobParams.city])
 
-  useEffect (()=>{
+  useEffect(() => {
     updateTempJobField("", "part")
   }, [jobParams.factory])
 
@@ -251,11 +251,11 @@ const ProductionTracker = props => {
     cage: "bg-dark",
     Cage: "bg-dark",
   }
-  useEffect (()=>{
-    console.log ('Parts changed')
+  useEffect(() => {
+    console.log('Parts changed')
   }, [parts])
   const filteredJobModalParts = useMemo(() => {
-    console.log ('changed parts options')
+    console.log('changed parts options')
     return parts.filter(part => part.factory == jobParams.factory)
   }, [jobParams.factory, parts])
   // useEffect(async () => {
@@ -306,7 +306,7 @@ const ProductionTracker = props => {
       setJob({})
       toggleModal()
     }
-  },[props.history.location])
+  }, [props.history.location])
 
   return (
     <div className="page-content production-tracker">
@@ -334,26 +334,25 @@ const ProductionTracker = props => {
               <>
 
                 <div className="d-flex align-items-end justify-space-between mb-3 mt-1">
-                  
+
                   <div className="d-flex city-selector-container flex-1 row p-0 m-0 mt-3 mr-5">
-                  {cities.map((_city, index) => (
-                    <div
-                      key={"city" + index}
-                      className="city text-uppercase col-lg-4 col-md-6 "
-                    >
+                    {cities.map((_city, index) => (
                       <div
-                        className={`city-selector ${
-                          _city == filterCity ? "active" : ""
-                        }`}
-                        onClick={() => setFilterCity(_city)}
+                        key={"city" + index}
+                        className="city text-uppercase col-lg-4 col-md-6 "
                       >
-                        <span>{_city}</span>
-                        <span>
-                          <i className="mdi mdi-poll"></i>
-                        </span>
+                        <div
+                          className={`city-selector ${_city == filterCity ? "active" : ""
+                            }`}
+                          onClick={() => setFilterCity(_city)}
+                        >
+                          <span>{_city}</span>
+                          <span>
+                            <i className="mdi mdi-poll"></i>
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                   </div>
 
                   <button
@@ -379,9 +378,8 @@ const ProductionTracker = props => {
                   <div className="d-flex jobs-table-header">
                     <div className="d-flex tab-container">
                       <div
-                        className={`jobs-tab ongoing-job-tab cursor-pointer ${
-                          tab === 1 ? "active" : ""
-                        }`}
+                        className={`jobs-tab ongoing-job-tab cursor-pointer ${tab === 1 ? "active" : ""
+                          }`}
                         onClick={() => {
                           setTab(1)
                           setPage(1)
@@ -394,9 +392,8 @@ const ProductionTracker = props => {
                         </div>
                       </div>
                       <div
-                        className={`jobs-tab past-job-tab cursor-pointer ${
-                          tab === 2 ? "active" : ""
-                        }`}
+                        className={`jobs-tab past-job-tab cursor-pointer ${tab === 2 ? "active" : ""
+                          }`}
                         onClick={() => {
                           setTab(2)
                           setPage(1)
@@ -409,9 +406,8 @@ const ProductionTracker = props => {
                         </div>
                       </div>
                       <div
-                        className={`jobs-tab past-job-tab cursor-pointer ${
-                          tab === 0 ? "active" : ""
-                        }`}
+                        className={`jobs-tab past-job-tab cursor-pointer ${tab === 0 ? "active" : ""
+                          }`}
                         onClick={() => {
                           setTab(0)
                           setPage(1)
@@ -425,9 +421,8 @@ const ProductionTracker = props => {
                       </div>
                       {user.role == "Admin" && (
                         <div
-                          className={`jobs-tab past-job-tab cursor-pointer ${
-                            tab === 3 ? "active" : ""
-                          }`}
+                          className={`jobs-tab past-job-tab cursor-pointer ${tab === 3 ? "active" : ""
+                            }`}
                           onClick={() => {
                             setTab(3)
                             setPage(1)
@@ -469,8 +464,8 @@ const ProductionTracker = props => {
                       <div className="d-flex flex-1 align-items-center ms-2 me-2">
                         <FactoryList
                           value={filterFactory}
-                          allowall={canAllFactories?"true":null}
-                          activeFactories = {activeFactories}
+                          allowall={canAllFactories ? "true" : null}
+                          activeFactories={activeFactories}
                           placeholder="Select Factory"
                           onChange={e => {
                             setFilterFactory(e.target.value)
@@ -480,14 +475,14 @@ const ProductionTracker = props => {
                     </div>
                   </div>
 
-                  <div className="jobs-table w-100 overflow-auto" style={{paddingBottom:'80px'}}>
+                  <div className="jobs-table w-100 overflow-auto" style={{ paddingBottom: '80px' }}>
                     <table
                       className="w-100 table table-nowrap mb-0"
                       id="jobstable"
                     >
                       <thead className="">
                         <tr>
-                          <th style={{width: "20px"}}></th>
+                          <th style={{ width: "20px" }}></th>
                           <th
                             style={{ paddingLeft: "56px", width: "40px" }}
                             onClick={() => {
@@ -498,7 +493,7 @@ const ProductionTracker = props => {
                             Factory
                           </th>
                           <th style={{ width: "80px" }}>Name</th>
-                          <th style={{ width: "280px"}}>PART/MACHINE</th>
+                          <th style={{ width: "280px" }}>PART/MACHINE</th>
                           <th style={{ width: "50px" }}>DRAW</th>
                           <th style={{ width: "48px" }}>COUNT</th>
                           <th style={{ width: "48px" }}>STATUS</th>
@@ -508,7 +503,7 @@ const ProductionTracker = props => {
                       <tbody>
                         {jobs.map((job, index) => (
                           <tr key={"job" + index}>
-                            <td style={{ paddingLeft: "20px" }}>{count * Math.max(page - 1, 0)+ index + 1}</td>
+                            <td style={{ paddingLeft: "20px" }}>{count * Math.max(page - 1, 0) + index + 1}</td>
                             <td>
                               <div className="d-flex align-items-center">
                                 {job.user ? (
@@ -520,13 +515,12 @@ const ProductionTracker = props => {
                                   <div className="job-user"> UA</div>
                                 )}
                                 <div
-                                  className={`job-factory ${
-                                    job.factory
+                                  className={`job-factory ${job.factory
                                       ? factoryStyle[
-                                          job.factory.substring(0, 4)
-                                        ]
+                                      job.factory.substring(0, 4)
+                                      ]
                                       : ""
-                                  }`}
+                                    }`}
                                   style={{ textAlign: "center" }}
                                 >
                                   {job.factory ? job.factory.substring(0, 4).toUpperCase() : ""}
@@ -569,31 +563,30 @@ const ProductionTracker = props => {
                                 {job.active === true ? "Active" : "Finished"}
                               </span>
                               <span
-                                className={`${
-                                  job.active === true ? "bg-primary" : "bg-info"
-                                } rounded indicator-line`}
+                                className={`${job.active === true ? "bg-primary" : "bg-info"
+                                  } rounded indicator-line`}
                               >
                                 {" "}
                               </span>
                             </td>
                             <td>
                               {job.dueDate && <>
-                              <b className="">
-                                {job.dueDate.replace(/T.*$/, "")}
-                              </b>
-                              <div className="text-secondary ">
-                                {subStractDate(
-                                  new Date(job.dueDate),
-                                  new Date()
-                                ) < 0 ? (
-                                  <span className="text-danger">Overdue</span>
-                                ) : (
-                                  subStractDate(
+                                <b className="">
+                                  {job.dueDate.replace(/T.*$/, "")}
+                                </b>
+                                <div className="text-secondary ">
+                                  {subStractDate(
                                     new Date(job.dueDate),
                                     new Date()
-                                  ) + " Days"
-                                )}
-                              </div>
+                                  ) < 0 ? (
+                                    <span className="text-danger">Overdue</span>
+                                  ) : (
+                                    subStractDate(
+                                      new Date(job.dueDate),
+                                      new Date()
+                                    ) + " Days"
+                                  )}
+                                </div>
                               </>
                               }
                             </td>
@@ -785,10 +778,10 @@ const ProductionTracker = props => {
                       {!users
                         ? ""
                         : users.map(user => (
-                            <option value={user._id} key={user._id}>
-                              {user.firstName + " " + user.lastName}
-                            </option>
-                          ))}
+                          <option value={user._id} key={user._id}>
+                            {user.firstName + " " + user.lastName}
+                          </option>
+                        ))}
                     </select>
                   </div>
                 </div>
@@ -840,7 +833,7 @@ const ProductionTracker = props => {
                       <AutoCompleteSelect
                         name="part"
                         option={job.part?.name || ""}
-                        value = {job.part?._id || ""}
+                        value={job.part?._id || ""}
                         placeholder="Select Parts"
                         options={filteredJobModalParts}
                         onChange={e => {
@@ -909,8 +902,8 @@ const ProductionTracker = props => {
                     />
                   </div>
                 </div>
-                
-                
+
+
               </form>
             </ModalBody>
             <ModalFooter>
@@ -944,8 +937,8 @@ const ProductionTracker = props => {
                 {deleteMode == 0
                   ? "Are you going to delete this job ?"
                   : deleteMode == 1
-                  ? "Are you going to restore this job ?"
-                  : "Are you going to permanently remove this job ?"}
+                    ? "Are you going to restore this job ?"
+                    : "Are you going to permanently remove this job ?"}
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" onClick={deleteJob}>

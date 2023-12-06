@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react"
-import { cities, factories } from "helpers/globals"
+import { cities, factories } from "../../../helpers/globals"
 import { useState } from "react"
 import MetaTags from "react-meta-tags"
 import {
@@ -21,7 +21,7 @@ import {
   getProducts,
   startTimerAction,
   updateTimerAction,
-} from "actions/timer"
+} from "../../../actions/timer"
 import { useMemo } from "react"
 import "./style.scss"
 import AutoCompleteSelect from "components/Common/AutoCompleteSelect"

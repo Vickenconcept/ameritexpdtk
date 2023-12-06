@@ -1,6 +1,6 @@
 import {useEffect, useState, useRef} from 'react' 
 import { createPortal } from "react-dom"
-import { BACKEND } from "./helpers/axiosConfig"
+import { BACKEND } from "../../../../helpers/axiosConfig"
 
 export const PopupWindow = props => {
   const { links } = props

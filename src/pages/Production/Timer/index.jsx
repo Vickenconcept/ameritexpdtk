@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react"
-import { cities, factories, classify, factory2mc, mc2factory, checkMcRule, machineClasses } from "helpers/globals"
+import { cities, factories, classify, factory2mc, mc2factory, checkMcRule, machineClasses } from "../../../helpers/globals"
 import { useState } from "react"
 import MetaTags from "react-meta-tags"
 import {
@@ -20,36 +20,36 @@ import {
   getProducts,
   updateTimerAction,
   createPartAction,
-} from "actions/timer"
+} from "../../../actions/timer"
 import { useMemo, useCallback } from "react"
 import SweetAlert from "react-bootstrap-sweetalert"
 
-import AutoCompleteSelect from "components/Common/AutoCompleteSelect"
-import { getCurrentTime } from "helpers/functions"
+import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
+import { getCurrentTime } from "../../../helpers/functions"
 import {
   CitySelect,
   CityVisualSelect,
   FactoryList,
-} from "components/Common/Select"
+} from "../../../components/Common/Select"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import TimerLogs from "./component/TimerLogs"
-import Pagination from "components/Common/Pagination"
+import Pagination from "../../../components/Common/Pagination"
 import ProductionClock from "./component/ProductionClock"
 
-import { LoadingContext } from "context/loading"
+import { LoadingContext } from "../../../context/loading"
 import PartEditModal from "../components/PartEditModal"
 
-import { useLocalDB } from "context/localDB"
-import { useNetStatus } from "context/net"
+import { useLocalDB } from "../../../context/localDB"
+import { useNetStatus } from "../../../context/net"
 
 import ControllerModal from "../components/ControllerModal"
-import { useTimerUser } from "context/timer"
+import { useTimerUser } from "../../../context/timer"
 
-import { getActiveCities, canGetAllCities, getActiveFactories, canGetAllFactories } from "helpers/user_role"
+import { getActiveCities, canGetAllCities, getActiveFactories, canGetAllFactories } from "../../../helpers/user_role"
 
-import "components/modal.scss"
-import {offset} from 'helpers/globals.js'
+import "../../../components/modal.scss"
+import { offset } from '../../../helpers/globals.js'
 import FactoryFilter from "../components/FactoryFilter"
 import TimerEditModal from "./component/TimerEditModal"
 import TimerList from "./component/TimerList"
@@ -60,20 +60,20 @@ import TimerViewModal from "./component/TimerViewModal"
 const TimerPage = props => {
   const { user } = props
 
-  const activeCities = useMemo(()=>{
-    return getActiveCities (user)
+  const activeCities = useMemo(() => {
+    return getActiveCities(user)
   }, [user])
 
-  const canAllCities = useMemo(()=>{
-    return canGetAllCities (user)
+  const canAllCities = useMemo(() => {
+    return canGetAllCities(user)
   }, [user])
 
   const activeFactories = useMemo(() => {
-    return getActiveFactories (user)
+    return getActiveFactories(user)
   }, [user])
 
   const canAllFactories = useMemo(() => {
-    return canGetAllFactories (user)
+    return canGetAllFactories(user)
   }, [user])
 
   const [canOperate, setCanOperate] = useState(true);
@@ -118,7 +118,7 @@ const TimerPage = props => {
   const [partsModal, setPartsModal] = useState(false)
   const { loading, setLoading } = useContext(LoadingContext)
 
-  const userCity = (user?(user.role=='Admin'?"Seguin":user.location):"Seguin")
+  const userCity = (user ? (user.role == 'Admin' ? "Seguin" : user.location) : "Seguin")
 
   const [city, setCity] = useState(userCity)
   const [lastUpdated, setLastUpdated] = useState(getCurrentTime(offset[city]))
@@ -228,10 +228,10 @@ const TimerPage = props => {
 
   const [factoryFilter, setFactoryFilter] = useState([false, false, false, false, false, true])
 
-  const factoryFilters = useMemo(()=>{
+  const factoryFilters = useMemo(() => {
     if (!canAllFactories) return activeFactories
     return [...activeFactories, "Not Assigned", "All"]
-  },[activeFactories, canAllFactories])
+  }, [activeFactories, canAllFactories])
 
   const selectedFactories = useMemo(() => {
     let _factories = factoryFilters.filter(
@@ -241,7 +241,7 @@ const TimerPage = props => {
       _factories = factoryFilters.filter(f => f != "All")
     }
     return _factories
-  },[factoryFilter, factoryFilters])
+  }, [factoryFilter, factoryFilters])
 
   const toggleFilter = (e, filter) => {
     let _filter = [...factoryFilter]
@@ -257,9 +257,9 @@ const TimerPage = props => {
     setFactoryFilter(_filter)
   }
 
-  useEffect(()=>{
-    setFactoryFilter(activeFactories?.length===1?[true]:[...factoryFilters.map(f=>(f=="All"&&canAllFactories))])
-  },[factoryFilters])
+  useEffect(() => {
+    setFactoryFilter(activeFactories?.length === 1 ? [true] : [...factoryFilters.map(f => (f == "All" && canAllFactories))])
+  }, [factoryFilters])
 
   const [editModal, setEditModal] = useState(false)
   const [editingTimer, setEditingTimer] = useState({
@@ -349,7 +349,7 @@ const TimerPage = props => {
       console.log("---------------------------------timer products------------------------------")
       console.log(res.products)
       setTimers(res.products)
-      setLastUpdated (getCurrentTime(offset[city]))
+      setLastUpdated(getCurrentTime(offset[city]))
       setTimerPagination({
         ...timerPagination,
         totalPage: Math.ceil(res.totalCount / 9),
@@ -365,9 +365,9 @@ const TimerPage = props => {
     updateTimers()
     console.log("---------------------update timers------------------------")
   }, [
-    timerPagination.page, 
-    selectedFactories, 
-    city, 
+    timerPagination.page,
+    selectedFactories,
+    city,
     // timerModal
   ])
 
@@ -422,8 +422,8 @@ const TimerPage = props => {
                     <div className="text-black-50">Timers </div>
                   </div>
                   {user.role == "Personnel" ||
-                  user.role == "Accounting" ||
-                  !isOnline ? (
+                    user.role == "Accounting" ||
+                    !isOnline ? (
                     ""
                   ) : (
                     <button
@@ -437,8 +437,8 @@ const TimerPage = props => {
               )}
             </div>
             {user.role == "Sales" ||
-            user.role == "HR" ||
-            user.role == "Corporate" ? (
+              user.role == "HR" ||
+              user.role == "Corporate" ? (
               <h4 className="mt-5">Not authorized to see content</h4>
             ) : (
               <div>
@@ -449,10 +449,10 @@ const TimerPage = props => {
                   }}
                 >
                   <div className="d-flex city-selector-container row p-0 m-0">
-                    <CityVisualSelect 
-                      activeCities={activeCities} 
-                      value={city} 
-                      onChange = {(val)=>{
+                    <CityVisualSelect
+                      activeCities={activeCities}
+                      value={city}
+                      onChange={(val) => {
                         setCity(val)
                       }}
                     />
@@ -466,7 +466,7 @@ const TimerPage = props => {
                 />
 
                 <ProductionClock city={city} setCanOperate={setCanOperate} setProdTime={setProductionTime} lastUpdated={lastUpdated} />
-                
+
                 <TimerProvider city={city} selectedFactories={selectedFactories} timers={timers} setTimers={setTimers}>
                   <TimerList
                     editTimer={editTimer}
@@ -477,17 +477,17 @@ const TimerPage = props => {
                     productionTime={productionTime}
                   />
 
-                  <TimerEditModal 
-                    open = {timerModal}
-                    edit = {edit}
-                    createTimer = {createTimer}
-                    toggleModal = {toggleModal}
-                    city = {city}
+                  <TimerEditModal
+                    open={timerModal}
+                    edit={edit}
+                    createTimer={createTimer}
+                    toggleModal={toggleModal}
+                    city={city}
                     // part = {null}
-                    activeFactories = {activeFactories}
-                    canAllFactories = {canAllFactories}
+                    activeFactories={activeFactories}
+                    canAllFactories={canAllFactories}
                     // newTimer = {newTimer}
-                    updateNewTimer = {updateNewTimer}
+                    updateNewTimer={updateNewTimer}
                   />
 
                 </TimerProvider>
@@ -497,7 +497,7 @@ const TimerPage = props => {
           </div>
         </div>
       </Container>
-      
+
       <TimerViewModal
         {...{
           editModal, toggleEditModal,

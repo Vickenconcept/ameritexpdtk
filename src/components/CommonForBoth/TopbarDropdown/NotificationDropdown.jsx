@@ -7,20 +7,20 @@ import Notification from "./Notification"
 //i18n
 import { withTranslation } from "react-i18next"
 
-import { useNotification } from "context/notification.js"
+import { useNotification } from "../../../context/notification.js"
 import 'simplebar-react/dist/simplebar.min.css';
 
 const NotificationDropdown = props => {
   // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false)
-  const {notification, clearNotification} = useNotification()
+  const { notification, clearNotification } = useNotification()
   const ref = useRef();
   const scrollableNodeRef = React.createRef();
 
-  useEffect(()=>{
+  useEffect(() => {
     ref.current.recalculate()
     scrollableNodeRef.current.scrollBottom = 0
-  },[notification])
+  }, [notification])
 
   return (
     <React.Fragment>
@@ -30,16 +30,16 @@ const NotificationDropdown = props => {
         className="dropdown d-inline-block"
         tag="li"
         {...props}
-        // style={{ left: "10%" }}
+      // style={{ left: "10%" }}
       >
         <DropdownToggle
           className="btn header-item noti-icon waves-effect"
           tag="button"
           id="page-header-notifications-dropdown"
-          // disabled={true}
+        // disabled={true}
         >
           <i className="mdi mdi-bell-outline" style={{ fontSize: "40px" }}></i>
-          {notification?.length > 0 && 
+          {notification?.length > 0 &&
             <span className="badge bg-danger rounded-pill">{notification.length}</span>
           }
         </DropdownToggle>
@@ -54,23 +54,23 @@ const NotificationDropdown = props => {
           </div>
 
           <SimpleBar ref={ref} scrollableNodeProps={{ ref: scrollableNodeRef }} style={{ height: "230px" }} autoHide={false}>
-            {notification.map((item, idx)=>(
-              <Notification item={item} idx={idx} key={"notification_"+idx} />
+            {notification.map((item, idx) => (
+              <Notification item={item} idx={idx} key={"notification_" + idx} />
             ))
             }
           </SimpleBar>
-          { notification?.length > 0 && 
-          <div className="p-2 border-top d-grid">
-            <button
-              className="btn btn-sm btn-link font-size-14 btn-block text-center"
-              onClick={clearNotification}
+          {notification?.length > 0 &&
+            <div className="p-2 border-top d-grid">
+              <button
+                className="btn btn-sm btn-link font-size-14 btn-block text-center"
+                onClick={clearNotification}
               // to="/production/timer"
-            >
-              <i className="mdi mdi-delete-circle me-1"></i>
-              {" "}
-              Remove all
-            </button>
-          </div>
+              >
+                <i className="mdi mdi-delete-circle me-1"></i>
+                {" "}
+                Remove all
+              </button>
+            </div>
           }
         </DropdownMenu>
       </Dropdown>

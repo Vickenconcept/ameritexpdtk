@@ -1,5 +1,5 @@
 import axios from "axios"
-import { extractFormData } from "helpers/functions"
+import { extractFormData } from "../helpers/functions"
 import {
   getStoreData,
   updateData,
@@ -7,7 +7,7 @@ import {
   putData,
   insertData,
   getLastUpdatedData,
-} from "helpers/offlineDB"
+} from "../helpers/offlineDB"
 
 export const createJobAction = async data => {
   const job = extractFormData(data)

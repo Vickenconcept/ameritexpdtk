@@ -7,17 +7,17 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap"
-import { deleteProductAction } from "actions/timer"
+import { deleteProductAction } from "../../../actions/timer"
 
-import {getMediaType, getMediaPreview, getMediaUrl} from "./MediaUtils"
+import { getMediaType, getMediaPreview, getMediaUrl } from "./MediaUtils"
 
 import { connect } from "react-redux"
-import { useNetStatus } from "context/net"
-import {FILE_BACKEND} from '../../../helpers/axiosConfig'
+import { useNetStatus } from "../../../context/net"
+import { FILE_BACKEND } from '../../../helpers/axiosConfig'
 const Part = props => {
 
-  const {user} = props
-  const {isOnline} = useNetStatus()
+  const { user } = props
+  const { isOnline } = useNetStatus()
 
   const [pause, setPause] = useState(false)
   const [moreMenu, setMoreMenu] = useState(false)
@@ -65,8 +65,8 @@ const Part = props => {
             </Dropdown>
           )}
         </div>
-        <div className="product-preview" onClick={showPart} style={{cursor:"pointer"}} >
-          <img src={props.preview? getMediaPreview(props.preview):"/placeholder.png"} className="w-100 h-100" />
+        <div className="product-preview" onClick={showPart} style={{ cursor: "pointer" }} >
+          <img src={props.preview ? getMediaPreview(props.preview) : "/placeholder.png"} className="w-100 h-100" />
         </div>
         <div className="product-info">
           <div
@@ -104,4 +104,4 @@ const mapStatetoProps = state => {
   return { user }
 }
 
-export default connect(mapStatetoProps,{})(Part)
+export default connect(mapStatetoProps, {})(Part)

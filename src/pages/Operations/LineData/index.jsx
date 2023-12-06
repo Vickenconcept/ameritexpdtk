@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { cities, factories } from 'helpers/globals';
+import { cities, factories } from '../../../helpers/globals';
 import MetaTags from 'react-meta-tags';
 import {
   Container, Modal, ModalHeader, ModalBody, ModalFooter, Button
 } from "reactstrap"
 import "./style.scss"
-import { getProducts } from 'actions/timer';
-import { getUsers } from 'actions/auth';
+import { getProducts } from '../../../actions/timer';
+import { getUsers } from '../../../actions/auth';
 
 import { useMemo } from 'react';
 
@@ -32,7 +32,7 @@ const LineData = (props) => {
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </Container>

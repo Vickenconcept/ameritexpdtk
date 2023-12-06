@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useMemo } from "react"
-import { cities, factories } from "helpers/globals"
+import { cities, factories } from "../../../helpers/globals"
 import MetaTags from "react-meta-tags"
 import {
   Container,
@@ -15,7 +15,7 @@ import {
   CardTitle
 } from "reactstrap"
 import "./style.scss"
-import { getReports as getUserReport } from "actions/auth"
+import { getReports as getUserReport } from "../../../actions/auth"
 
 import "./style.scss"
 import { connect } from "react-redux"
@@ -33,20 +33,20 @@ import ReportLookup from "./components/ReportLookup"
 const SystemCheck = props => {
   // authUser loading
 
-  const [user_report, setUserReport] = useState ()
+  const [user_report, setUserReport] = useState()
 
   const loadUserReport = async () => {
     try {
       const res = await getUserReport()
-      setUserReport (res)
+      setUserReport(res)
     } catch (error) {
-      console.log (error)
-      setUserReport (null)
+      console.log(error)
+      setUserReport(null)
     }
   }
 
-  useEffect (async () => {
-    await loadUserReport ()
+  useEffect(async () => {
+    await loadUserReport()
   }, [])
 
   return (
@@ -71,11 +71,11 @@ const SystemCheck = props => {
               </div>
             </div>
           </div>
-          <ReportLookup 
-            report={null} 
-            user_report={user_report} 
-            pinnable={true} 
-            loadUserReport={loadUserReport} 
+          <ReportLookup
+            report={null}
+            user_report={user_report}
+            pinnable={true}
+            loadUserReport={loadUserReport}
             editable={true}
           />
           <Row style={{ marginTop: 2 }}>
@@ -83,7 +83,7 @@ const SystemCheck = props => {
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle style={{display:'flex', justifyContent:'space-between'}}>
+                  <CardTitle style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <h4 className="card-title mb-4">Production time per machine...</h4>
                     <a>
                       <i className='mdi mdi-pin-off-outline'></i>
@@ -97,7 +97,7 @@ const SystemCheck = props => {
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle style={{display:'flex', justifyContent:'space-between'}}>
+                  <CardTitle style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <h4 className="card-title mb-4">Coming Soon...</h4>
                     <a>
                       <i className='mdi mdi-pin-outline'></i>
@@ -108,11 +108,11 @@ const SystemCheck = props => {
                 </CardBody>
               </Card>
             </Col>
-            
+
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle style={{display:'flex', justifyContent:'space-between'}}>
+                  <CardTitle style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <h4 className="card-title mb-4">Coming Soon...</h4>
                     <a>
                       <i className='mdi mdi-pin-outline'></i>
@@ -122,11 +122,11 @@ const SystemCheck = props => {
                 </CardBody>
               </Card>
             </Col>
-            
+
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle style={{display:'flex', justifyContent:'space-between'}}>
+                  <CardTitle style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <h4 className="card-title mb-4">Coming Soon...</h4>
                     <a>
                       <i className='mdi mdi-pin-outline'></i>
@@ -140,7 +140,7 @@ const SystemCheck = props => {
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle style={{display:'flex', justifyContent:'space-between'}}>
+                  <CardTitle style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <h4 className="card-title mb-4">Coming Soon...</h4>
                     <a>
                       <i className='mdi mdi-pin-outline'></i>
@@ -164,4 +164,4 @@ const mapStatetoProps = state => {
   const user = state.Login.user
   return { error, success, user }
 }
-export default withRouter(connect(mapStatetoProps,{})(SystemCheck))
+export default withRouter(connect(mapStatetoProps, {})(SystemCheck))

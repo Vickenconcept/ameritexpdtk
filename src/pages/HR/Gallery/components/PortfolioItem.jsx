@@ -5,9 +5,9 @@ import {
 import LightgalleryItem from "./LightgalleryItem";
 import { useCallback, useEffect, useState, forwardRef } from "react";
 
-import { useModal } from "components/Common/Modal/promise-modal/index.jsx"
-import { AlertModal } from "components/Common/Modal/AlertModal"
-import { ConfirmModal } from "components/Common/Modal/ConfirmModal"
+import { useModal } from "../../../../components/Common/Modal/promise-modal/index"
+import { AlertModal } from "../../../../components/Common/Modal/AlertModal"
+import { ConfirmModal } from "../../../../components/Common/Modal/ConfirmModal"
 
 const PortfolioItem = forwardRef(({
   image,

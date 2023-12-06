@@ -3,11 +3,11 @@ import {
   getProducts,
   getTimerLogsOfMachine,
   searchMacheinsAction,
-} from "actions/timer"
+} from "../../../../actions/timer"
 import {
   useTimerUser
-} from 'context/timer'
-import { formatSeconds } from "helpers/functions"
+} from '../../../../context/timer'
+import { formatSeconds } from "../../../../helpers/functions"
 import './report.scss'
 
 export default (props) => {

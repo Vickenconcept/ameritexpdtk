@@ -1,12 +1,12 @@
-import { getCityAction, updateCityAction } from "actions/city"
-import { startProductionTimeAction } from "actions/timer"
-import { formatSeconds, getCurrentTime } from "helpers/functions"
+import { getCityAction, updateCityAction } from "../../../../actions/city"
+import { startProductionTimeAction } from "../../../../actions/timer"
+import { formatSeconds, getCurrentTime } from "../../../../helpers/functions"
 import { useEffect, useState } from "react"
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap"
-import { useNetStatus } from "context/net"
-import { useTimerUser } from "context/timer"
+import { useNetStatus } from "../../../../context/net"
+import { useTimerUser } from "../../../../context/timer"
 
-import {offset} from 'helpers/globals.js'
+import { offset } from '../../../../helpers/globals.js'
 
 const ProductionClock = props => {
   const [now, setNow] = useState(new Date())
@@ -72,12 +72,12 @@ const ProductionClock = props => {
     setProductionTime(editedTime)
   }
 
-  useEffect (() => {
-    console.log (productionTime)
-    console.log ("ProductionClock: useEffect (start, productionTime, city)", start, productionTime, city)
+  useEffect(() => {
+    console.log(productionTime)
+    console.log("ProductionClock: useEffect (start, productionTime, city)", start, productionTime, city)
     if (city && city != "" && productionTime)
       setProductionTimeCtx(city, productionTime, start)
-  },[start, productionTime, city])
+  }, [start, productionTime, city])
 
   return (
     <>
@@ -95,7 +95,7 @@ const ProductionClock = props => {
           </div>
 
           <div className="col-lg-2 col-sm-4 text-center">
-            <div>{lastUpdated?lastUpdated.toTimeString().substring(0, 8):''}</div>
+            <div>{lastUpdated ? lastUpdated.toTimeString().substring(0, 8) : ''}</div>
             <div className="desc">LAST UPDATED</div>
           </div>
 

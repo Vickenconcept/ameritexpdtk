@@ -1,5 +1,5 @@
 import axios from "axios"
-import { extractFormData, getCurrentTime } from "helpers/functions"
+import { extractFormData, getCurrentTime } from "../helpers/functions"
 // import { addLocalProducts, getLocalProducts } from "helpers/indexedDB"
 import {
   getStoreData,
@@ -9,7 +9,7 @@ import {
   putDataArr,
   insertData,
   getLastUpdatedData,
-} from "helpers/offlineDB"
+} from "../helpers/offlineDB"
 
 export const createMachineAction = async (form, cb) => {
   const res = await axios.post("/timer/create-machine", form, {
@@ -70,8 +70,8 @@ export const getLocalProducts = async (type, page = 1, filters) => {
     if (type === "Timer") return isFactoryMatch
     const isMachineMatch =
       filters.machineClass == "All" ||
-      filters.machineClass == "" ||
-      !filters.machineClass
+        filters.machineClass == "" ||
+        !filters.machineClass
         ? true
         : product.machineClass == filters.machineClass
     const isSearchMatch = !filters.search
@@ -119,7 +119,7 @@ export const localTimerAction = async (
 ) => {
   try {
     const timer = await getStoreItem(city, "Timer", id)
-    console.log("Local timer action : " + action +"timer to be updated--", timer)
+    console.log("Local timer action : " + action + "timer to be updated--", timer)
     if (!timer) {
       return { error: "Timer not found" }
     }
@@ -256,14 +256,14 @@ export const startTimerAction = async (
     const time = new Date()
     if (isOnline) {
       const res_online = await
-      axios.post("/timer/start-timer", {
-        id,
-        city,
-        operator,
-        time: time.toISOString(),
-      })
+        axios.post("/timer/start-timer", {
+          id,
+          city,
+          operator,
+          time: time.toISOString(),
+        })
       // .then ((res) => {
-        // console.log("startTimerAction res", res.data)
+      // console.log("startTimerAction res", res.data)
       //   // if (res.data.success && res.data.timer) {
       //   //   putDataArr(city, "Timer", res.data.timer)
       //   // }
@@ -273,7 +273,7 @@ export const startTimerAction = async (
       //   // TODO: handle error (Stop timer again)
       //   return null
       // })
-      console.log ("startTimerAction res_online", res_online)
+      console.log("startTimerAction res_online", res_online)
       return res_online
     }
     const timer = await getStoreItem(city, "Timer", id)
@@ -296,7 +296,7 @@ export const startTimerAction = async (
     )
     return res_offline
   } catch (error) {
-    console.log (error)
+    console.log(error)
     return error
   }
 }
@@ -306,11 +306,11 @@ export const endTimerAction = async (id, city = "Seguin", isOnline = true) => {
     const time = new Date()
     if (isOnline) {
       const res_online = await
-      axios.post("/timer/end-timer", {
-        id,
-        city,
-        time,
-      })
+        axios.post("/timer/end-timer", {
+          id,
+          city,
+          time,
+        })
       // .then((res) => {
       //   console.log("endTimerAction res", res.data)
       //   // putDataArr(city, "Timer", res.data.timer)
@@ -338,12 +338,12 @@ export const stopTimerAction = async (id, city = "Seguin", isOnline = true, stop
     const time = new Date()
     if (isOnline) {
       const res_online = await
-      axios.post("/timer/stop-timer", {
-        id,
-        city,
-        time,
-        stoppingReason,
-      })
+        axios.post("/timer/stop-timer", {
+          id,
+          city,
+          time,
+          stoppingReason,
+        })
       // .then((res) => {
       //   console.log("stopTimerAction res", res.data)
       //   // putDataArr(city, "Timer", res.data.timer)
@@ -351,7 +351,7 @@ export const stopTimerAction = async (id, city = "Seguin", isOnline = true, stop
       //   console.log("stopTimerAction err", err)
       //   // TODO: handle error (Fetch backend timer again)
       // })
-      console.log ("stop timer res", res_online)
+      console.log("stop timer res", res_online)
       return res_online
     }
     const res_offline = await localTimerAction(
@@ -387,7 +387,7 @@ export const updateTimerAction = async (id, city, updates, isOnline = true) => {
       updates,
       isOnline
     )
-    console.log (res_offline)
+    console.log(res_offline)
     return res_offline
   } catch (error) {
     console.log("ERROR")
@@ -404,7 +404,7 @@ export const refreshTimerAction = async (
   try {
     if (isOnline) {
       const res_online = await
-      axios.get("/timer/get-timer?id=" + id + "&city=" + city)
+        axios.get("/timer/get-timer?id=" + id + "&city=" + city)
       // .then(res => {
       //   console.log("update local db on timer ", res.data.timer)
       //   putDataArr(city, "Timer", [res.data.timer])

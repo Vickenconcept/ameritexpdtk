@@ -18,9 +18,9 @@ import NonAuthLayout from "./components/NonAuthLayout.jsx"
 import Indicator from "./components/Indicator/index.jsx"
 import { setUserProfile } from './store/actions'
 
-import { LoadingProvider } from './context/loading.js'
-import { LocalDBProvider } from './context/localDB.js'
-import { NetStatusProvider } from './context/net.js'
+import { LoadingProvider } from './context/loading.jsx'
+import { LocalDBProvider } from './context/localDB.jsx'
+import { NetStatusProvider } from './context/net.jsx'
 import { TimerUserProvider } from './context/timer'
 import { NotificationProvider } from './context/notification'
 

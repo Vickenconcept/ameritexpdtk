@@ -22,7 +22,7 @@ import lgVideo from "lightgallery/plugins/video"
 import { useModal } from "components/Common/Modal/promise-modal/index.js"
 import { ConfirmModal } from "components/Common/Modal/ConfirmModal"
 
-import { BACKEND } from "./helpers/axiosConfig"
+import { BACKEND } from "../../../../helpers/axiosConfig"
 import axios from "axios"
 
 export default ({ photos, albumId, lightGalleryRef, galleryRef, zoomOpen, setZoomOpen, onSlide, metadata, onOrderAction, setPhotos, canEdit, onAfterSetCover }) => {
@@ -116,7 +116,7 @@ export default ({ photos, albumId, lightGalleryRef, galleryRef, zoomOpen, setZoo
     // Create a temporary anchor element and download the image
     const anchor = document.createElement("a")
     anchor.href = URL.createObjectURL(blob)
-    anchor.download = name.includes(".")? name : name + ".jpg"
+    anchor.download = name.includes(".") ? name : name + ".jpg"
     // Set desired filename here
     anchor.style.display = "none"
     document.body.appendChild(anchor)
@@ -133,12 +133,12 @@ export default ({ photos, albumId, lightGalleryRef, galleryRef, zoomOpen, setZoo
         e.preventDefault()
         e.stopPropagation()
         const url = e.target.getAttribute("href")
-        const {index} = ev
+        const { index } = ev
         const name = lightGalleryRef.current.galleryItems[index].subHtml
-        downloadImage(url,name)
+        downloadImage(url, name)
       }
     }
-  },[photos, lightGalleryRef.current])
+  }, [photos, lightGalleryRef.current])
 
   const removeAction = useCallback(
     async (ids, cb) => {
@@ -174,29 +174,29 @@ export default ({ photos, albumId, lightGalleryRef, galleryRef, zoomOpen, setZoo
 
   const setCoverAction = useCallback(async (id, cb) => {
     if (!albumId) return
-    confirmDelete (async () => {
+    confirmDelete(async () => {
       const url = `/album/${albumId}`
       const data = { cover: id }
       try {
         const res = await axios.post(url, data)
         if (!res.data?.success) throw new Error('set cover failed')
-        await onAfterSetCover (albumId, res.data?.cover)
+        await onAfterSetCover(albumId, res.data?.cover)
         if (cb)
           return cb(res.data?.cover)
       } catch (e) {
-        console.log (e)
+        console.log(e)
         if (cb)
           return cb(null)
       }
     }, () => {
-      return cb (null)
-    },{
+      return cb(null)
+    }, {
       title: `Set Cover Image`,
       text: `Are you sure you want to set this image as album cover?`,
     })
   }, [albumId, photos, lightGalleryRef.current])
 
-  
+
 
   // useEffect(() => {
   //   let total_photos = photos?.length

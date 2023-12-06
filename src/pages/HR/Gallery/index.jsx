@@ -17,15 +17,15 @@ import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
 import AlbumEditModal from "./components/AlbumModal"
-import { useLoading } from "context/loading"
+import { useLoading } from "../../../context/loading"
 import { SortableContainer, SortableElement } from "react-sortable-hoc"
-import { BACKEND } from "./helpers/axiosConfig"
+import { BACKEND } from "../../../helpers/axiosConfig"
 
 import PhotoList from "./components/PhotoList"
 
-import { useModal } from "components/Common/Modal/promise-modal/index.js"
-import { AlertModal } from "components/Common/Modal/AlertModal"
-import { ConfirmModal } from "components/Common/Modal/ConfirmModal"
+import { useModal } from "../../../components/Common/Modal/promise-modal/index.jsx"
+import { AlertModal } from "../../../components/Common/Modal/AlertModal"
+import { ConfirmModal } from "../../../components/Common/Modal/ConfirmModal"
 
 function clearGallery() {
   if (document.querySelector(".lg-backdrop"))
@@ -170,7 +170,7 @@ const Gallery = props => {
       setLoading(true)
       setAlbumLoaded(false)
       // setPhotos({})
-      await loadAlbums (0, 48)
+      await loadAlbums(0, 48)
       setLoading(false)
     } catch (e) {
       console.log(e)
@@ -203,11 +203,11 @@ const Gallery = props => {
       if (total_cnt)
         setPhotosMetadata(prev => ({
           ...prev,
-          [id]: { 
-            total: total_cnt, 
-            name: _album?.name, 
-            year: _album?.year, 
-            cover: _album?.cover, 
+          [id]: {
+            total: total_cnt,
+            name: _album?.name,
+            year: _album?.year,
+            cover: _album?.cover,
             _id: _album?._id,
           },
         }))
@@ -429,8 +429,8 @@ const Gallery = props => {
     })
   }
 
-  const onReorderSave = useCallback (async e => {
-    confirm (async ()=>{
+  const onReorderSave = useCallback(async e => {
+    confirm(async () => {
       try {
         setReordering(false)
         setLoading(true)
@@ -438,55 +438,55 @@ const Gallery = props => {
           _id: album._id,
           order: idx,
         }))
-        openAlert (()=>{},()=>{},{
+        openAlert(() => { }, () => { }, {
           title: 'Reordering Albums',
           text: 'Reordering albums, please wait...',
           showConfirmButton: false,
         })
         const res = await axios.put("/album/reorder", { albums: postData })
-        setLoading (false)
+        setLoading(false)
         closeAlert()
         if (res.data.success) {
-          setTimeout (()=>{
-            openAlert(async ()=>{
+          setTimeout(() => {
+            openAlert(async () => {
               await loadItems()
             },
-            ()=>{
-    
-            },
-            {
-              title: 'Reorder Success',
-              text: 'Galleries are reordered successfully',
-              confirmText: 'Done',
-            }
+              () => {
+
+              },
+              {
+                title: 'Reorder Success',
+                text: 'Galleries are reordered successfully',
+                confirmText: 'Done',
+              }
             )
           }, 1000)
         }
       } catch (e) {
         console.log(e)
-        openAlert(()=>{
+        openAlert(() => {
           setReordering(true)
         },
-        ()=>{
-  
-        },
-        {
-          title: 'Reorder Failed',
-          text: 'Failed to reorder galleries',
-          confirmText: 'Done',
-        }
+          () => {
+
+          },
+          {
+            title: 'Reorder Failed',
+            text: 'Failed to reorder galleries',
+            confirmText: 'Done',
+          }
         )
       } finally {
         // setLoading(false)
       }
     },
-    ()=>{},
-    {
-      title: 'Reorder Albums',
-      text: 'Are you sure you want to reorder albums?'
-    } 
+      () => { },
+      {
+        title: 'Reorder Albums',
+        text: 'Are you sure you want to reorder albums?'
+      }
     )
-  },[albums])
+  }, [albums])
 
   // a little function to help us with reordering the result
   const reorder = (list, startIndex, endIndex) => {
@@ -566,7 +566,7 @@ const Gallery = props => {
 
   const onAfterSetCover = (id, cover) => {
     try {
-      setAlbums (prev=>{
+      setAlbums(prev => {
         let temp = [...prev]
         let idx = temp.findIndex((item) => item._id === id)
         if (idx > -1) {
@@ -575,14 +575,14 @@ const Gallery = props => {
         }
         return prev
       })
-      setPhotosMetadata (prev=>{
-        let temp = {...prev}
+      setPhotosMetadata(prev => {
+        let temp = { ...prev }
         if (!temp[id]) temp[id] = {}
         temp[id].cover = cover
         return temp
       })
     } catch (e) {
-      console.log (e)
+      console.log(e)
     }
   }
 
@@ -670,7 +670,7 @@ const Gallery = props => {
                     name="name"
                     onChange={onChangeFilter}
                   ></input>
-                  <input style={{margin: "40px", position: "absolute", opacity: "0.0"}} />
+                  <input style={{ margin: "40px", position: "absolute", opacity: "0.0" }} />
                   <a
                     className="btn btn-primary ml-2"
                     onClick={onResetFilter}

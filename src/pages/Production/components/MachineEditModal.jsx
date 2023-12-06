@@ -31,7 +31,7 @@ import {
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-import { getMediaType, getMediaPreview, getMediaUrl } from "./MediaUtils.js"
+import { getMediaType, getMediaPreview, getMediaUrl } from "./MediaUtils.jsx"
 
 import "components//modal.scss"
 

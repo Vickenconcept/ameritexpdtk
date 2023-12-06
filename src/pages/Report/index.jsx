@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PDFViewer, Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
 import { useParams } from 'react-router-dom';
-import { getLogsToPrintAction, getTimerLogsOfMachine } from 'actions/timer';
+import { getLogsToPrintAction, getTimerLogsOfMachine } from '../../actions/timer';
 
 import Logo from "../../assets/images/logo-dark.png"
 
@@ -95,16 +95,16 @@ const ReportPage = (props) => {
   }
 
   useEffect(() => {
-    console.log ('useEffect')
+    console.log('useEffect')
     getReports()
   }, [])
 
-  return ((!loading) ? 
+  return ((!loading) ?
     <PDFViewer style={styles.viewer}>
       <Document>
         <Page size="A4" style={styles.page}>
           <View style={styles.section}>
-            <Image src={Logo} style={styles.image}/>
+            <Image src={Logo} style={styles.image} />
             <View style={styles.row}>
               <Text style={styles.col1}>No</Text>
               <Text style={styles.col2}>City</Text>
@@ -116,7 +116,7 @@ const ReportPage = (props) => {
             </View>
             {
               logs.map((log, index) => (
-                <View style={styles.row} key={"log"+index}>
+                <View style={styles.row} key={"log" + index}>
                   <Text style={styles.col1}>{logs.length - index}</Text>
                   <Text style={styles.col2}>{city}</Text>
                   <Text style={styles.col3}>{log.machine}</Text>

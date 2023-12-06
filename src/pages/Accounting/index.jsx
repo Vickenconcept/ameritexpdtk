@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { cities, factories } from 'helpers/globals';
+import { cities, factories } from '../../helpers/globals';
 import MetaTags from 'react-meta-tags';
 import {
   Container, Modal, ModalHeader, ModalBody, ModalFooter, Button
 } from "reactstrap"
 import "./style.scss"
-import { getProducts } from 'actions/timer';
-import { getUsers } from 'actions/auth';
+import { getProducts } from '../../actions/timer';
+import { getUsers } from '../../actions/auth';
 
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
@@ -55,4 +55,4 @@ const mapStatetoProps = state => {
   return { error, success, user }
 }
 
-export default withRouter(connect(mapStatetoProps,{})(Accounting))
+export default withRouter(connect(mapStatetoProps, {})(Accounting))

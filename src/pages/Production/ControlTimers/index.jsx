@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react"
-import { cities, factories } from "helpers/globals"
+import { cities, factories } from "../../../helpers/globals"
 import { useState } from "react"
 import MetaTags from "react-meta-tags"
 import {
@@ -18,14 +18,14 @@ import {
   getProducts,
   startTimerAction,
   updateTimerAction,
-} from "actions/timer"
+} from "../../../actions/timer"
 import { useMemo } from "react"
 import "./style.scss"
-import AutoCompleteSelect from "components/Common/AutoCompleteSelect"
-import { getCurrentTime } from "helpers/functions"
-import { CitySelect, FactoryList } from "components/Common/Select"
+import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
+import { getCurrentTime } from "../../../helpers/functions"
+import { CitySelect, FactoryList } from "../../../components/Common/Select"
 
-import { LoadingContext } from "context/loading"
+import { LoadingContext } from "../../../context/loading"
 import { control } from "leaflet"
 const ControlTimer = props => {
   const [timers, setTimers] = useState([])
@@ -66,13 +66,13 @@ const ControlTimer = props => {
     setFilteredControllerTimers(
       _timers
     )
-    if(_timers[0]) setControlTimer(_timers[0]._id);
+    if (_timers[0]) setControlTimer(_timers[0]._id);
   }, [controlFilter, timers])
   const startTimerInController = async () => {
     setLoading(true)
     const res = await startTimerAction(controlTimer, controlFilter.city)
     if (res.status == 200)
-      if(res.data.success == false)
+      if (res.data.success == false)
         setAlert({
           color: "danger",
           text: res.data.msg,
@@ -210,21 +210,21 @@ const ControlTimer = props => {
                   >
                     {filteredControllerTimers
                       ? filteredControllerTimers.map(timer => (
-                          <option
-                            className="text-uppercase"
-                            key={
-                              "" +
-                              timer.machine._id +
-                              timer.part._id +
-                              timer._id
-                            }
-                            value={timer._id}
-                          >
-                            {timer.machine.machineClass +
-                              " " +
-                              timer.machine.name}
-                          </option>
-                        ))
+                        <option
+                          className="text-uppercase"
+                          key={
+                            "" +
+                            timer.machine._id +
+                            timer.part._id +
+                            timer._id
+                          }
+                          value={timer._id}
+                        >
+                          {timer.machine.machineClass +
+                            " " +
+                            timer.machine.name}
+                        </option>
+                      ))
                       : ""}
                   </select>
                   {/* <AutoCompleteSelect
