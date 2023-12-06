@@ -6,26 +6,26 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { createModal } from "react-modal-promise";
 
 import { useLoading } from "context/loading";
-import Toggle from './Toggle.component.js'
+import Toggle from './Toggle.component.jsx'
 import './switch.scss'
 
-const MyBootstrapModal = ({ 
-    isOpen, 
-    onResolve, 
-    onReject, 
-    item, 
-    device_types, 
+const MyBootstrapModal = ({
+    isOpen,
+    onResolve,
+    onReject,
+    item,
+    device_types,
     deviceAction,
     openAlert,
 }) => {
     // const submit = () => onResolve("resolved!!");
     // const cancel = () => onReject("rejected!!");
-    const {loading, setLoading} = useLoading()
+    const { loading, setLoading } = useLoading()
 
-    const [input, setInput] = useState({...item})
+    const [input, setInput] = useState({ ...item })
     const [edit, setEdit] = useState(false)
 
-    const reset = () => setInput({...item})
+    const reset = () => setInput({ ...item })
 
     const onChangeField = (e) => {
         const { name, value } = e.target
@@ -38,7 +38,7 @@ const MyBootstrapModal = ({
         } else {
             if (input?.id) {
                 const type = device_types.find(item => item._id == input?.id)
-                setInput(prev=>{
+                setInput(prev => {
                     return {
                         ...prev,
                         name: type?.name || ''
@@ -48,19 +48,19 @@ const MyBootstrapModal = ({
                 reset()
             }
         }
-    },[input?.id])
+    }, [input?.id])
 
     const availToSave = useMemo(() => {
         return input?.name && input?.name != ''
-    },[input])
+    }, [input])
 
     const submit = async () => {
         try {
             if (availToSave) {
-                setLoading (true)
+                setLoading(true)
                 if (edit) {
-                    if (!input?.id) throw new Error ('Please select one item to edit')
-                    const res = await deviceAction.updateDeviceType(input?.id,input)
+                    if (!input?.id) throw new Error('Please select one item to edit')
+                    const res = await deviceAction.updateDeviceType(input?.id, input)
                     if (res) {
                         onResolve(res)
                     }
@@ -73,9 +73,9 @@ const MyBootstrapModal = ({
                 onReject('Something went wrong')
             }
         } catch (error) {
-            openAlert ('Error', error.response?.data?.error || error.message)
+            openAlert('Error', error.response?.data?.error || error.message)
         } finally {
-            setLoading (false)
+            setLoading(false)
         }
     }
 
@@ -86,29 +86,29 @@ const MyBootstrapModal = ({
 
     return (
         <Modal isOpen={isOpen} toggle={cancel}>
-            <ModalHeader toggle={cancel}>{!edit?'Create Device':'Edit Device'}</ModalHeader>
+            <ModalHeader toggle={cancel}>{!edit ? 'Create Device' : 'Edit Device'}</ModalHeader>
             <ModalBody>
                 <div className='form-group'>
-                <Toggle
-                    checked={edit}
-                    text="Edit"
-                    size={'default'}
-                    disabled={false}
-                    onChange={()=>{setEdit(prev=>!prev)}}
-                    offstyle="btn-danger"
-                    onstyle="btn-success"
-                />
+                    <Toggle
+                        checked={edit}
+                        text="Edit"
+                        size={'default'}
+                        disabled={false}
+                        onChange={() => { setEdit(prev => !prev) }}
+                        offstyle="btn-danger"
+                        onstyle="btn-success"
+                    />
                 </div>
-                {edit&&(
-                <div className="form-group">
-                    <label htmlFor="type">Type</label>
-                    <select onChange={onChangeField} className="form-control" name="id" value={input?.id || ''}>
-                        <option value={''} disabled>Select Type</option>
-                        {device_types.map((item, index) => (
-                            <option key={`device_edit_type_option_${item._id}`} value={item._id}>{item.name}</option>
-                        ))}
-                    </select>
-                </div>
+                {edit && (
+                    <div className="form-group">
+                        <label htmlFor="type">Type</label>
+                        <select onChange={onChangeField} className="form-control" name="id" value={input?.id || ''}>
+                            <option value={''} disabled>Select Type</option>
+                            {device_types.map((item, index) => (
+                                <option key={`device_edit_type_option_${item._id}`} value={item._id}>{item.name}</option>
+                            ))}
+                        </select>
+                    </div>
                 )}
                 {(!edit || (edit && input?.id)) && (
                     <div className="form-group">
@@ -118,11 +118,11 @@ const MyBootstrapModal = ({
                 )}
             </ModalBody>
             <ModalFooter>
-                <Button disabled={!availToSave} style={{backgroundColor:'#B70000', color:'white'}} onClick={submit}>
-                {`Save`}
+                <Button disabled={!availToSave} style={{ backgroundColor: '#B70000', color: 'white' }} onClick={submit}>
+                    {`Save`}
                 </Button>{" "}
                 <Button color="secondary" onClick={cancel}>
-                {`Cancel`}
+                    {`Cancel`}
                 </Button>
             </ModalFooter>
         </Modal>

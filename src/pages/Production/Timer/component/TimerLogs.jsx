@@ -6,14 +6,14 @@ import {
 import { machineClasses } from "helpers/globals"
 import React, { useEffect, useMemo, useRef, useState } from "react"
 
-import { formatSeconds, lbsToTons } from "../../../../helpers/functions"
+import { formatSeconds, lbsToTons } from "../../../../helpers/functions.js"
 import { useNetStatus } from "context/net"
 
-import PopupWindow from './PopupWindow.js'
+import PopupWindow from './PopupWindow.jsx'
 import NewWindow from 'react-new-window'
-import LogTable from "./LogTable.js"
-import LogTableFS from "./LogTableFS.js"
-import Report from "./Report.js"
+import LogTable from "./LogTable.jsx"
+import LogTableFS from "./LogTableFS.jsx"
+import Report from "./Report.jsx"
 
 const TimerLogs = props => {
   const { isOnline } = useNetStatus()

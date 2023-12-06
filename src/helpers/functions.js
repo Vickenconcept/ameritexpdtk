@@ -1,5 +1,5 @@
 import moment from "moment"
-import { BACKEND, FILE_BACKEND } from "./helpers/axiosConfig"
+import { BACKEND, FILE_BACKEND } from "../helpers/axiosConfig"
 
 export const formatMSeconds = val => {
   val = Math.floor(val * 1000);
@@ -8,9 +8,9 @@ export const formatMSeconds = val => {
   values.push(Math.floor(val % 1000 / 10));
   val = Math.floor((val - val % 1000) / 1000);
 
-  while(val) {
+  while (val) {
     cnt = cnt + 1;
-    if(cnt == 3) {
+    if (cnt == 3) {
       values.push(val);
       break;
     }
@@ -18,7 +18,7 @@ export const formatMSeconds = val => {
     val = (val - val % 60) / 60
   }
 
-  while(values.length < 4) {
+  while (values.length < 4) {
     values.push(0)
   }
   values.reverse()
@@ -30,9 +30,9 @@ export const formatMSeconds = val => {
 export const formatSeconds = val => {
   let values = []
   let cnt = 0;
-  while(val) {
+  while (val) {
     cnt = cnt + 1;
-    if(cnt == 3) {
+    if (cnt == 3) {
       values.push(val);
       break;
     }
@@ -40,7 +40,7 @@ export const formatSeconds = val => {
     val = (val - val % 60) / 60
   }
 
-  while(values.length < 3) {
+  while (values.length < 3) {
     values.push(0)
   }
   values.reverse()
@@ -52,9 +52,9 @@ export const formatSeconds = val => {
 export const formatSecondsLetter = val => {
   let values = []
   let cnt = 0;
-  while(val) {
+  while (val) {
     cnt = cnt + 1;
-    if(cnt == 3) {
+    if (cnt == 3) {
       values.push(val);
       break;
     }
@@ -62,7 +62,7 @@ export const formatSecondsLetter = val => {
     val = (val - val % 60) / 60
   }
 
-  while(values.length < 3) {
+  while (values.length < 3) {
     values.push(0)
   }
   values.reverse()
@@ -84,8 +84,8 @@ export const formatSecondsLetter = val => {
 }
 
 export const formatTimeValue = val => {
-  if(!val) val = 0;
-  return val >= 10 ? val : '0'+val
+  if (!val) val = 0;
+  return val >= 10 ? val : '0' + val
 }
 
 export const extractFormData = form => {
@@ -119,7 +119,7 @@ export const getCurrentTime = (offsetByHour) => {
 export const lbsToTons = lbs => (lbs * 0.0005).toFixed(3)
 
 export const avatar2url = (avatar) => {
-  if (avatar==null || avatar == '') return null
+  if (avatar == null || avatar == '') return null
   if (avatar.startsWith('data:image/')) return avatar
   return FILE_BACKEND + "apms/client" + avatar
 }

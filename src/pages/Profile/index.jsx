@@ -10,40 +10,40 @@ import { getReports as getUserReport } from "actions/auth"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import { useMemo } from 'react';
-import ReportLookup from "../Production/SystemCheck/components/ReportLookup.js"
+import ReportLookup from "../Production/SystemCheck/components/ReportLookup.jsx"
 
 import Select from "react-dropdown-select";
 
 const options = [
-{
-id: 1,
-name: "Leanne Graham"
-},
-{
-id:  2,
-name: "Ervin Howell"
-}
+  {
+    id: 1,
+    name: "Leanne Graham"
+  },
+  {
+    id: 2,
+    name: "Ervin Howell"
+  }
 ];
 
 
 const ProfileHome = (props) => {
 
-  const [user_report, setUserReport] = useState ()
+  const [user_report, setUserReport] = useState()
 
   const loadUserReport = async () => {
     try {
       const res = await getUserReport()
-      setUserReport (res)
+      setUserReport(res)
     } catch (error) {
-      console.log (error)
-      setUserReport (null)
+      console.log(error)
+      setUserReport(null)
     }
   }
 
-  useEffect (async () => {
-    await loadUserReport ()
+  useEffect(async () => {
+    await loadUserReport()
   }, [])
-  
+
   return <div className="page-content profile-home">
     <MetaTags>
       <title>{props.user.firstName + ' ' + props.user.lastName + ' Profile Home Page'}</title>
@@ -65,14 +65,14 @@ const ProfileHome = (props) => {
             </div>
           </div>
           <div>
-            
+
             {user_report && (
-              <ReportLookup 
-                report={user_report} 
-                user_report={user_report} 
-                pinnable={false} 
+              <ReportLookup
+                report={user_report}
+                user_report={user_report}
+                pinnable={false}
                 loadUserReport={loadUserReport}
-                editable={false} 
+                editable={false}
               />
             )}
           </div>
@@ -89,4 +89,4 @@ const mapStatetoProps = state => {
   return { error, success, user }
 }
 
-export default withRouter(connect(mapStatetoProps,{})(ProfileHome))
+export default withRouter(connect(mapStatetoProps, {})(ProfileHome))

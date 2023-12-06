@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, {useContext, useEffect, useState} from "react"
+import React, { useContext, useEffect, useState } from "react"
 
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom"
 import { connect } from "react-redux"
@@ -8,7 +8,7 @@ import { connect } from "react-redux"
 import { userRoutes, authRoutes } from "./routes/allRoutes.js"
 
 // Import all middleware
-import Authmiddleware from "./routes/middleware/Authmiddleware.js"
+import Authmiddleware from "./routes/middleware/Authmiddleware.jsx"
 import { setAxiosConfig } from './helpers/axiosConfig'
 
 // layouts Format
@@ -47,58 +47,58 @@ const App = props => {
     return layoutCls
   }
 
-  useEffect(()=>{
-    props.setUserProfile({offline:!(navigator.onLine)})
-  },[])
+  useEffect(() => {
+    props.setUserProfile({ offline: !(navigator.onLine) })
+  }, [])
 
   const Layout = getLayout()
   return (
     <React.Fragment>
       {/* <p style={{position:"fixed", right:"50%", zIndex:"999"}}>{isOnline ? 'Online' : 'Offline'}</p> */}
-      <LoadingProvider indicator={<Indicator/>} >
+      <LoadingProvider indicator={<Indicator />} >
         <NotificationProvider>
           <TimerUserProvider>
             <NetStatusProvider>
               <LocalDBProvider user={props.authUser} userLoading={props.loading}>
                 <ModalProvider>
-                    <Router>
-                      <Switch>
-                        <Route 
-                          path="/report/:city/:machine/:classify/:from/:to"
-                          render={props => <ReportPage {...props} />}
-                          />
+                  <Router>
+                    <Switch>
+                      <Route
+                        path="/report/:city/:machine/:classify/:from/:to"
+                        render={props => <ReportPage {...props} />}
+                      />
 
-                        {authRoutes.map((route, idx) => (
-                          <Authmiddleware
-                            path={route.path}
-                            layout={NonAuthLayout}
-                            component={route.component}
-                            isLoggedIn={props.loggedIn}
-                            loading={props.loading}
-                            key={idx}
-                            exact
-                            isAuthProtected={false}
-                            admin={route.admin}
-                            user={props.authUser}
-                          />
-                        ))}
+                      {authRoutes.map((route, idx) => (
+                        <Authmiddleware
+                          path={route.path}
+                          layout={NonAuthLayout}
+                          component={route.component}
+                          isLoggedIn={props.loggedIn}
+                          loading={props.loading}
+                          key={idx}
+                          exact
+                          isAuthProtected={false}
+                          admin={route.admin}
+                          user={props.authUser}
+                        />
+                      ))}
 
-                        {userRoutes.map((route, idx) => (
-                          <Authmiddleware
-                            path={route.path}
-                            layout={Layout}
-                            component={route.component}
-                            isLoggedIn={props.loggedIn}
-                            loading={props.loading}
-                            key={idx}
-                            isAuthProtected={true}
-                            exact
-                            admin={route.admin}
-                            user={props.authUser}
-                          />
-                        ))}
-                      </Switch>
-                    </Router>
+                      {userRoutes.map((route, idx) => (
+                        <Authmiddleware
+                          path={route.path}
+                          layout={Layout}
+                          component={route.component}
+                          isLoggedIn={props.loggedIn}
+                          loading={props.loading}
+                          key={idx}
+                          isAuthProtected={true}
+                          exact
+                          admin={route.admin}
+                          user={props.authUser}
+                        />
+                      ))}
+                    </Switch>
+                  </Router>
                 </ModalProvider>
               </LocalDBProvider>
             </NetStatusProvider>

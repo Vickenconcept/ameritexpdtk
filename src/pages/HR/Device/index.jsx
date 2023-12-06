@@ -9,16 +9,16 @@ import "./style.scss"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
-import { DeviceProvider } from './context/device';
+import { DeviceProvider } from './context/device.jsx';
 
-import Page from './Page.js'
+import Page from './Page.jsx'
 
 // import {devices, device_types} from './seed';
 
 const DevicePage = (props) => {
   const user = props.user
-  
-  const canEdit = useMemo(() => (user ? (user?.role === "Admin" || (user?.role === "HR" && user.admin)) :  false ), [user])
+
+  const canEdit = useMemo(() => (user ? (user?.role === "Admin" || (user?.role === "HR" && user.admin)) : false), [user])
 
   // authUser loading
   return <div className="page-content hr-dashboard">

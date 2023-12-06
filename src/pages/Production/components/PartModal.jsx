@@ -12,14 +12,14 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 
-import "components//modal.scss";
+import "components/modal.scss";
 import MediaPreview from "./MediaPreview";
 
-import {useNetStatus} from "context/net"
+import { useNetStatus } from "context/net"
 
 const PartModal = (props) => {
   const { item, createItem, updateItem, toggle, isOpen, id, reload, idx } = props;
-  const {isOnline} = useNetStatus()
+  const { isOnline } = useNetStatus()
 
   const [canSave, setCanSave] = useState(false);
 
@@ -28,21 +28,21 @@ const PartModal = (props) => {
       e.target.value = e.target.value.replace("$", "");
     }
     if (e.target.value != "") {
-      setCanSave (true);
+      setCanSave(true);
     }
     updateItem(e.target.name, e.target.value);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    createItem((res) => {});
+    createItem((res) => { });
     console.log("done");
   };
 
   const onEdit = async (e) => {
-      e.preventDefault();
-      toggle()
-      props.onEdit(idx)
+    e.preventDefault();
+    toggle()
+    props.onEdit(idx)
   }
 
   return (
@@ -154,7 +154,7 @@ const PartModal = (props) => {
         <button className="btn btn-primary text-white" onClick={onSubmit} disabled={!isOnline || !canSave}>
           Save
         </button>
-            <button className="btn btn-info text-white" onClick={onEdit} disabled={!isOnline}>Edit</button>
+        <button className="btn btn-info text-white" onClick={onEdit} disabled={!isOnline}>Edit</button>
         <button className="btn btn-secondary text-white" onClick={props.toggle}>
           Close
         </button>

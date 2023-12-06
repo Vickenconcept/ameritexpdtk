@@ -14,7 +14,7 @@ import {
   Input,
   Progress,
 } from "reactstrap"
-import Timer from "../components/Timer"
+import Timer from "./Timer"
 import {
   createTimerAction,
   endTimerAction,
@@ -48,7 +48,7 @@ const ControlTimer = props => {
   const [controlTimer, setControlTimer] = useState("")
   const [time, setTime] = useState(0)
   const [timerId, setTimerId] = useState(0)
-  
+
   useEffect(async () => {
     setControlFilter({
       ...controlFilter,
@@ -70,16 +70,16 @@ const ControlTimer = props => {
 
   useEffect(() => {
     setTime(0)
-    if(selectedTimer && selectedTimer._id)
+    if (selectedTimer && selectedTimer._id)
       setSelectedTimer(props.timers.filter(elem => elem._id == selectedTimer._id)[0])
     console.log(selectedTimer)
     if (selectedTimer && selectedTimer.status == "Started") {
       clearInterval(timerId)
       setTime(
         new Date() -
-          new Date(
-            selectedTimer.times[selectedTimer.times.length - 1].startTime
-          )
+        new Date(
+          selectedTimer.times[selectedTimer.times.length - 1].startTime
+        )
       )
     }
   }, [selectedTimer, props.show, props.timers])
@@ -118,13 +118,13 @@ const ControlTimer = props => {
         return a.machine.name < b.machine.name
           ? -1
           : a.machine.name > b.machine.name
-          ? 1
-          : 0
+            ? 1
+            : 0
       })
     setFilteredControllerTimers(_timers)
     if (_timers[0]) setControlTimer(_timers[0]._id)
   }, [controlFilter, timers])
-  
+
   useEffect(() => {
     if (timers == undefined) return timers
     const _timers = props.timers.filter(timer => timer._id == controlTimer)
@@ -259,8 +259,8 @@ const ControlTimer = props => {
         style={{
           backgroundImage:
             selectedTimer &&
-            selectedTimer.status == "Started" &&
-            time / 1000 > selectedTimer.part[0].avgTime
+              selectedTimer.status == "Started" &&
+              time / 1000 > selectedTimer.part[0].avgTime
               ? 'url("/images/REDBacking_web.png")'
               : 'url("/images/GreenBacking_web.png")',
 
@@ -333,21 +333,21 @@ const ControlTimer = props => {
                 >
                   {filteredControllerTimers
                     ? filteredControllerTimers.map(timer => (
-                        <option
-                          className="text-uppercase"
-                          key={
-                            "" +
-                            timer.machine[0]._id +
-                            timer.part[0]._id +
-                            timer._id
-                          }
-                          value={timer._id}
-                        >
-                          {timer.machine[0].machineClass +
-                            " " +
-                            timer.machine[0].name}
-                        </option>
-                      ))
+                      <option
+                        className="text-uppercase"
+                        key={
+                          "" +
+                          timer.machine[0]._id +
+                          timer.part[0]._id +
+                          timer._id
+                        }
+                        value={timer._id}
+                      >
+                        {timer.machine[0].machineClass +
+                          " " +
+                          timer.machine[0].name}
+                      </option>
+                    ))
                     : ""}
                 </select>
               </div>
@@ -436,17 +436,17 @@ const ControlTimer = props => {
               <b>UNITS PER HR:</b>{" "}
               {selectedTimer
                 ? lbsToTons(
-                    selectedTimer.dailyTon /
-                      (Math.round(selectedTimer.totalTime / 3600) || 1)
-                  )
+                  selectedTimer.dailyTon /
+                  (Math.round(selectedTimer.totalTime / 3600) || 1)
+                )
                 : "UPH"}
               <br />
               <b>TONS PER HOUR:</b>{" "}
               {selectedTimer
                 ? lbsToTons(
-                    selectedTimer.dailyUnit /
-                      (Math.round(selectedTimer.totalTime / 3600) || 1)
-                  )
+                  selectedTimer.dailyUnit /
+                  (Math.round(selectedTimer.totalTime / 3600) || 1)
+                )
                 : "TPH"}
             </div>
           </div>
@@ -455,12 +455,12 @@ const ControlTimer = props => {
         <Progress
           color={
             selectedTimer &&
-            selectedTimer.status == "Started" &&
-            time / 1000 > selectedTimer.part[0].avgTime
+              selectedTimer.status == "Started" &&
+              time / 1000 > selectedTimer.part[0].avgTime
               ? "danger"
               : "success"
           }
-          value={selectedTimer? Math.min(100, time * 1000 / selectedTimer.part[0].avgTime):100}
+          value={selectedTimer ? Math.min(100, time * 1000 / selectedTimer.part[0].avgTime) : 100}
           style={{ height: "2vw", marginTop: "8%" }}
         />
 
@@ -483,8 +483,8 @@ const ControlTimer = props => {
           <img
             src={
               selectedTimer &&
-              selectedTimer.status == "Started" &&
-              time / 1000 > selectedTimer.part[0].avgTime
+                selectedTimer.status == "Started" &&
+                time / 1000 > selectedTimer.part[0].avgTime
                 ? "/images/endproduction_Red.png"
                 : "/images/endproduction_Green.png"
             }

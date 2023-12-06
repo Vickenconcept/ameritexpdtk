@@ -5,20 +5,20 @@ import {
 import LightgalleryItem from "./LightgalleryItem";
 import { useCallback, useEffect, useState, forwardRef } from "react";
 
-import { useModal } from "components/Common/Modal/promise-modal/index.js"
-import {AlertModal} from "components/Common/Modal/AlertModal"
-import {ConfirmModal} from "components/Common/Modal/ConfirmModal"
+import { useModal } from "components/Common/Modal/promise-modal/index.jsx"
+import { AlertModal } from "components/Common/Modal/AlertModal"
+import { ConfirmModal } from "components/Common/Modal/ConfirmModal"
 
-const PortfolioItem = forwardRef(({ 
-  image, 
-  thumb, 
-  group, 
-  visible, 
+const PortfolioItem = forwardRef(({
+  image,
+  thumb,
+  group,
+  visible,
   photo, //null: it means that it's the album element
-  album, 
-  canEdit, 
-  openModal, 
-  deleteItem, 
+  album,
+  canEdit,
+  openModal,
+  deleteItem,
   loadItem,
   name,
   setZoomOpen,
@@ -26,10 +26,10 @@ const PortfolioItem = forwardRef(({
   lightGalleryRef,
 }, ref) => {
   // const { openGallery } = useLightgallery();
-  const [loading, setLoading] = useState (false)
-  const [total, setTotal] = useState (0)
-  const [loadCnt, setLoadCnt] = useState (0)
-  
+  const [loading, setLoading] = useState(false)
+  const [total, setTotal] = useState(0)
+  const [loadCnt, setLoadCnt] = useState(0)
+
   const { create: createAlert } = useModal(AlertModal, {
     instanceId: "alert",
     title: "Alert!",
@@ -38,29 +38,29 @@ const PortfolioItem = forwardRef(({
   })
 
   const alert = (text) => {
-    createAlert({text}).then(()=>{}).catch(()=>{})
+    createAlert({ text }).then(() => { }).catch(() => { })
   }
 
   const onAlbumClick = async () => {
     try {
       if (photo || loading) return
-      if (!album.photo_cnt) return alert ('No available photos in this album')
+      if (!album.photo_cnt) return alert('No available photos in this album')
       if (loadItem === undefined) return
-      setLoading (true)
+      setLoading(true)
       await loadItem(album._id)
       if (lightGalleryRef.current) {
         lightGalleryRef.current.init()
         lightGalleryRef.current.openGallery()
       }
-      setLoading (false)
+      setLoading(false)
     } catch (e) {
-      console.log (e)
-      setLoading (false)
+      console.log(e)
+      setLoading(false)
     } finally {
     }
   }
 
-  function onEditClick (e) {
+  function onEditClick(e) {
     e.stopPropagation()
     e.preventDefault()
     if (loading) return
@@ -84,15 +84,15 @@ const PortfolioItem = forwardRef(({
 
   return (
     // <div style={{display: visible?"":"none"}} onClick={onAlbumClick}>
-      <div ref={ref} className={`album-container ${(loading) ?'loading':''}`}>
-        {
+    <div ref={ref} className={`album-container ${(loading) ? 'loading' : ''}`}>
+      {
         // <LightgalleryItem group={group} src={image} thumb={thumb} subHtml={`${name}`}>
-          <div className="react_lightgallery_item">
-            <img src={thumb} style={{ width: "100%" }} alt='image' className={`light-gallery-item ${loading?'blur':''}`} />
-          </div>
+        <div className="react_lightgallery_item">
+          <img src={thumb} style={{ width: "100%" }} alt='image' className={`light-gallery-item ${loading ? 'blur' : ''}`} />
+        </div>
         // </LightgalleryItem>
-        }
-        {!photo &&
+      }
+      {!photo &&
         <div className="album-overlay" onClick={onAlbumClick}>
           <div className="button-container">
             <button className="btn btn-action btn-sm">
@@ -100,30 +100,30 @@ const PortfolioItem = forwardRef(({
               {album.photo_cnt}
             </button>
             {canEdit && <>
-            <button className="btn btn-action btn-sm" onClick={onEditClick}>
-              <i className="fa fa-edit"></i>
-            </button>
+              <button className="btn btn-action btn-sm" onClick={onEditClick}>
+                <i className="fa fa-edit"></i>
+              </button>
             </>
             }
           </div>
         </div>
-        }
-        {loading && 
+      }
+      {loading &&
         <div className='loading-indicator'>
           <Spinner color='light' animation="border" variant="primary" />
         </div>
-        }
-        {photo &&
-          <div id={`photo_info_${photo._id}`}>{photo.name}</div>
-        }
-        {!photo &&<>
+      }
+      {photo &&
+        <div id={`photo_info_${photo._id}`}>{photo.name}</div>
+      }
+      {!photo && <>
         <div id={`album_info_${album._id}`} className="album-banner">
           <span className='album-banner-year'>{album.year}</span>
-          <br/>
+          <br />
           {album.name}
         </div>
-        </>}
-      </div>
+      </>}
+    </div>
     // {/* </div> */}
   )
 })
