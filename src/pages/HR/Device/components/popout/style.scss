@@ -1,0 +1,308 @@
+$color: #3c3c3c;
+$color-light: #ffffff;
+$color-gray: #bebebe;
+$color-dark: #1c1c1c;
+$color-darkgray: #797979;
+$color-primary: #3E5B84;
+$color-secondary: #d69c50;
+$color-tertiary: #3E5B84;
+$color-quaternary: #3E5B84;
+$color-quinary: #3E5B84;
+$color-info: #296ece;
+$color-red: #702222;
+
+.popout-request {
+    font-size: 8px;
+    .dropdown-item-title {
+        display: flex;
+        .dropdown-item-title-text {
+            font-size: 13px;
+            font-weight: 500;
+            // color: #000000;
+            flex: 1;
+        }
+    }
+    .dropdown-item-body {
+        margin-top: 15px;
+        .dropdown-item-body-item {
+            line-height: 10px;
+            margin-top: 5px;
+            text-wrap: balance;
+            line-height: 10px;
+            .dropdown-item-body-item-image {
+                width: 70px;
+                height: 40px;
+                overflow: hidden;
+                border-radius: 10px;
+                border: 1px solid $color-gray;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .dropdown-item-body-item-title {
+                // display: flex;
+                margin-right: 5px;
+                // font-size: 11px;
+                text-transform: uppercase;
+                font-weight: 500;
+                // color: $color-secondary;
+                line-height: 15px;
+                flex: 1;
+                // .dropdown-item-body-title-text {
+                // }
+            }
+            .dropdown-item-body-item-value {
+                display: flex;
+                font-size: 11px;
+                // font-weight: 500;
+                // color: #000000;
+                color: $color-primary;
+                flex: 1;
+            }
+        }
+    }
+    .dropdown-item-action {
+        display: flex;
+        justify-content: flex-end;
+        // gap: 10px;
+        border-top: 1px solid $color-gray;
+        margin-top: 5px;
+        .btn {
+            background-color: $color-secondary !important;
+            font-size: 10px;
+            font-weight: 500;
+            color: $color-light !important;
+            border: none !important;
+            border-radius: 5px;
+            padding: 2px 7px;
+            margin-top: 7px;
+            text-transform: uppercase;
+            &:hover {
+                background-color: lighten($color: $color-secondary, $amount: 10%) !important;
+                color: $color-light !important;
+            }
+            &.btn-primary {
+                border: none !important;
+                background-color: $color-primary !important;
+                color: $color-light !important;
+                &:hover {
+                    background-color: lighten($color: $color-primary, $amount: 10%) !important;
+                    color: $color-light !important;
+                }
+            }
+            &.btn-error {
+                border: none !important;
+                background-color: $color-red !important;
+                color: $color-light !important;
+                &:hover {
+                    background-color: lighten($color: $color-red, $amount: 10%) !important;
+                    color: $color-light !important;
+                }
+            }
+            &.btn-gray {
+                border: none !important;
+                background-color: $color-gray !important;
+                color: $color-light !important;
+                &:hover {
+                    background-color: lighten($color: $color-gray, $amount: 10%) !important;
+                    color: $color-light !important;
+                }
+            }
+        }
+    }
+
+    &.device-manage {
+        .dropdown-item-body {
+            display: flex;
+            gap: 10px;
+            margin: 0;
+            .dropdown-item-body-item {
+                margin-top: 0;
+            }
+            .dropdown-item-body-item-image {
+                margin-top: 10px;
+                border-radius: 5px;
+                width: 100px;
+                height: 60px;
+            }
+        }
+        .dropdown-item-action {
+            justify-content: space-between;
+        }
+    }
+}
+
+.device-manage-popup {
+    display: block !important;
+    position: relative !important;
+    border-radius: 1rem !important;
+    width: 100% !important;
+    animation: none !important;
+    transform: none !important;
+    // height: 0px;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: -1 !important;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    .popout-request {
+        height: 0px;
+        opacity: 0;
+        transition: height 0.3s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        .dropdown-item:last-child {
+            margin-top: 0;
+            padding-top: 0;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 1;
+            overflow: hidden;
+            justify-content: space-between;
+            flex-grow: 1;
+            .dropdown-item-body { 
+                flex: 1;
+            }
+        }
+    }
+
+    &.show {
+        // height: auto;
+        display: block !important;
+        z-index: 100 !important;
+        opacity: 1;
+        height: 350px;
+        .popout-request {
+            opacity: 1;
+            height: 350px;
+        }
+    }
+}
+
+.close-popout {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 1rem;
+    user-select: none;
+}
+
+.log-table-wrapper {
+    height: 100%;
+    .log-list-table {
+        width: 100%;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        &.full {
+            height: 660px;
+            flex: 1 0 660px;
+        }
+        overflow-y: auto;
+        overflow-x: hidden;
+        &::-webkit-scrollbar {
+            width: 5px;
+            right: -10px;
+            padding-top: 10px;
+            position: absolute;
+            // background-color: #296ece;
+        }
+        
+        /* Track */
+        &::-webkit-scrollbar-track {
+            margin-top: 30px;
+            // margin-bottom: 30px;
+            background: transparent;
+        }
+        
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+        
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+        table {
+            width: 100%;
+            // height: 100%;
+            // flex: 1;
+            thead {
+                position: sticky;
+                height: 30px;
+                top: 0;
+                background-color: white;
+                padding: 0 5px;
+            }
+            tbody {
+                // height: 50px;
+                overflow: auto;
+                // vertical-align: top;
+                flex: 1;
+            }
+            tr {
+                height: 20px;
+            }
+            tr:nth-child(odd) {
+                background-color: #f2f2f2;
+            }
+            tr:nth-child(even) {
+                background-color: white;
+            }
+            th, td {
+                padding: 0 5px;
+                // border-bottom: 1px solid #ddd;
+                text-align: left;
+                font-size: 10px;
+            }
+            th {
+                background: white;
+            }
+            
+            tfoot {
+                position: sticky;
+                height: 30px;
+                bottom: 0;
+                // background-color: white;
+                color: white;
+                padding: 0 5px;
+            }
+        }
+    }
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        .pagination-info {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            color: $color-gray;
+        }
+        .pagination-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            background-color: $color-gray;
+            color: $color-light;
+            cursor: pointer;
+            &.active {
+                background-color: $color-primary;
+                color: $color-light;
+            }
+            &:hover {
+                background-color: lighten($color: $color-gray, $amount: 10%);
+                color: $color-light;
+            }
+        }
+    }
+}

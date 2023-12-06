@@ -1,0 +1,250 @@
+$background-gray: rgb(246, 247, 251);
+$gray-font: rgb(141, 144, 150);
+$gray-color: #e9edf2;
+
+.production-tracker {
+  .production-tracker-page-header {
+    h2 {
+      font-family: Exo\ 2, Helvetica Neue, Arial, sans-serif !important;
+      color: #272c33;
+      font-size: 2rem;
+    }
+
+    font-family: Exo\ 2,
+    Helvetica Neue,
+    Arial,
+    sans-serif !important;
+  }
+ 
+  .divide-line {
+    font-family: Exo\ 2, Helvetica Neue, Arial, sans-serif !important;
+    color: #272c33;
+    font-size: 20px;
+    .line {
+      width: 100%;
+      height: 2px;
+      background-color: $gray-color;
+
+    }
+  }
+
+  .jobs-table-container {
+    border-radius: 10px;
+    border: 1px solid $gray-color;
+
+    .jobs-table-header {
+      i {
+        font-size: 1rem;
+        font-weight: 600;
+        left: 16px;
+        top: 6px;
+      }
+
+      .jobs-tab {
+        background-color: $background-gray;
+        padding: 12px 18px;
+        border-right: 1px solid $gray-color;
+        display: flex;
+        align-items: center;
+
+
+        border-top: 5px solid rgba(72, 131, 268, 0);
+
+        .number {
+          font-family: Exo\ 2, Helvetica Neue, Arial, sans-serif !important;
+          margin-right: 16px;
+          font-weight: 700;
+        }
+
+        h4 {
+          font-size: 1.125rem;
+          font-weight: 700;
+        }
+      }
+
+
+      .ongoing-job-tab {
+        border-top-left-radius: 10px;
+      }
+
+      .active {
+        border-top: 5px solid #4aa2ee;
+        background-color: white;
+
+        .number,
+        h4 {
+          color: #272c33;
+        }
+
+      }
+
+      border-bottom: 1px solid $gray-color;
+      .countshow {
+        font-family: Exo\ 2, Helvetica Neue, Arial, sans-serif !important;
+        font-size: 1rem;
+        input {
+          font-size: 1rem;
+        }
+      }
+      .btn-newjob {
+        background-color: rgb(155, 0, 4);
+        color: white;
+        font-size: .875rem;
+        min-width: 90px;
+        border: .5rem;
+        font-family: Exo\ 2, Helvetica Neue, Arial, sans-serif !important;
+        padding: .5rem 1rem;
+
+      }
+    }
+
+    .jobs-table {
+      table {
+        min-width: 960px;
+      }
+
+      .job-factory {
+        width: 50px;
+        min-width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        display: flex;
+        font-weight: 500;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+        background-color: rgb(74, 161, 238);
+      }
+
+      .job-user {
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: gray;
+        color: white;
+        border-radius: 20px;
+        margin-right: 8px;
+      }
+
+      thead {
+        border-bottom: 1px solid $gray-color;
+
+        th {
+          padding: 8px;
+          font-family: Exo\ 2, Helvetica Neue, Arial, sans-serif !important;
+          color: #272c33;
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+        }
+
+        th:after {
+          padding-left: .5rem;
+          // content: url("data:image/svg+xml;utf8,<svg width='6' height='10' viewBox='0 0 6 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M3 0L6 4H0L3 0ZM3 10L0 6H6L3 10Z' fill='rgba(39, 44, 51, 0.54)'/></svg>")
+        }
+      }
+
+      tbody {
+        tr {
+
+          border-bottom: 1px solid $gray-color;
+
+          td {
+            padding: 8px;
+            border: none;
+            background-color: white !important;
+            vertical-align: middle;
+
+            .name {
+              white-space: pre-wrap;
+
+            }
+
+            b {
+              color: #272c33;
+            }
+
+            i {
+              font-family: Material Icons;
+              font-weight: 400;
+              font-style: normal;
+              font-size: 24px;
+              color: grey;
+            }
+
+            i:hover {
+              color: #272c33;
+            }
+
+            .dropdown-menu {
+              min-width: 100px;
+              transform: none !important;
+              inset: unset !important;
+              right: 0 !important;
+              top: 100% !important;
+              animation-name: DropDownSlide !important;
+              animation-duration: .3s !important;
+              animation-fill-mode: both !important;
+            }
+          }
+        }
+
+
+      }
+
+      // .job-status {
+
+      //   // border-bottom: 3px solid #e4a93c !important;
+
+      // }
+
+      .indicator-line {
+        display: block;
+        margin-top: 6px;
+        width: 18px;
+        height: 4px;
+      }
+    }
+
+    .text-secondary {
+      color: $gray-font !important;
+    }
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+
+  .bg-pipe {
+    background-color: rgb(74, 161, 238) !important;
+  }
+
+  .bg-precast {
+    background-color: rgb(227, 169, 61) !important;
+  }
+
+  .bg-steel {
+    background-color: rgb(1, 188, 195) !important;
+  }
+
+
+  @media (max-width: 768px) {
+    .jobs-table-header{
+      display: block !important;
+      .flex-fill {
+        margin: .5rem 0;
+      }
+      .tab-container {
+        .jobs-tab{
+          width: 50%;
+          justify-content: center;
+        }
+        border-bottom: 1px solid #dddee2;
+      }
+    }
+  }
+}

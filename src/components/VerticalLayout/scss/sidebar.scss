@@ -1,0 +1,61 @@
+.metismenu {
+  margin: 0;
+  padding: 0;
+  li {
+      display: block;
+      width: 100%;
+  }
+
+  .mm-collapse {
+      display: none;
+
+      &:not(.mm-show) {
+          display: none;
+      }
+
+      &.mm-show {
+          display: block
+      }
+  }
+
+  .mm-collapsing {
+      position: relative;
+      height: 0;
+      overflow: hidden;
+      transition-timing-function: ease;
+      transition-duration: .35s;
+      transition-property: height, visibility;
+  }
+}
+
+.vertical-menu {
+  .simplebar-horizontal {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+#sidebar-menu {
+  
+  .sidebar-avatar-container {
+    .simplebar-content-wrapper{
+      overflow: hidden !important;
+    }
+    .sidebar-avatar {
+      border-radius: 100px;
+      background-color: white;
+      box-sizing: initial;
+      font-family: Exo\ 2,Helvetica Neue,Arial,sans-serif;
+      h4{
+        font-family: Exo\ 2,Helvetica Neue,Arial,sans-serif;
+      }
+      img{
+        width: 36px;
+        height: 36px;
+        object-fit: cover;
+      }
+    }
+  }
+
+
+}

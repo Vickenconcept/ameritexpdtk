@@ -1,0 +1,187 @@
+.timer-components {
+  .react-select-container {
+    height: 38px;
+    background-color: #f8f8f8;
+    border: 2px solid #bebebe;
+    border-radius: 8px;
+    position: relative;
+    .react-dropdown-select-content {
+      display: -webkit-box;
+      // -webkit-line-clamp: 1;
+      // -webkit-box-orient: vertical;
+      overflow: hidden;
+      // word-break: break-all;
+      // max-width: 160px;
+      max-width: 160px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  .product {
+    padding: 0;
+    border: 2px solid #e1e1e1;
+    width: fit-content;
+    .product-header {
+      padding: 8px 20px;
+      border-bottom: 2px solid #e1e1e1;
+    }
+    @media screen and (max-width: 1200px) {
+      .product-header {
+        padding: 8px 10px;
+      }
+    }
+    @media screen and (max-width: 993px) {
+      .product-header {
+        padding: 8px 20px !important;
+      }
+    }
+    .timer-info {
+      border: none;
+      margin-top: 0;
+      padding: 5px 15px 15px 15px;
+
+      .part-name {
+        font-weight: 700;
+        font-size: 1.6rem;
+        font-family: "Bebas Neue", sans-serif;
+        margin-bottom: 0;
+        letter-spacing: 0.125rem;
+      }
+
+      .timer-name {
+        margin: 0;
+        .time {
+          font-size: 5rem;
+          font-family: "Bebas Neue", sans-serif;
+          font-weight: 700;
+          margin-bottom: -0.5rem;
+          line-height: 5rem;
+          letter-spacing: 1px;
+        }
+        @media screen and (max-width: 1200px) {
+          .time {
+            font-size: 5rem;
+          }
+        }
+        @media screen and (max-width: 1050px) {
+          .time {
+            font-size: 4.5rem !important;
+          }
+        }
+        // @media screen and (max-width: 993px) {
+        //   .time {
+        //     font-size: 4.5rem !important;
+        //   }
+        // }
+      }
+
+      .production-details {
+        margin: 0;
+        .operator-name {
+          padding: 0;
+          margin-bottom: 1rem;
+        }
+
+        .daily-unit-container {
+          .daily-unit-digit {
+            font-size: 4rem;
+            margin-top: -1.5rem;
+            margin-bottom: -1.5rem;
+            .active {
+            }
+            .inactive {
+              color: #b0b0b0;
+            }
+          }
+
+          .daily-unit-caption {
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+          }
+        }
+
+        .info-container {
+          > .row {
+            margin: 0;
+
+            > * {
+              padding: 0 5px;
+              font-size: 14px;
+            }
+
+            .caption {
+              text-align: right;
+              border-right: 1px solid #b0b0b0;
+            }
+
+            .info {
+              text-align: left;
+            }
+          }
+        }
+
+        .button-container {
+          margin: 0;
+          margin-top: 12px;
+
+          button {
+            border-radius: 4px;
+            color: white;
+          }
+
+          .button-controller {
+            margin-right: 13px;
+            width: 43%;
+            font-size: 1em;
+          }
+
+          .button-camera {
+            background: #b2b2b2;
+            margin-left: 13px;
+            width: 45%;
+            font-size: 1em;
+          }
+
+          @media screen and (max-width: 993px) {
+            .button-controller {
+              margin-right: 0 !important;
+              font-size: 1em !important;
+            }
+
+            .button-camera {
+              margin-left: 0 !important;
+              font-size: 1em !important;
+            }
+          }
+          @media screen and (max-width: 1200px) {
+            .button-controller {
+              margin-right: 5px;
+              font-size: .8em;
+              width: auto !important;
+            }
+
+            .button-camera {
+              margin-left: 5px;
+              font-size: .8em;
+              width: auto !important;
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 1200px) {
+      .timer-info {
+        padding: 5px 10px 10px 10px;
+      }
+    }
+    @media screen and (max-width: 993px) {
+      .timer-info {
+        padding: 5px 10px 10px 10px !important;
+      }
+    }
+  }
+}
+.text-zero {
+  color: #cbc4ab !important;
+}

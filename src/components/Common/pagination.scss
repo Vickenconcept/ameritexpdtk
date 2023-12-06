@@ -1,0 +1,36 @@
+.pagination {
+  font-weight: 500;
+  font-size: .8125rem;
+  line-height: 24px !important;
+
+  .mdi {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+
+  .dropdown-menu {
+    min-width: fit-content !important;
+    transform: none !important;
+    inset: unset !important;
+    left: 0 !important;
+    top: 100% !important;
+    animation-name: DropDownSlide !important;
+    animation-duration: .3s !important;
+    animation-fill-mode: both !important;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .dropdown-menu:after {
+    border: none;
+  }
+}

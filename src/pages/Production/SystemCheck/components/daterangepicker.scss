@@ -1,0 +1,21 @@
+.daterangepicker {
+    .applyBtn {
+        background-color: #102136 !important;
+        border: 1px solid #102136 !important;
+        color: #fff;
+        &:hover {
+            background-color: #1f3b5e !important;
+            border: 1px solid #102136 !important;
+        }
+    }
+}
+
+.btn-apply-date {
+    background-color: #102136 !important;
+    border: 1px solid #102136 !important;
+    color: #fff !important;
+    &:hover {
+        background-color: #1f3b5e !important;
+        border: 1px solid #102136 !important;
+    }
+}
