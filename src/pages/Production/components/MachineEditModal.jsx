@@ -1,4 +1,4 @@
-import {
+wimport {
     Container,
     Modal,
     ModalHeader,
@@ -13,7 +13,7 @@ import {
     Form,
     Spinner
 } from "reactstrap"
-import Dropzone from "../../../components/Common/Dropzone"
+import Dropzone from "../../../components/Common/Dropzone.jsx"
 
 import {
     CitySelect,
@@ -31,7 +31,7 @@ import {
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-import {getMediaType, getMediaPreview, getMediaUrl} from "./MediaUtils"
+import {getMediaType, getMediaPreview, getMediaUrl} from "./MediaUtils.js"
 
 import "components//modal.scss"
 

@@ -14,7 +14,7 @@ import {
   Input,
   Progress,
 } from "reactstrap"
-import Timer from "../components/Timer"
+import Timer from "./Timer"
 import {
   createTimerAction,
   endTimerAction,

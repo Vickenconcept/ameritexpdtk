@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react"
-import { TimeDiffText } from "../util"
-import { useDevice } from "../../context/device";
+import { TimeDiffText } from "../util/index.js"
+import { useDevice } from "../../context/device.js";
 import moment from 'moment'
 import DevicePostList from "./posts.js"
 

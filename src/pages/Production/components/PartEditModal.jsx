@@ -12,7 +12,7 @@ import {
     Row,
     Spinner
 } from "reactstrap"
-import Dropzone from "../../../components/Common/Dropzone"
+import Dropzone from "../../../components/Common/Dropzone.jsx"
 
 import {
     CitySelect,
@@ -22,10 +22,10 @@ import {
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-import {getMediaType, getMediaPreview, getMediaUrl} from "./MediaUtils"
+import {getMediaType, getMediaPreview, getMediaUrl} from "./MediaUtils.jsx"
 
 import "components//modal.scss"
-import MediaList from './MediaList.js'
+import MediaList from './MediaList.jsx'
 
 const PartEditModal = (props) => {
 

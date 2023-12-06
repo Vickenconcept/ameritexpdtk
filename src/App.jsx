@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, {useContext, useEffect, useState} from "react"
+import {useContext, useEffect, useState} from "react"
 
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom"
 import { connect } from "react-redux"
