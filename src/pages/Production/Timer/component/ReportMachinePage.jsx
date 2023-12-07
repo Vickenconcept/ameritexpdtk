@@ -1,8 +1,8 @@
 import { getTimerLogsOfMachine } from "../../../../actions/timer"
 import { useEffect, useRef, useState, useMemo } from "react"
-import { formatSeconds, lbsToTons, formatSecondsLetter } from "../../../helpers/functions"
+import { formatSeconds, lbsToTons, formatSecondsLetter } from "../../../../helpers/functions"
 
-import { BACKEND } from "./helpers/axiosConfig"
+import { BACKEND } from "../../../../helpers/axiosConfig"
 import moment from "moment"
 const styles = ({
     page: {
@@ -113,7 +113,7 @@ export default ({
     const [totalGain, setTotalGain] = useState(0)
     const [totalFloat, setTotalFloat] = useState(0)
     const [resultDateRange, setResultDateRange] = useState([])
-    const [forToday, setForToday] = useState (false)
+    const [forToday, setForToday] = useState(false)
 
     const getReports = async () => {
         setLoading(true)
@@ -137,8 +137,8 @@ export default ({
             setTotalGain(res.totalGain ? res.totalGain : 0)
             setTotalLoss(res.totalLoss ? res.totalLoss : 0)
             setTotalFloat(res.totalFloat ? res.totalFloat : 0)
-            setResultDateRange ([res.from, res.to])
-            setForToday (res.forToday)
+            setResultDateRange([res.from, res.to])
+            setForToday(res.forToday)
 
             setLogs(res.logs || [])
         } catch (e) {
@@ -149,15 +149,15 @@ export default ({
         }
     }
 
-    const dateRangeText = useMemo (()=>{
-        if (!resultDateRange || resultDateRange.length!=2) return ''
+    const dateRangeText = useMemo(() => {
+        if (!resultDateRange || resultDateRange.length != 2) return ''
         if (forToday) return 'Today'
         return `${moment(resultDateRange[0])?.format('MM/DD/YYYY')} - ${moment(resultDateRange[1])?.format('MM/DD/YYYY')}`
     }, [resultDateRange])
 
     useEffect(() => {
         getReports()
-    },[])
+    }, [])
 
     return (
         <div>
@@ -165,141 +165,143 @@ export default ({
                 <div>loading...</div>
             ) : (
                 <div className='page'>
-                    <div style={{...styles.info, marginTop: '10px'}}>
-                        <div style={{flex:1}}>
+                    <div style={{ ...styles.info, marginTop: '10px' }}>
+                        <div style={{ flex: 1 }}>
                             <img src={BACKEND + '/logo-dark.png'} style={styles.image} />
                         </div>
-                        <div style={{textAlign: 'right'}}>
+                        <div style={{ textAlign: 'right' }}>
                             <div>
                                 <span style={infoStyles.label}>
-                                City : 
+                                    City :
                                 </span>
                                 {city}
                             </div>
                             <div>
                                 <span style={infoStyles.label}>
-                                Factory : 
+                                    Factory :
                                 </span>
                                 {machine?.factory}
                             </div>
                             <div>
                                 <span style={infoStyles.label}>
-                                Machine Class : 
+                                    Machine Class :
                                 </span>
                                 {machine?.machineClass}
                             </div>
                             <div>
                                 <span style={infoStyles.label}>
-                                Machine : 
+                                    Machine :
                                 </span>
                                 {machine?.name}
                             </div>
                             <div>
                                 <span style={infoStyles.label}>
-                                Report : 
+                                    Report :
                                 </span>
                                 {moment().format('DD/MM/YYYY')}
                             </div>
                         </div>
                     </div>
-                    <div style={{...titleStyle, marginTop: 80}}>
+                    <div style={{ ...titleStyle, marginTop: 80 }}>
                         TOTALS
                     </div>
                     <div style={infoStyles.container}>
-                        <div style={{...infoStyles.row, justifyContent: 'flex-start'}}>
-                            <div style={{...infoStyles.col1, ...infoStyles.label}}>
+                        <div style={{ ...infoStyles.row, justifyContent: 'flex-start' }}>
+                            <div style={{ ...infoStyles.col1, ...infoStyles.label }}>
                                 Date Range
                             </div>
-                            <div style={{...infoStyles.col2}}>
+                            <div style={{ ...infoStyles.col2 }}>
                                 {dateRangeText}
                             </div>
                         </div>
                         <div style={infoStyles.row}>
-                            <div style={{...infoStyles.col1, ...infoStyles.label}}>
+                            <div style={{ ...infoStyles.col1, ...infoStyles.label }}>
                                 Total Units
                             </div>
-                            <div style={{...infoStyles.col2}}>
+                            <div style={{ ...infoStyles.col2 }}>
                                 {resultCount}
                             </div>
                         </div>
                         <div style={infoStyles.row}>
-                            <div style={{...infoStyles.col1, ...infoStyles.label}}>
+                            <div style={{ ...infoStyles.col1, ...infoStyles.label }}>
                                 Total Tons
                             </div>
-                            <div style={{...infoStyles.col2}}>
+                            <div style={{ ...infoStyles.col2 }}>
                                 {totalTons}
                             </div>
                         </div>
                         <div style={infoStyles.row}>
-                            <div style={{...infoStyles.col1, ...infoStyles.label}}>
+                            <div style={{ ...infoStyles.col1, ...infoStyles.label }}>
                                 Total Time of Gain
                             </div>
-                            <div style={{...infoStyles.col2}}>
+                            <div style={{ ...infoStyles.col2 }}>
                                 {formatSecondsLetter(totalGain)}
                             </div>
                         </div>
                         <div style={infoStyles.row}>
-                            <div style={{...infoStyles.col1, ...infoStyles.label}}>
+                            <div style={{ ...infoStyles.col1, ...infoStyles.label }}>
                                 Total Time of Loss
                             </div>
-                            <div style={{...infoStyles.col2}}>
+                            <div style={{ ...infoStyles.col2 }}>
                                 {formatSecondsLetter(totalLoss)}
                             </div>
                         </div>
                         {totalFloat ? (
                             <div style={infoStyles.row}>
-                                <div style={{...infoStyles.col1, ...infoStyles.label}}>
+                                <div style={{ ...infoStyles.col1, ...infoStyles.label }}>
                                     Total Time of Unused
                                 </div>
-                                <div style={{...infoStyles.col2}}>
+                                <div style={{ ...infoStyles.col2 }}>
                                     {formatSecondsLetter(totalFloat)}
                                 </div>
                             </div>
                         ) : ""}
                     </div>
                     {includeCycle &&
-                    <>
-                    <div style={titleStyle}>
-                        CYCLES
-                    </div>
-                    <div style={styles.row}>
-                        <div style={styles.col1}>No</div>
-                        <div style={styles.col2}>Part</div>
-                        <div style={styles.col3}>Id</div>
-                        <div style={styles.col4}>Operator</div>
-                        <div style={styles.col5}>Status</div>
-                        <div style={styles.col6}>Start</div>
-                        <div style={styles.col7}>Duration</div>
-                    </div>
-                    {logs?.map((log, index) => (
-                        <div key={index} style={styles.row}>
-                            {/* <div>{log.id}</div> */}
-                            <div style={styles.col1}>{logs.length - index}</div>
-                            <div style={styles.col2}>{log.part?.name}</div>
-                            <div style={styles.col3}>{log.id}</div>
-                            <div style={styles.col4}>{log.operator}</div>
-                            <div style={{...styles.col5, color: (
-                                log.loss > 0 ? 'red' : log.gain > 0 ? 'green' : 'black'
-                            ),
-                            fontWeight: 'bold',}}>
-                                {log.loss > 0 ? 'Loss' : log.gain > 0 ? 'Gain' : ''}
+                        <>
+                            <div style={titleStyle}>
+                                CYCLES
                             </div>
-                            <div style={styles.col6}>
-                                <span style={{color: 'black'}}>
-                                    {moment(log.startTime).format('MM/DD/YYYY')}
-                                </span>
-                                {` `}
-                                <span style={{color: 'gray'}}>
-                                    {moment(log.startTime).format('HH:mm:ss')}
-                                </span>
+                            <div style={styles.row}>
+                                <div style={styles.col1}>No</div>
+                                <div style={styles.col2}>Part</div>
+                                <div style={styles.col3}>Id</div>
+                                <div style={styles.col4}>Operator</div>
+                                <div style={styles.col5}>Status</div>
+                                <div style={styles.col6}>Start</div>
+                                <div style={styles.col7}>Duration</div>
                             </div>
-                            <div style={{...styles.col7, color: 'yellowgreen'}}>{formatSecondsLetter(log.time)}</div>
-                        </div>
-                    ))}
-                    {logs.length == 0 && (
-                        <div style={{textAlign: 'center', marginTop: 20}}>No data</div>
-                    )}
-                    {/* <div style={{
+                            {logs?.map((log, index) => (
+                                <div key={index} style={styles.row}>
+                                    {/* <div>{log.id}</div> */}
+                                    <div style={styles.col1}>{logs.length - index}</div>
+                                    <div style={styles.col2}>{log.part?.name}</div>
+                                    <div style={styles.col3}>{log.id}</div>
+                                    <div style={styles.col4}>{log.operator}</div>
+                                    <div style={{
+                                        ...styles.col5, color: (
+                                            log.loss > 0 ? 'red' : log.gain > 0 ? 'green' : 'black'
+                                        ),
+                                        fontWeight: 'bold',
+                                    }}>
+                                        {log.loss > 0 ? 'Loss' : log.gain > 0 ? 'Gain' : ''}
+                                    </div>
+                                    <div style={styles.col6}>
+                                        <span style={{ color: 'black' }}>
+                                            {moment(log.startTime).format('MM/DD/YYYY')}
+                                        </span>
+                                        {` `}
+                                        <span style={{ color: 'gray' }}>
+                                            {moment(log.startTime).format('HH:mm:ss')}
+                                        </span>
+                                    </div>
+                                    <div style={{ ...styles.col7, color: 'yellowgreen' }}>{formatSecondsLetter(log.time)}</div>
+                                </div>
+                            ))}
+                            {logs.length == 0 && (
+                                <div style={{ textAlign: 'center', marginTop: 20 }}>No data</div>
+                            )}
+                            {/* <div style={{
                         fontWeight: 'bold',
                         textAlign: 'right',
                         flexDirection: 'column',
@@ -317,7 +319,7 @@ export default ({
                             TOTAL LOSS: {formatSeconds(totalLoss)}
                         </div>
                     </div> */}
-                    </>
+                        </>
                     }
                 </div>
             )}

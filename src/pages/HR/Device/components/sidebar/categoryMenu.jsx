@@ -1,4 +1,4 @@
-import { useDevice } from '../../context/device.js'
+import { useDevice } from '../../context/device.jsx'
 
 export default ({
     tabs,
@@ -11,7 +11,7 @@ export default ({
         devices,
         requests,
         consts,
-    } = useDevice ()
+    } = useDevice()
 
     const onSetTab = (index) => {
         setTab(tabs[index])
@@ -20,12 +20,12 @@ export default ({
     return (
         <div className='category-menu'>
             {tabs?.map((item, index) => (
-            <div key={`category-item-${item.id}`} className={`category-menu-item ${tab?.id==item?.id?'active':''}`} onClick={()=>onSetTab(item?.id)}>
-                {item?.name}
-                {item?.pending > 0 && (
-                    <span className='badge badge-sx badge-error badge-color-secondary'>{item?.pending}</span>
-                )}
-            </div>
+                <div key={`category-item-${item.id}`} className={`category-menu-item ${tab?.id == item?.id ? 'active' : ''}`} onClick={() => onSetTab(item?.id)}>
+                    {item?.name}
+                    {item?.pending > 0 && (
+                        <span className='badge badge-sx badge-error badge-color-secondary'>{item?.pending}</span>
+                    )}
+                </div>
             ))}
         </div>
     )

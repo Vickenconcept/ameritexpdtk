@@ -19,10 +19,10 @@ import lgVideo from "lightgallery/plugins/video"
 // import lgShare from 'lightgallery/plugins/share';
 // import lgRotate from 'lightgallery/plugins/rotate';
 
-import { useModal } from "../../../../components/Common/Modal/promise-modal/index.js"
-import { ConfirmModal } from "../../../components/Common/Modal/ConfirmModal"
+import { useModal } from "../../../../components/Common/Modal/promise-modal/index.jsx"
+import { ConfirmModal } from "../../../../components/Common/Modal/ConfirmModal"
 
-import { BACKEND } from "../../../../helpers/axiosConfig"
+// import { BACKEND } from "../../../../helpers/axiosConfig"
 import axios from "axios"
 
 export default ({ photos, albumId, lightGalleryRef, galleryRef, zoomOpen, setZoomOpen, onSlide, metadata, onOrderAction, setPhotos, canEdit, onAfterSetCover }) => {

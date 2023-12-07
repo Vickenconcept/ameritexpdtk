@@ -3,7 +3,7 @@ import { useNetStatus } from "./net";
 import { cities } from "../helpers/globals";
 import { initDB, insertData, putData, clearStore, getStoreData } from "../helpers/offlineDB";
 
-import { getProducts, getTimerLogsOfMachine, uploadMigrationData, getLastUpdated, getLocalLastUpdated } from "../../../../actions/timer";
+import { getProducts, getTimerLogsOfMachine, uploadMigrationData, getLastUpdated, getLocalLastUpdated } from "../actions/timer";
 import { getJobsForMP } from "../actions/job";
 
 const LocalDBContext = createContext();

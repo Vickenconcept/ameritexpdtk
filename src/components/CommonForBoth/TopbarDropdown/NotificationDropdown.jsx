@@ -7,7 +7,7 @@ import Notification from "./Notification"
 //i18n
 import { withTranslation } from "react-i18next"
 
-import { useNotification } from "../../../context/notification.js"
+import { useNotification } from "../../../context/notification.jsx"
 import 'simplebar-react/dist/simplebar.min.css';
 
 const NotificationDropdown = props => {

@@ -14,8 +14,8 @@ import sampleAvatar from "../../assets/images/person.svg"
 //i18n
 import { withTranslation } from "react-i18next"
 import "./scss/sidebar.scss"
-import { BACKEND } from "./helpers/axiosConfig"
-import { avatar2url } from "../../../helpers/functions";
+// import { BACKEND } from "./helpers/axiosConfig"
+import { avatar2url } from "../../helpers/functions";
 import { connect } from "react-redux"
 
 const SidebarContent = props => {

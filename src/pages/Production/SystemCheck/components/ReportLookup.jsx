@@ -9,11 +9,11 @@ import {
 import {
   getProducts,
 } from "../../../../actions/timer"
-import { updateReport } from "../../../actions/auth.js"
+import { updateReport } from "../../../../actions/auth.js"
 import Multiselect from 'multiselect-react-dropdown';
 import DateRangePicker from "react-bootstrap-daterangepicker"
 import NewWindow from 'react-new-window'
-import Report from '../../Timer/component/Report.js'
+import Report from '../../Timer/component/Report.jsx'
 import "bootstrap-daterangepicker/daterangepicker.css"
 import "./daterangepicker.scss"
 import "./style.scss"

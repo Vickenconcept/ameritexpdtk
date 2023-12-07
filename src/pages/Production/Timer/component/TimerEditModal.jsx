@@ -3,8 +3,8 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, Label } from 
 import {
     FactoryList,
     MachineClassSelect,
-} from "../../../components/Common/Select"
-import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
+} from "../../../../components/Common/Select"
+import AutoCompleteSelect from "../../../../components/Common/AutoCompleteSelect"
 import Select from "react-select"
 import { useTimerContext } from "../context"
 
@@ -24,14 +24,14 @@ export default forwardRef(({
     canAllFactories,
     createTimer,
     // onCancel
-}, ref)=> {
+}, ref) => {
 
     const {
         machines,
         machinesLoading,
-        parts: globalParts, 
-        partsLoaded: globalPartsLoaded, 
-        partsLoading: globalPartsLoading 
+        parts: globalParts,
+        partsLoaded: globalPartsLoaded,
+        partsLoading: globalPartsLoading
     } = useTimerContext()
 
     const initItem = {
@@ -47,10 +47,10 @@ export default forwardRef(({
     const [item, setItem] = useState(initItem)
     const [part, setPart] = useState(null)
 
-    useEffect (()=>{
+    useEffect(() => {
         setPart(null)
         setItem(initItem)
-    },[open])
+    }, [open])
 
     const updateItem = (f, e) => {
         setItem({
@@ -61,7 +61,7 @@ export default forwardRef(({
     }
 
     useEffect(() => {
-        console.log ('factory and machineclass is changed')
+        console.log('factory and machineclass is changed')
         setPart(null)
         if (!item.factory || item.factory == "") {
             return setItem({
@@ -116,9 +116,9 @@ export default forwardRef(({
         return globalPartsLoading[item.machineClass] ? true : false
     }, [globalPartsLoading, item.machineClass])
 
-    useEffect (()=>{
-        console.log ('part changed', item.part, part)
-        
+    useEffect(() => {
+        console.log('part changed', item.part, part)
+
         if (selectRef.current) {
             console.log(selectRef.current)
             // selectRef.current.select.clearValue()
@@ -128,19 +128,19 @@ export default forwardRef(({
             if (selectRef.current) {
                 selectRef.current.clearAll()
             }
-            setItem (prev=>({...prev, part: ""}))
+            setItem(prev => ({ ...prev, part: "" }))
         } else {
-            setItem (prev=>({...prev, part: part._id}))
+            setItem(prev => ({ ...prev, part: part._id }))
         }
         // if (!item.part || item.part == "") setPart (null)
         // else if (parts && parts.length > 0) setPart(parts.find(p => p._id == item.part))
         // else setPart (null)
-    },[item.part, part])
+    }, [item.part, part])
 
     const partChanged = (e) => {
         console.log('part changed to', e)
         setPart(e)
-        setItem(prev=>{
+        setItem(prev => {
             return ({
                 ...prev,
                 part: e ? e._id : "",
@@ -178,11 +178,11 @@ export default forwardRef(({
             item.part != "" &&
             item.machine != ""
         )
-        if (!tmp) console.log (tmp, item)
+        if (!tmp) console.log(tmp, item)
         return tmp
     }, [item])
 
-    useEffect (()=>{console.log (selectRef)},[selectRef])
+    useEffect(() => { console.log(selectRef) }, [selectRef])
 
     return (
         <Modal

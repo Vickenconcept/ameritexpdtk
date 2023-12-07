@@ -31,7 +31,7 @@ import './scss/header.scss'
 //i18n
 import { withTranslation } from "react-i18next"
 
-import { useNetStatus } from "../../../context/net"
+import { useNetStatus } from "../../context/net"
 
 // Redux Store
 import {
@@ -84,24 +84,24 @@ const Header = props => {
   const [singlebtn, setSinglebtn] = useState(false)
   const [switch1, setswitch1] = useState(false)
 
-  const {isOnline, isManualOffline, setIsManualOffline} = useNetStatus()
+  const { isOnline, isManualOffline, setIsManualOffline } = useNetStatus()
   const [tooltipOpen, setTooltipOpen] = useState({})
   const toggleTooltipOpen = (id) => {
-    setTooltipOpen({...tooltipOpen, [id]: !tooltipOpen[id] })
+    setTooltipOpen({ ...tooltipOpen, [id]: !tooltipOpen[id] })
   }
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  const {user} = props
+  const { user } = props
 
   const onDrawerClick = () => {
     setDrawerOpen(!drawerOpen)
   }
 
-  const isAllowed = useMemo (()=>{
+  const isAllowed = useMemo(() => {
     return (user.role == "Sales" ||
-              user.role == "HR" ||
-              user.role == "Corporate")
+      user.role == "HR" ||
+      user.role == "Corporate")
   }, [user])
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
@@ -143,23 +143,23 @@ const Header = props => {
     }
   }
 
-  const {toggleMenuCallback} = props
+  const { toggleMenuCallback } = props
 
   return (
     <React.Fragment>
       <header id="page-topbar">
         <div className="navbar-header d-flex justify-content-between" >
-          
+
           <button type="button" className="mobile-show btn btn-sm px-3 font-size-24 header-item waves-effect"
-              id="vertical-menu-btn"
-              onClick={() => {
-                toggleMenuCallback()
-              }}
-              data-target="#topnav-menu-content"
-            >
+            id="vertical-menu-btn"
+            onClick={() => {
+              toggleMenuCallback()
+            }}
+            data-target="#topnav-menu-content"
+          >
             <i className="mdi mdi-menu"></i>
           </button>
-          
+
           <div className="d-flex">
             <div className="navbar-brand-box" style={{ width: 255 }}>
               <Link to="/" className="logo logo-dark">
@@ -207,7 +207,7 @@ const Header = props => {
                       paddingLeft: "40px",
                     }}
                   />
-                  <input style={{position:"absolute", opacity: "0.0"}} />
+                  <input style={{ position: "absolute", opacity: "0.0" }} />
                 </div>
 
                 <div className="form-check form-switch custom-switch d-flex align-items-center ms-5 p-0">
@@ -227,7 +227,7 @@ const Header = props => {
                     className="form-check-label mb-0 ms-3"
                     htmlFor="flexSwitchCheckDefault"
                   >
-                    <b>{isManualOffline?"Offline":"Online"}</b>
+                    <b>{isManualOffline ? "Offline" : "Online"}</b>
                   </label>
                 </div>
               </div>
@@ -273,7 +273,7 @@ const Header = props => {
                   target="btn-notification"
                   placement="bottom"
                   isOpen={tooltipOpen?.notification}
-                  toggle={() => {toggleTooltipOpen('notification')} }
+                  toggle={() => { toggleTooltipOpen('notification') }}
                 >
                   Notification
                 </Tooltip>
@@ -281,33 +281,33 @@ const Header = props => {
               </>)}
 
 
-                <div className="email-icon-container ps-2">
-                  <Tooltip
-                    target="btn-clock"
-                    placement="bottom"
-                    isOpen={tooltipOpen?.clock}
-                    toggle={() => {toggleTooltipOpen('clock')} }
-                  >
-                    Working list
-                  </Tooltip>
-                  <button id='btn-clock' onClick={onDrawerClick} className="btn header-item noti-icon right-bar-toggle waves-effect p-0">
-                    <i className="mdi mdi-clock-outline" style={{color:'#525f80'}}></i>
-                  </button>
-                </div>
-                <Drawer toggle={onDrawerClick} open={drawerOpen}>
-                  <WorkingList />
-                </Drawer>
-              
+              <div className="email-icon-container ps-2">
+                <Tooltip
+                  target="btn-clock"
+                  placement="bottom"
+                  isOpen={tooltipOpen?.clock}
+                  toggle={() => { toggleTooltipOpen('clock') }}
+                >
+                  Working list
+                </Tooltip>
+                <button id='btn-clock' onClick={onDrawerClick} className="btn header-item noti-icon right-bar-toggle waves-effect p-0">
+                  <i className="mdi mdi-clock-outline" style={{ color: '#525f80' }}></i>
+                </button>
+              </div>
+              <Drawer toggle={onDrawerClick} open={drawerOpen}>
+                <WorkingList />
+              </Drawer>
+
               <div className="email-icon-container ps-2" id="btn-netstatus" >
                 <Tooltip
                   target="btn-netstatus"
                   placement="bottom"
                   isOpen={tooltipOpen?.netstatus}
-                  toggle={() => {toggleTooltipOpen('netstatus')} }
+                  toggle={() => { toggleTooltipOpen('netstatus') }}
                 >
-                  {isOnline?'Online':'Offline'}
+                  {isOnline ? 'Online' : 'Offline'}
                 </Tooltip>
-                <i className={"mdi "+(isOnline?"mdi-access-point":"mdi-access-point-off")} style={{color:(isOnline?'#009e54':'rgb(236,69,97)')}}></i>
+                <i className={"mdi " + (isOnline ? "mdi-access-point" : "mdi-access-point-off")} style={{ color: (isOnline ? '#009e54' : 'rgb(236,69,97)') }}></i>
               </div>
               {isAllowed ? ("") : (<>
                 <DBDropdown />
@@ -319,7 +319,7 @@ const Header = props => {
                   target="btn-lock"
                   placement="bottom"
                   isOpen={tooltipOpen?.lock}
-                  toggle={() => {toggleTooltipOpen('lock')} }
+                  toggle={() => { toggleTooltipOpen('lock') }}
                 >
                   Lock
                 </Tooltip>
@@ -327,7 +327,7 @@ const Header = props => {
                   id="btn-lock"
                   type="button"
                   className="btn header-item noti-icon right-bar-toggle waves-effect p-0"
-                  onClick={()=>{
+                  onClick={() => {
                     props.setLockStatues(true)
                   }}
                 >
@@ -355,7 +355,7 @@ Header.propTypes = {
 const mapStatetoProps = state => {
   const { layoutType, showRightSidebar, leftMenu, leftSideBarType } =
     state.Layout
-  const {user} = state.Login
+  const { user } = state.Login
   return { layoutType, showRightSidebar, leftMenu, leftSideBarType, user }
 }
 

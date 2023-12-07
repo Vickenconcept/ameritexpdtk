@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux"
 
-import { useDevice } from "../../context/device.js";
-import ActionDropdown from "./actions.jsx";
-import { set } from "lodash";
+import { useDevice } from "../../context/device.jsx";
+// import ActionDropdown from "./actions.jsx";
+// import { set } from "lodash";
 import moment from "moment";
 
 const DeviceItem = ({ canEdit = false, openAlert, user }) => {

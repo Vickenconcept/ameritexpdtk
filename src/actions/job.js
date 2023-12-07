@@ -1,5 +1,5 @@
 import axios from "axios"
-import { extractFormData } from "../../../helpers/functions"
+import { extractFormData } from "../helpers/functions"
 import {
   getStoreData,
   updateData,

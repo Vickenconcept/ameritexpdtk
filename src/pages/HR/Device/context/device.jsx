@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useEffect, useMemo, useCallback } from "react";
 import deviceAction from "../action";
 
-import { useModal, ModalProvider } from "../../../../components/Common/Modal/promise-modal/index.js"
-import {EditModal} from '../components/EditModal';
+import { useModal, ModalProvider } from "../../../../components/Common/Modal/promise-modal/index.jsx"
+import { EditModal } from '../components/EditModal';
 import TypeModal from '../components/TypeModal';
-import {AlertModal} from '../../../components/Common/Modal/AlertModal';
+import { AlertModal } from '../../../../components/Common/Modal/AlertModal';
 
 
 export const DeviceContext = createContext(null);
@@ -16,8 +16,8 @@ export const DeviceProvider = ({
     user,
     canEdit,
 }) => {
-    const [device, setDevice] = useState (null)
-    const [devices, setDevices] = useState ([])
+    const [device, setDevice] = useState(null)
+    const [devices, setDevices] = useState([])
     const [device_type, setDeviceType] = useState(null);
     const [device_types, setDeviceTypes] = useState([])
     const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ export const DeviceProvider = ({
     const [requests, setRequests] = useState({})
     const [now, setNow] = useState(0);
 
-    
+
     const { create: createAlert, resolve: resolveAlert } = useModal(AlertModal, {
         instanceId: "alert",
         title: "Alert!",
@@ -36,11 +36,11 @@ export const DeviceProvider = ({
     })
 
     const deviceActions = useMemo(() => {
-        return deviceAction (consts)
-    },[consts])
+        return deviceAction(consts)
+    }, [consts])
 
     const openAlert = (title, text) => {
-        createAlert({title, text})
+        createAlert({ title, text })
     }
 
     const closeAlert = () => {
@@ -48,14 +48,14 @@ export const DeviceProvider = ({
     }
 
     const onSuccess = (res) => {
-        console.log (res)
+        console.log(res)
         if (res?.device) {
             reloadAll()
         }
     }
 
     const onError = (err) => {
-        console.log (err)
+        console.log(err)
     }
 
     const { create: createEditModal, resolve: destroyEditModal } = useModal(EditModal, {
@@ -74,7 +74,7 @@ export const DeviceProvider = ({
     })
 
     const openNewModal = () => {
-        console.log ('open')
+        console.log('open')
         createEditModal({
             edit: false,
             item: null,
@@ -82,7 +82,7 @@ export const DeviceProvider = ({
     }
 
     const openEditModal = (item) => {
-        console.log ('open')
+        console.log('open')
         createEditModal({
             edit: true,
             item,
@@ -101,10 +101,10 @@ export const DeviceProvider = ({
 
     const openDevTypeModal = () => {
         createTypeModal({
-        edit: false,
-        item: null,
-        }).then ((res)=>{
-            console.log (res)
+            edit: false,
+            item: null,
+        }).then((res) => {
+            console.log(res)
             reloadAll()
         }).catch(onError)
     }
@@ -118,97 +118,97 @@ export const DeviceProvider = ({
         if (dId && dId != '') {
             setDevice(devices.find(item => item._id == dId))
         } else {
-            setDevice (null)
+            setDevice(null)
         }
     }
 
     const loadDeviceTypes = async (dependent = false) => {
-        if (!dependent) setLoading (true)
-        const {deviceTypes:res_device_types} = await deviceActions.getDeviceTypes()
+        if (!dependent) setLoading(true)
+        const { deviceTypes: res_device_types } = await deviceActions.getDeviceTypes()
         if (res_device_types) {
             setDeviceTypes(res_device_types)
         }
-        if (!dependent) setLoading (false)
+        if (!dependent) setLoading(false)
     }
 
     const loadDevices = async (dependent = false) => {
-        if (!dependent) setLoading (true)
-        const {devices:res_devices, constants} = await deviceActions.getDevices()
+        if (!dependent) setLoading(true)
+        const { devices: res_devices, constants } = await deviceActions.getDevices()
         if (res_devices) {
             setDevices(res_devices)
         } else {
             setDevices([])
         }
         if (constants && constants !== {}) {
-            setConsts (constants)
+            setConsts(constants)
         }
-        if (!dependent) setLoading (false)
+        if (!dependent) setLoading(false)
     }
 
     const loadUserHistory = async (dependent = false) => {
-        if (!dependent) setLoading (true)
-        const {data:res_user_history} = await deviceActions.getUserHistory(user._id)
+        if (!dependent) setLoading(true)
+        const { data: res_user_history } = await deviceActions.getUserHistory(user._id)
         if (res_user_history) {
             setUserHistory(res_user_history)
         }
-        if (!dependent) setLoading (false)
+        if (!dependent) setLoading(false)
     }
 
     const loadRequests = async (dependent = false) => {
-        if (!canEdit) return setRequests ({})
-        if (!dependent) setLoading (true)
-        let res = await deviceActions.getHistory ({
+        if (!canEdit) return setRequests({})
+        if (!dependent) setLoading(true)
+        let res = await deviceActions.getHistory({
             status: 'pending'
         })
-        console.log (res.data)
-        setRequests (res.data || {})
-        if (!dependent) setLoading (false)
+        console.log(res.data)
+        setRequests(res.data || {})
+        if (!dependent) setLoading(false)
     }
 
     const reloadAll = async () => {
-        setLoading (true)
+        setLoading(true)
         try {
-            await loadDevices (true)
+            await loadDevices(true)
             // after this, constants are ready so that we can user them for loading other data
             await Promise.all([
-                loadDeviceTypes (true),
-                loadUserHistory (true),
-                loadRequests (true),
+                loadDeviceTypes(true),
+                loadUserHistory(true),
+                loadRequests(true),
             ])
         } catch (error) {
             console.error(error)
         }
-        setLoading (false)
+        setLoading(false)
     }
 
-    const device_options = useMemo (() => {
-        if(device_type && devices && consts && user_history){
+    const device_options = useMemo(() => {
+        if (device_type && devices && consts && user_history) {
             let options = devices.filter(
                 item => item.type?._id == device_type
-                && item.status == consts['DEVICE_STATUS_IDLE']
+                    && item.status == consts['DEVICE_STATUS_IDLE']
             )
             return options
         }
         return []
-    },[device_type, devices, consts, user_history])
+    }, [device_type, devices, consts, user_history])
 
-    const user_devices = useMemo (() => {
+    const user_devices = useMemo(() => {
         if (devices && consts) {
             let options = devices.filter(
                 item => item.user?._id == user._id
-                && item.status == consts['DEVICE_STATUS_USING']
+                    && item.status == consts['DEVICE_STATUS_USING']
             )
             return options
         }
         return []
-    },[devices, consts])
+    }, [devices, consts])
 
     const getDeviceType = useCallback((id) => {
         if (device_types && device_types.length > 0) {
             return device_types.find(item => item._id == id)
         }
         return null
-    },[device_types])
+    }, [device_types])
 
     useEffect(() => {
         // if (device_types.length > 0) {
@@ -217,8 +217,8 @@ export const DeviceProvider = ({
         setDeviceType(null)
     }, [device_types])
 
-    useEffect (()=>{
-        setDevice( prev => {
+    useEffect(() => {
+        setDevice(prev => {
             if (!device_options || device_options.length == 0) return null;
             if (prev) {
                 return device_options.find(item => item._id == prev._id) || device_options[0]
@@ -227,11 +227,11 @@ export const DeviceProvider = ({
                 return null
             }
         })
-    },[device_options])
+    }, [device_options])
 
     useEffect(async () => {
-        await reloadAll ()
-    },[])
+        await reloadAll()
+    }, [])
 
     return (
         <DeviceContext.Provider value={{

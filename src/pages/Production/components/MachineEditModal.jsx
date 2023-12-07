@@ -35,7 +35,7 @@ import { getMediaType, getMediaPreview, getMediaUrl } from "./MediaUtils.jsx"
 
 import "../../../components/modal.scss"
 
-import MediaList from './MediaList.js'
+import MediaList from './MediaList.jsx'
 
 const MachineEditModal = (props) => {
   const {
