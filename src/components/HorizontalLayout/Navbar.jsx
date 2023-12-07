@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Row, Col, Collapse } from "reactstrap"
 import { Link, withRouter } from "react-router-dom"
 import classname from "classnames"

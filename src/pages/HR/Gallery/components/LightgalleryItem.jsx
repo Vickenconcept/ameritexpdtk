@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 
 export default ({ group, src, thumb, subHtml, children }) => {
     return (

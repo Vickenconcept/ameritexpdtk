@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, createRef } from "react"
+import { useState, useRef, useEffect, createRef } from "react"
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom"
 import { Dropdown, DropdownToggle, DropdownMenu, Row, Col } from "reactstrap"

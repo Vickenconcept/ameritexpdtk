@@ -1,4 +1,4 @@
-import React from "react"
+// import React from "react"
 import PropTypes from 'prop-types'
 import { FormGroup } from "reactstrap"
 
@@ -269,8 +269,8 @@ const RightSidebar = props => {
               </div>
 
               <div className="mb-2">
-                <Link to="//veltrix-v-dark.react.themesbrand.com" 
-                target="_blank">
+                <Link to="//veltrix-v-dark.react.themesbrand.com"
+                  target="_blank">
                   <img
                     src={layout2}
                     className="img-fluid img-thumbnail"
@@ -280,8 +280,8 @@ const RightSidebar = props => {
               </div>
 
               <div className="mb-2">
-                <Link to="//veltrix-v-rtl.react.themesbrand.com" 
-                target="_blank">
+                <Link to="//veltrix-v-rtl.react.themesbrand.com"
+                  target="_blank">
                   <img
                     src={layout3}
                     className="img-fluid img-thumbnail"

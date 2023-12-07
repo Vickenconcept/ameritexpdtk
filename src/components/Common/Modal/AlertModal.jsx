@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { createModal } from "react-modal-promise";
@@ -12,11 +12,11 @@ const MyBootstrapModal = ({ isOpen, onResolve, onReject, text, title, confirmTex
       <ModalHeader toggle={cancel}>{title}</ModalHeader>
       <ModalBody>{text}</ModalBody>
       {showConfirmButton && <>
-      <ModalFooter>
-        <Button style={{backgroundColor:'#B70000', color:'white'}} onClick={submit}>
-          {confirmText||`Confirm`}
-        </Button>
-      </ModalFooter>
+        <ModalFooter>
+          <Button style={{ backgroundColor: '#B70000', color: 'white' }} onClick={submit}>
+            {confirmText || `Confirm`}
+          </Button>
+        </ModalFooter>
       </>
       }
     </Modal>

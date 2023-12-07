@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 
 import { useState, useEffect } from "react";
 import moment from "moment";
@@ -6,18 +6,18 @@ import moment from "moment";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { createModal } from "react-modal-promise";
 
-import { useLoading } from "../../../context/loading";
-import "../../../components/modal.scss"
+import { useLoading } from "../../../../context/loading";
+import "../../../../components/modal.scss"
 import { connect } from "react-redux"
 
-import { cities } from "helpers/globals";
+import { cities } from "../../../../helpers/globals";
 import ImageUploader from "./ImageUploader";
 
 const MyBootstrapModal = ({ isOpen, onResolve, onReject, edit, item, device_types, deviceAction, openAlert, user }) => {
-    const [input, setInput] = useState({...item, type: item?.type?._id || item?.type || ''})
-    const reset = () => setInput({...item})
+    const [input, setInput] = useState({ ...item, type: item?.type?._id || item?.type || '' })
+    const reset = () => setInput({ ...item })
 
-    const {loading, setLoading} = useLoading()
+    const { loading, setLoading } = useLoading()
 
     const onChangeField = (e) => {
         const { name, value } = e.target
@@ -26,41 +26,41 @@ const MyBootstrapModal = ({ isOpen, onResolve, onReject, edit, item, device_type
 
     const availToSave = useMemo(() => {
         return input?.type
-        // && input?.city 
-        && input?.sn 
-        && input?.name
-    },[input])
+            // && input?.city 
+            && input?.sn
+            && input?.name
+    }, [input])
 
     const [image, setImage] = useState()
 
     const submit = async () => {
         try {
-        if (availToSave) {
-            setLoading (true)
-            const formData = new FormData()
-            formData.append('type', input.type?._id || input.type)
-            // formData.append('city', input.city)
-            formData.append('sn', input.sn)
-            formData.append('name', input.name)
-            formData.append('note', input.note)
+            if (availToSave) {
+                setLoading(true)
+                const formData = new FormData()
+                formData.append('type', input.type?._id || input.type)
+                // formData.append('city', input.city)
+                formData.append('sn', input.sn)
+                formData.append('name', input.name)
+                formData.append('note', input.note)
 
-            if (image) {
-                formData.append('photo', image)
-            }
+                if (image) {
+                    formData.append('photo', image)
+                }
 
-            if (edit) {
-                const res = await deviceAction.updateDevice(item?._id,formData)
-                setLoading (false)
-                return onResolve(res)
-            } else {
-                const res = await deviceAction.createDevice(formData)
-                setLoading (false)
-                return onResolve(res)
+                if (edit) {
+                    const res = await deviceAction.updateDevice(item?._id, formData)
+                    setLoading(false)
+                    return onResolve(res)
+                } else {
+                    const res = await deviceAction.createDevice(formData)
+                    setLoading(false)
+                    return onResolve(res)
+                }
             }
-        }
         } catch (error) {
-            setLoading (false)
-            openAlert ('Error', error.response?.data?.error || error.message)
+            setLoading(false)
+            openAlert('Error', error.response?.data?.error || error.message)
         }
     }
 
@@ -73,7 +73,7 @@ const MyBootstrapModal = ({ isOpen, onResolve, onReject, edit, item, device_type
         <Modal isOpen={isOpen} toggle={cancel} className="spec-modal device-modal">
             <ModalHeader toggle={cancel}>
                 <div className="modal-title-caption">
-                    {!edit?'Add':'Edit'}
+                    {!edit ? 'Add' : 'Edit'}
                 </div>
                 <div className="modal-title-city">
                     {'Device'}
@@ -119,7 +119,7 @@ const MyBootstrapModal = ({ isOpen, onResolve, onReject, edit, item, device_type
                         <label className="col-label" htmlFor="note">Added By</label>
                         {/* <input type="text" className="col-input" name="created_by" value={} disabled={true} /> */}
                         <div className="col-input fake">
-                            {item?.created_by ? `${item.created_by.firstName} ${item.created_by.lastName}` :  `${user.firstName} ${user.lastName}`}
+                            {item?.created_by ? `${item.created_by.firstName} ${item.created_by.lastName}` : `${user.firstName} ${user.lastName}`}
                         </div>
                     </div>
                     {/* <div className="row general">
@@ -129,11 +129,11 @@ const MyBootstrapModal = ({ isOpen, onResolve, onReject, edit, item, device_type
                 </div>
             </ModalBody>
             <ModalFooter>
-                <Button style={{backgroundColor:'#B70000', color:'white'}} className="btn-primary" onClick={() => submit()} disabled={!availToSave} >
-                {`Save`}
+                <Button style={{ backgroundColor: '#B70000', color: 'white' }} className="btn-primary" onClick={() => submit()} disabled={!availToSave} >
+                    {`Save`}
                 </Button>{" "}
-                <Button color="secondary" onClick={()=>cancel()}>
-                {`Cancel`}
+                <Button color="secondary" onClick={() => cancel()}>
+                    {`Cancel`}
                 </Button>
             </ModalFooter>
         </Modal>

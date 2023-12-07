@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import ChartistGraph from 'react-chartist';
 
 class lineareachart extends Component {

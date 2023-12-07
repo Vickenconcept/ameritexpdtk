@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+// import React, { useRef } from "react";
 // import qs from "query-string";
 
 import ModalContainer from "react-modal-promise";
@@ -29,7 +29,7 @@ const ModalProvider = ({ children }) => {
   const onRemove = (id) => {
     const { [id]: _, ...query } = router.query;
 
-    console.log ('onRemove modal', id)
+    console.log('onRemove modal', id)
 
     router.push({
       pathname: router.location.pathname,

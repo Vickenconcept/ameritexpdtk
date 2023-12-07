@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Offcanvas, OffcanvasBody, OffcanvasHeader } from "reactstrap"
 
 const Drawer = ({ children, toggle, open, ...props }) => {

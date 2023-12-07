@@ -3,8 +3,8 @@ import {
   getTimerLogsOfMachine,
   searchMacheinsAction,
 } from "../../../../actions/timer"
-import { machineClasses } from "helpers/globals"
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import { machineClasses } from "../../../../helpers/globals"
+import { useEffect, useMemo, useRef, useState } from "react"
 
 import { formatSeconds, lbsToTons } from "../../../../helpers/functions.js"
 import { useNetStatus } from "../../../../context/net"

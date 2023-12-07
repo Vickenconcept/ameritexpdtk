@@ -15,7 +15,7 @@ import {
   CardTitle
 } from "reactstrap"
 import "./style.scss"
-import { getReports as getUserReport } from "../../../helpers/functions"
+import { getReports as getUserReport } from "../../../actions/auth"
 
 import "./style.scss"
 import { connect } from "react-redux"

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import React, { useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 
 import { connect } from "react-redux"
 import {

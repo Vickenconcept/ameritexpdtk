@@ -21,19 +21,19 @@ import {
   MachineClassSelect,
 } from "../../../components/Common/Select"
 
-import {
-  mcRule as rule,
-  factory2mc,
-  mc2factory,
-  classfiy
-} from "helpers/globals"
+// import {
+//   mcRule as rule,
+//   factory2mc,
+//   mc2factory,
+//   classfiy
+// } from "../../../helpers/globals"
 
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 import { getMediaType, getMediaPreview, getMediaUrl } from "./MediaUtils.jsx"
 
-import "components//modal.scss"
+import "../../../components/modal.scss"
 
 import MediaList from './MediaList.js'
 

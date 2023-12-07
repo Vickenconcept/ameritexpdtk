@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Nav,
   NavItem,
@@ -26,17 +26,18 @@ const WorkingList = (props) => {
                 {item_city}{`  `}({Object.keys(TIMER_USER[item_city]).length})
               </NavLink>
             </NavItem>
-          )})
+          )
+        })
         }
       </Nav>
       <TabContent activeTab={curCity}>
         {Object.keys(TIMER_USER).map((city) => {
           return (
-            <TabPane tabId={city} key={"tab_pane_"+city}>
+            <TabPane tabId={city} key={"tab_pane_" + city}>
               <h4 className='mt-3 mb-3'>{city}</h4>
               {Object.keys(TIMER_USER[city]).map((tid) => {
                 return (
-                  <div key={"timer_user_"+tid} className="mb-2 d-flex align-items-center">
+                  <div key={"timer_user_" + tid} className="mb-2 d-flex align-items-center">
                     <img src={avatar2url(TIMER_USER[city][tid]?.profile?.avatar) || sampleAvatar} alt="avatar" className="rounded-circle img-thumbnail avatar-sm me-2" />
                     <div className="ml-1">
                       <strong>
@@ -58,8 +59,8 @@ const WorkingList = (props) => {
                           TIMER_USER[city][tid]?.meta?.operator
                         }
                       </strong>
-                      <br/>
-                      <span style={{color:'gray'}}>
+                      <br />
+                      <span style={{ color: 'gray' }}>
                         {TIMER_USER[city][tid]?.time}
                       </span>
                     </div>

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Fragment, useEffect, useRef, useState, useContext, useMemo } from "react"
+import { Fragment, useEffect, useRef, useState, useContext, useMemo } from "react"
 import MetaTags from 'react-meta-tags';
 import {
   Container,

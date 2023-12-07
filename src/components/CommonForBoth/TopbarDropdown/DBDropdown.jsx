@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect, useMemo } from "react"
+// import React, { useState, useRef, useEffect, useMemo } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
+
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom"
 import { Dropdown, DropdownToggle, DropdownMenu, Row, Col, Tooltip } from "reactstrap"
@@ -16,17 +18,17 @@ const DBDropdown = props => {
   const [menu, setMenu] = useState(false)
   const ref = useRef();
   const scrollableNodeRef = React.createRef();
-  const {isOnline, isManualOffline, setIsManualOffline} = useNetStatus()
-  const {isDBReady, initDBs, isDBLoading, dbStatus} = useLocalDB()
+  const { isOnline, isManualOffline, setIsManualOffline } = useNetStatus()
+  const { isDBReady, initDBs, isDBLoading, dbStatus } = useLocalDB()
   const [tooltipOpen, setTooltipOpen] = useState({})
   const toggleTooltipOpen = (id) => {
-    setTooltipOpen({...tooltipOpen, [id]: !tooltipOpen[id] })
+    setTooltipOpen({ ...tooltipOpen, [id]: !tooltipOpen[id] })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     ref.current.recalculate()
     scrollableNodeRef.current.scrollBottom = 0
-  },[])
+  }, [])
 
   const dbIcon = useMemo(() => {
     switch (dbStatus) {
@@ -51,10 +53,10 @@ const DBDropdown = props => {
       default:
         return "mdi mdi-database-outline"
     }
-    console.log (dbStatus)
+    console.log(dbStatus)
   }, [dbStatus])
 
-  const dbColor = useMemo (()=>{
+  const dbColor = useMemo(() => {
     const green = '#009e54';
     const red = 'rgb(236,69,97)';
     const gray = null;
@@ -82,7 +84,7 @@ const DBDropdown = props => {
     }
   }, [dbStatus])
 
-  const tooltipText = useMemo (()=>{
+  const tooltipText = useMemo(() => {
     switch (dbStatus) {
       case "Ready":
         return "Ready"
@@ -105,31 +107,31 @@ const DBDropdown = props => {
       default:
         return "Offline"
     }
-  },[dbStatus])
+  }, [dbStatus])
 
-  const noteText = useMemo (()=>{
+  const noteText = useMemo(() => {
     switch (dbStatus) {
-        case "Ready":
-          return "Local database is ready to use"
-          break;
-        case "Loading":
-          return "Fetching data from backend to local database"
-          break;
-        case "Error":
-          return "Something went wrong while fetching data from backend to local database. Please click the reload button to try again."
-          break;
-        case "Synced":
-          return "Local dabatase is syncronized with backend"
-          break;
-        case "Uploading":
-          return "Uploading data from local database to backend"
-          break;
-        case "Downloading":
-          return "Downloading data from backend to local database"
-          break;
-        default:
-          return "Offline"
-      }
+      case "Ready":
+        return "Local database is ready to use"
+        break;
+      case "Loading":
+        return "Fetching data from backend to local database"
+        break;
+      case "Error":
+        return "Something went wrong while fetching data from backend to local database. Please click the reload button to try again."
+        break;
+      case "Synced":
+        return "Local dabatase is syncronized with backend"
+        break;
+      case "Uploading":
+        return "Uploading data from local database to backend"
+        break;
+      case "Downloading":
+        return "Downloading data from backend to local database"
+        break;
+      default:
+        return "Offline"
+    }
   }, [dbStatus])
 
   return (
@@ -140,23 +142,23 @@ const DBDropdown = props => {
         className="dropdown d-inline-block"
         tag="li"
         {...props}
-        // style={{ left: "10%" }}
+      // style={{ left: "10%" }}
       >
         <DropdownToggle
           className="btn header-item noti-icon waves-effect border-right"
           tag="button"
           id="page-header-db-dropdown"
-          // disabled={true}
+        // disabled={true}
         >
-            <Tooltip
+          <Tooltip
             target="db-status"
             placement="bottom"
             isOpen={tooltipOpen?.db}
-            toggle={() => {toggleTooltipOpen('db')} }
-            >
+            toggle={() => { toggleTooltipOpen('db') }}
+          >
             {tooltipText}
-            </Tooltip>
-            <i id="db-status" className={dbIcon} style={{color:dbColor}}></i>
+          </Tooltip>
+          <i id="db-status" className={dbIcon} style={{ color: dbColor }}></i>
         </DropdownToggle>
 
         <DropdownMenu className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">
@@ -169,13 +171,13 @@ const DBDropdown = props => {
           </div>
 
           <SimpleBar ref={ref} scrollableNodeProps={{ ref: scrollableNodeRef }} style={{ height: "230px" }} autoHide={false}>
-            <div style={{padding:'30px'}}>{noteText}</div>
+            <div style={{ padding: '30px' }}>{noteText}</div>
           </SimpleBar>
           <div className="p-2 border-top d-grid">
             <button
               className="btn btn-sm btn-link font-size-14 btn-block text-center"
               onClick={initDBs}
-              // to="/production/timer"
+            // to="/production/timer"
             >
               <i className="mdi mdi-reload me-1"></i>
               {" "}

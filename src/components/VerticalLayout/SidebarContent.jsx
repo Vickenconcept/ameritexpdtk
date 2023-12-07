@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import React, { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 
 // //Import Scrollbar
 import SimpleBar from "simplebar-react"
@@ -104,199 +104,199 @@ const SidebarContent = props => {
       <SimpleBar style={{ maxHeight: "100%" }} ref={ref}>
         <div id="sidebar-menu">
           {/* <ul className="metismenu list-unstyled" id="side-menu"> */}
-            <MetisMenu id="side-menu" activeLinkFromLocation>
-              <li className="sidebar-avatar-container p-3 pe-0">
-                <div className="sidebar-avatar d-flex align-items-center justify-content-between px-3 py-2">
-                  <div className=" d-flex align-items-center">
-                    <div >
-                      <img src={ avatar2url(user.avatar) || sampleAvatar } className="rounded-circle" />
-                    </div>
-                    <div className="text-dark mx-auto ps-2">
-                      <h4 className="mb-0 font-size-16">{user.firstName + ' ' + user.lastName}</h4>
-                      <div className="text-black-50">{user.role === 'Admin' ? 'Administrator' : user.role}</div>
-                    </div>
+          <MetisMenu id="side-menu" activeLinkFromLocation>
+            <li className="sidebar-avatar-container p-3 pe-0">
+              <div className="sidebar-avatar d-flex align-items-center justify-content-between px-3 py-2">
+                <div className=" d-flex align-items-center">
+                  <div >
+                    <img src={avatar2url(user.avatar) || sampleAvatar} className="rounded-circle" />
                   </div>
-                  <div>
-                    <span
-                      className="mdi mdi-chevron-down font-size-16"
-                      style={{ color: '#5b626b' }}
-                    ></span>
+                  <div className="text-dark mx-auto ps-2">
+                    <h4 className="mb-0 font-size-16">{user.firstName + ' ' + user.lastName}</h4>
+                    <div className="text-black-50">{user.role === 'Admin' ? 'Administrator' : user.role}</div>
                   </div>
                 </div>
+                <div>
+                  <span
+                    className="mdi mdi-chevron-down font-size-16"
+                    style={{ color: '#5b626b' }}
+                  ></span>
+                </div>
+              </div>
+            </li>
+
+            <form className="app-search d-none d-lg-block p-0 ps-3">
+              <div className="position-relative pb-3">
+                <input
+                  type="text"
+                  className="form-control bg-dark text-white rounded"
+                  placeholder={props.t("Search") + "..."}
+                  style={{ backgroundColor: "rgb(35, 35, 40) !important" }}
+                />
+                <span className="fa fa-search"></span>
+              </div>
+            </form>
+            <div>
+              <li className="profile-menu" style={{}}>
+                <NavLink to="/profile-home" className="waves-effect text-capitalize" >
+                  <span>{props.t("PROFILE HOME")}</span>
+                </NavLink>
               </li>
 
-              <form className="app-search d-none d-lg-block p-0 ps-3">
-                <div className="position-relative pb-3">
-                  <input
-                    type="text"
-                    className="form-control bg-dark text-white rounded"
-                    placeholder={props.t("Search") + "..."}
-                    style={{ backgroundColor: "rgb(35, 35, 40) !important" }}
-                  />
-                  <span className="fa fa-search"></span>
-                </div>
-              </form>
-              <div>
-                <li className="profile-menu" style={{}}>
-                  <NavLink to="/profile-home" className="waves-effect text-capitalize" >
-                    <span>{props.t("PROFILE HOME")}</span>
-                  </NavLink>
-                </li>
-
-                {/* <li className="profile-menu" style={{}}>
+              {/* <li className="profile-menu" style={{}}>
                   <NavLink to="/statistics" className="waves-effect text-capitalize" >
                     <span>{props.t("STATISTICS")}</span>
                   </NavLink>
                 </li> */}
 
-                <li>
-                  <Link to="/#" className="has-arrow waves-effect text-capitalize">
-                    <span>{props.t("ORDER FLOW")}</span>
-                  </Link>
-                  <ul>
-                    <li>
-                      <NavLink to="/orderflow/dashboard">{props.t("Project Dashboard")}</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/orderflow/projects">{props.t("Projects")}</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/orderflow/drafting">{props.t("Drafting")}</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/orderflow/inventory">{props.t("Inventory")}</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/orderflow/production-tracker">
-                        {props.t("Production Tracker")}
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/orderflow/load-out">{props.t("Load out")}</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/orderflow/project-close">{props.t("Project Close")}</NavLink>
-                    </li>
+              <li>
+                <Link to="/#" className="has-arrow waves-effect text-capitalize">
+                  <span>{props.t("ORDER FLOW")}</span>
+                </Link>
+                <ul>
+                  <li>
+                    <NavLink to="/orderflow/dashboard">{props.t("Project Dashboard")}</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/orderflow/projects">{props.t("Projects")}</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/orderflow/drafting">{props.t("Drafting")}</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/orderflow/inventory">{props.t("Inventory")}</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/orderflow/production-tracker">
+                      {props.t("Production Tracker")}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/orderflow/load-out">{props.t("Load out")}</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/orderflow/project-close">{props.t("Project Close")}</NavLink>
+                  </li>
 
-                  </ul>
-                </li>
+                </ul>
+              </li>
 
-                <li>
-                  <Link to="/#" className="has-arrow waves-effect text-capitalize">
-                    <span>{props.t("PRODUCTION")}</span>
-                  </Link>
-                  <ul>
-                    <li>
-                      <NavLink to="/production/timer">{props.t("Timer")}</NavLink>
-                    </li>
-                    {/* <li>
+              <li>
+                <Link to="/#" className="has-arrow waves-effect text-capitalize">
+                  <span>{props.t("PRODUCTION")}</span>
+                </Link>
+                <ul>
+                  <li>
+                    <NavLink to="/production/timer">{props.t("Timer")}</NavLink>
+                  </li>
+                  {/* <li>
                       <NavLink to="/production/control-timers">{props.t("Control Timers")}</NavLink>
                     </li> */}
-                    <li>
-                      <NavLink to="/production/system-check">{props.t("System Check")}</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/production/list">{props.t("Product List")}</NavLink>
-                    </li>
-                  </ul>
-                </li>
+                  <li>
+                    <NavLink to="/production/system-check">{props.t("System Check")}</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/production/list">{props.t("Product List")}</NavLink>
+                  </li>
+                </ul>
+              </li>
 
-                <li>
-                  <Link to="/#" className="has-arrow waves-effect text-capitalize">
-                    <span>{props.t("OPERATIONS")}</span>
-                  </Link>
-                  <ul>
-                    <li>
-                      <Link to="/operations/dashboard">{props.t("Operations Dashboard")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/operations/quality-control">{props.t("Quality Control")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/operations/maintenance">{props.t("Maintenance")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/operations/safety101">{props.t("Safety 101")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/operations/forms">{props.t("Forms")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/operations/line-data">{props.t("Line Data")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/operations/fixx">{props.t("FIXX")}</Link>
-                    </li>
-                  </ul>
-                </li>
+              <li>
+                <Link to="/#" className="has-arrow waves-effect text-capitalize">
+                  <span>{props.t("OPERATIONS")}</span>
+                </Link>
+                <ul>
+                  <li>
+                    <Link to="/operations/dashboard">{props.t("Operations Dashboard")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/operations/quality-control">{props.t("Quality Control")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/operations/maintenance">{props.t("Maintenance")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/operations/safety101">{props.t("Safety 101")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/operations/forms">{props.t("Forms")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/operations/line-data">{props.t("Line Data")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/operations/fixx">{props.t("FIXX")}</Link>
+                  </li>
+                </ul>
+              </li>
 
-                <li>
-                  <Link to="/#" className="has-arrow waves-effect text-capitalize">
-                    <span>{props.t("HUMAN RESOURCES")}</span>
-                  </Link>
-                  <ul>
-                    <li>
-                      <Link to="/human-resources/dashboard">{props.t("HR Dashboard")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/human-resources/gallery">{props.t("Gallery")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/human-resources/device">{props.t("Device Checkout")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/human-resources/adt">{props.t("ADT")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/human-resources/down-time">{props.t("Down Time")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/human-resources/community">{props.t("Community")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/human-resources/msg-discussions">{props.t("Msg / Discussions")}</Link>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <Link to="/#" className="has-arrow waves-effect text-capitalize">
-                    <span>{props.t("ACCOUNTING")}</span>
-                  </Link>
-                  <ul>
-                    <li>
-                      <NavLink to="/accounting/dashboard">{props.t("Accounting Dashboard")}</NavLink>
-                    </li>
-                  </ul>
-                </li>
+              <li>
+                <Link to="/#" className="has-arrow waves-effect text-capitalize">
+                  <span>{props.t("HUMAN RESOURCES")}</span>
+                </Link>
+                <ul>
+                  <li>
+                    <Link to="/human-resources/dashboard">{props.t("HR Dashboard")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/human-resources/gallery">{props.t("Gallery")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/human-resources/device">{props.t("Device Checkout")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/human-resources/adt">{props.t("ADT")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/human-resources/down-time">{props.t("Down Time")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/human-resources/community">{props.t("Community")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/human-resources/msg-discussions">{props.t("Msg / Discussions")}</Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <Link to="/#" className="has-arrow waves-effect text-capitalize">
+                  <span>{props.t("ACCOUNTING")}</span>
+                </Link>
+                <ul>
+                  <li>
+                    <NavLink to="/accounting/dashboard">{props.t("Accounting Dashboard")}</NavLink>
+                  </li>
+                </ul>
+              </li>
 
-                <li>
-                  <Link to="/#" className="has-arrow waves-effect text-capitalize">
-                    <span>{props.t("SALES")}</span>
-                  </Link>
-                  <ul>
-                    <li>
-                      <NavLink to="/sales/dashboard">{props.t("Sales Dashboard")}</NavLink>
-                    </li>
-                  </ul>
-                </li>
-                {
-                user.role !== 'HR' && 
-                user.role !== 'Admin' && 
-                user.role !== 'Production' 
-                // && 
-                // user.role !== 'Sales' && 
-                // user.role !== 'Accounting' && 
-                // user.role !== 'Personnel' 
-                ?
+              <li>
+                <Link to="/#" className="has-arrow waves-effect text-capitalize">
+                  <span>{props.t("SALES")}</span>
+                </Link>
+                <ul>
+                  <li>
+                    <NavLink to="/sales/dashboard">{props.t("Sales Dashboard")}</NavLink>
+                  </li>
+                </ul>
+              </li>
+              {
+                user.role !== 'HR' &&
+                  user.role !== 'Admin' &&
+                  user.role !== 'Production'
+                  // && 
+                  // user.role !== 'Sales' && 
+                  // user.role !== 'Accounting' && 
+                  // user.role !== 'Personnel' 
+                  ?
                   "" :
                   <li className="profile-menu" style={{}}>
                     <NavLink to="/users/Pending" className="waves-effect text-capitalize" >
                       <span>{props.t("TEAM MEMBERS")}</span>
                     </NavLink>
                   </li>
-                }
-              </div>
-            </MetisMenu>
+              }
+            </div>
+          </MetisMenu>
           {/* </ul> */}
         </div>
       </SimpleBar>
@@ -315,5 +315,5 @@ const mapStatetoProps = state => {
   return { error, success, user }
 }
 
-export default 
+export default
   withRouter(connect(mapStatetoProps, {})(withTranslation()(SidebarContent)))

@@ -13,13 +13,13 @@ import {
   Form,
   Spinner
 } from "reactstrap"
-import Dropzone from "components/Common/Dropzone"
+import Dropzone from "../../../../components/Common/Dropzone"
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { Link } from "react-router-dom"
-import "components/modal.scss"
+import "../../../../components/modal.scss"
 import axios from "axios"
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { formatBytes } from "helpers/functions"
+import { formatBytes } from "../../../../helpers/functions"
 import PhotoItem from "./PhotoItem.jsx"
 import { useModal } from "../../../../components/Common/Modal/promise-modal/index.js"
 import { AlertModal } from "../../../../components/Common/Modal/AlertModal"

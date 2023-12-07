@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import MetaTags from "react-meta-tags"
-import React, { useState, useEffect, useRef, useContext } from "react"
+import { useState, useEffect, useRef, useContext } from "react"
 import {
   Container,
   Row,

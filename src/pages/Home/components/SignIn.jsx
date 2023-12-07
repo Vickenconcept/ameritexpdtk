@@ -13,20 +13,20 @@ import Logo from "../../../assets/images/logo-dark.png"
 import { SignupContext } from "../contexts/sign"
 
 import { Row, Col, CardBody, Card, Alert, Container, Label } from "reactstrap"
-import { isUserAuthenticated } from "helpers/fakebackend_helper"
+import { isUserAuthenticated } from "../../../helpers/fakebackend_helper"
 import { useNetStatus } from "../../../context/net"
 import Copyright from "./Copyright"
 
 const SignIn = props => {
-  const {isOnline} = useNetStatus()
+  const { isOnline } = useNetStatus()
   const { up, setUp } = useContext(SignupContext)
   const [data, setData] = useState({ email: "", password: "" })
   const [available, setAvailable] = useState(false)
   const history = useHistory()
 
   useEffect(() => {
-    onChangeField({target: {value: (!isOnline)}}, "offline")
-  },[isOnline])
+    onChangeField({ target: { value: (!isOnline) } }, "offline")
+  }, [isOnline])
 
   const onChangeField = (e, field) => {
     const _data = {
@@ -43,7 +43,7 @@ const SignIn = props => {
   }
 
   useEffect(() => {
-    
+
   }, [props.error])
   useEffect(() => {
     props.apiError("")
@@ -67,23 +67,23 @@ const SignIn = props => {
         </div>
 
         <div className="d-flex justify-content-between align-items-center">
-        <div
-          className="d-flex flex-column justify-content-center h-100 signin-form w-100"
-        >
-          {props.error && props.error && !props.error.toString().startsWith("Error: Request failed with status code") ? (
-            <Alert color="danger">{props.error.toString()}</Alert>
-          ) : ""}
-          {!isOnline &&
-          <Alert color="warning">
-            It's offline state now. <br/>
-            Please check the network status. <br/>
-            Or if you logged in once in 6 hours, you can log in with that user for offline working. 
-          </Alert>
-          }
-          <Alert color="warning">
-            We are upgrading the portal architecture to 2.0, you'll be notified when access is restored.
-          </Alert>
-          {/* <div>
+          <div
+            className="d-flex flex-column justify-content-center h-100 signin-form w-100"
+          >
+            {props.error && props.error && !props.error.toString().startsWith("Error: Request failed with status code") ? (
+              <Alert color="danger">{props.error.toString()}</Alert>
+            ) : ""}
+            {!isOnline &&
+              <Alert color="warning">
+                It's offline state now. <br />
+                Please check the network status. <br />
+                Or if you logged in once in 6 hours, you can log in with that user for offline working.
+              </Alert>
+            }
+            <Alert color="warning">
+              We are upgrading the portal architecture to 2.0, you'll be notified when access is restored.
+            </Alert>
+            {/* <div>
             <label>Username</label>
             <input
               className="form-control"
@@ -103,7 +103,7 @@ const SignIn = props => {
             />
           </div> */}
 
-          {/* <div className="d-flex justify-content-between align-items-center mt-3">
+            {/* <div className="d-flex justify-content-between align-items-center mt-3">
             <div className="form-check mt-3">
               <input type="checkbox" className="form-check-input" />
               <label className="form-check-label">Remember Me</label>
@@ -119,7 +119,7 @@ const SignIn = props => {
               </button>
             </div>
           </div> */}
-          {/* {isOnline&&
+            {/* {isOnline&&
           <div className="mt-5 text-center">
             <p>
               Don&#39;t have an account ?{" "}
@@ -137,9 +137,9 @@ const SignIn = props => {
             </p>
           </div>
           } */}
-          <Copyright />
+            <Copyright />
+          </div>
         </div>
-      </div>
 
       </div>
     </div>
