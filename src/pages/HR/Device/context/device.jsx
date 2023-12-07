@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useEffect, useMemo, useCallback } from "react";
 import deviceAction from "../action";
 
-import { useModal, ModalProvider } from "components/Common/Modal/promise-modal/index.js"
+import { useModal, ModalProvider } from "../../../../components/Common/Modal/promise-modal/index.js"
 import {EditModal} from '../components/EditModal';
 import TypeModal from '../components/TypeModal';
-import {AlertModal} from 'components/Common/Modal/AlertModal';
+import {AlertModal} from '../../../components/Common/Modal/AlertModal';
 
 
 export const DeviceContext = createContext(null);

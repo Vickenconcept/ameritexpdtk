@@ -3,8 +3,8 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, Label } from 
 import {
     FactoryList,
     MachineClassSelect,
-} from "components/Common/Select"
-import AutoCompleteSelect from "components/Common/AutoCompleteSelect"
+} from "../../../components/Common/Select"
+import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
 import Select from "react-select"
 import { useTimerContext } from "../context"
 

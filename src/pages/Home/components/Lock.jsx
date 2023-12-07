@@ -22,8 +22,8 @@ import {
     postSocialLogin,
     updateProfileRequest,
 } from "helpers/fakebackend_helper"
-import { avatar2url } from "helpers/functions"
-import {useNetStatus} from "context/net"
+import { avatar2url } from "../../../helpers/functions"
+import {useNetStatus} from "../../../context/net"
 import Copyright from "./Copyright"
 
 const Lock = (props) => {

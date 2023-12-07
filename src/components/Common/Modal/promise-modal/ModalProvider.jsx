@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import qs from "query-string";
+// import qs from "query-string";
 
 import ModalContainer from "react-modal-promise";
 

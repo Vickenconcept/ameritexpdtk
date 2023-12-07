@@ -19,7 +19,7 @@ import { withRouter } from "react-router-dom"
 import AlbumEditModal from "./components/AlbumModal"
 import { useLoading } from "../../../context/loading"
 import { SortableContainer, SortableElement } from "react-sortable-hoc"
-import { BACKEND } from "../../../helpers/axiosConfig"
+// import { BACKEND } from "./helpers/axiosConfig"
 
 import PhotoList from "./components/PhotoList"
 

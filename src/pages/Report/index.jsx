@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PDFViewer, Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
 import { useParams } from 'react-router-dom';
-import { getLogsToPrintAction, getTimerLogsOfMachine } from '../../actions/timer';
+// import { getLogsToPrintAction, getTimerLogsOfMachine } from '../../actions/timer';
 
 import Logo from "../../assets/images/logo-dark.png"
 

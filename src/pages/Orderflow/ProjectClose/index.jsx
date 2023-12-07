@@ -8,7 +8,7 @@ import "./style.scss"
 import { getProducts } from '../../../actions/timer';
 import { getUsers } from '../../../actions/auth';
 
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 const ProjectClose = (props) => {
   // authUser loading
   return <div className="page-content project-close">

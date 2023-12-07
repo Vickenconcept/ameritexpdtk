@@ -2,7 +2,7 @@ import SidebarContext from "./components/sidebar"
 import DeviceItem from "./components/device"
 import DeviceDetail from "./components/device/detail"
 import { forwardRef } from "react"
-import { useLoading } from "context/loading"
+import { useLoading } from "../../../context/loading"
 import { useMemo, useRef, useEffect, useState } from 'react';
 
 import {useDevice, DeviceContext} from './context/device';

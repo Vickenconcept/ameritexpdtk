@@ -1,5 +1,5 @@
 import axios from "axios"
-import { extractFormData } from "../helpers/functions"
+import { extractFormData } from "../../../helpers/functions"
 import {
   getStoreData,
   updateData,
@@ -32,19 +32,19 @@ export const getJobsAction = async (page, query, tab, city, factory, count = 7, 
   if (!city || city == '') city = 'All';
   const res = await axios.get(
     "/job/get-jobs?page=" +
-      page +
-      "&query=" +
-      query +
-      "&tab=" +
-      tab +
-      "&city=" +
-      city +
-      "&factory=" +
-      factory +
-      "&order=" +
-      order +
-      "&count=" +
-      count
+    page +
+    "&query=" +
+    query +
+    "&tab=" +
+    tab +
+    "&city=" +
+    city +
+    "&factory=" +
+    factory +
+    "&order=" +
+    order +
+    "&count=" +
+    count
   )
   return res.data
 }
@@ -55,33 +55,33 @@ export const getJobsForTimer = async (city, factory, machine, part, isOnline = t
   if (isOnline) {
     const res = await axios.get(
       "/job/get-jobs-timer?city=" +
-        city +
-        "&factory=" +
-        factory +
-        "&machine=" +
-        machine +
-        "&part=" +
-        part
+      city +
+      "&factory=" +
+      factory +
+      "&machine=" +
+      machine +
+      "&part=" +
+      part
     )
     return res.data;
   } else {
     const res = await getStoreData(city, 'Job');
-    const jobs = res.filter(job => 
+    const jobs = res.filter(job =>
       // job.factory == factory && 
-      job.machine == machine && 
+      job.machine == machine &&
       job.part == part
     )
-    const stock_jobs = res.filter (job=>
-      job.stock  
+    const stock_jobs = res.filter(job =>
+      job.stock
     )
-    return {jobs, stock_jobs};
+    return { jobs, stock_jobs };
   }
 }
 
 export const getJobsForMP = async (city, machines, parts) => {
   const res = await axios.post(
-    "/job/get-jobs-mp", 
-    { 
+    "/job/get-jobs-mp",
+    {
       city, // city name
       machines, // array of machine ids
       parts // array of part ids

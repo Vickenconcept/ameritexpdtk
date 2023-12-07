@@ -6,8 +6,8 @@ import SimpleBar from "simplebar-react"
 //i18n
 import { withTranslation } from "react-i18next"
 
-import { useNetStatus } from "context/net"
-import { useLocalDB } from "context/localDB"
+import { useNetStatus } from "../../../context/net"
+import { useLocalDB } from "../../../context/localDB"
 
 import 'simplebar-react/dist/simplebar.min.css';
 

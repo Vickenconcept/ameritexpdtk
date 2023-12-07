@@ -3,12 +3,12 @@ import {
   startTimerAction,
   stopTimerAction,
   updateTimerAction,
-} from "../../../actions/timer"
-import { BACKEND } from "../../../helpers/axiosConfig"
+} from "../../../../actions/timer"
+import { BACKEND } from "./helpers/axiosConfig"
 import { useState, useEffect, forwardRef, useRef, useMemo, useCallback } from "react"
 
-import { formatMSeconds, formatSeconds } from "../../../helpers/functions"
-import { lbsToTons } from "../../../helpers/functions"
+import { formatMSeconds, formatSeconds } from "../../../../../../helpers/functions"
+import { lbsToTons } from "../../../../../../helpers/functions"
 
 import { getJobsForTimer } from "../../../actions/job"
 

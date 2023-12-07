@@ -14,7 +14,7 @@ import { SignupContext } from "../contexts/sign"
 
 import { Row, Col, CardBody, Card, Alert, Container, Label } from "reactstrap"
 import { isUserAuthenticated } from "helpers/fakebackend_helper"
-import { useNetStatus } from "context/net"
+import { useNetStatus } from "../../../context/net"
 import Copyright from "./Copyright"
 
 const SignIn = props => {

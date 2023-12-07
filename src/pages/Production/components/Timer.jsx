@@ -1,5 +1,5 @@
 import "./style.scss"
-import { formatSeconds } from "../../../helpers/functions"
+import { formatSeconds } from "../../../../../../helpers/functions"
 import { Fragment, useState } from "react"
 import {
   Dropdown,
@@ -13,7 +13,7 @@ import {
   startTimerAction,
   updateTimerAction,
   deleteProductAction,
-} from "../../../actions/timer"
+} from "../../../../actions/timer"
 import { useEffect, useMemo, useCallback, useRef, forwardRef } from "react"
 
 import { createPortal } from "react-dom"
@@ -21,7 +21,7 @@ import { createPortal } from "react-dom"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
-import { lbsToTons } from "../../../helpers/functions"
+import { lbsToTons } from "../../../../../../helpers/functions"
 import Editable from "react-bootstrap-editable"
 
 import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
@@ -384,10 +384,10 @@ const Timer = props => {
           <div className="timer-name">
             <div
               className={`time ${props.status == "Pending" && !props.times.length
-                  ? "text-zero"
-                  : isExpired
-                    ? "text-success"
-                    : "text-danger"
+                ? "text-zero"
+                : isExpired
+                  ? "text-success"
+                  : "text-danger"
                 }`}
             >
               {timeText}

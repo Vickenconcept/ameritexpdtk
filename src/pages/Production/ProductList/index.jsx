@@ -4,7 +4,11 @@ import {
   FactoryList,
   MachineClassSelect,
 } from "../../../components/Common/Select"
+<<<<<<< HEAD
 import { cities, factories } from "../../../helpers/globals"
+=======
+// import { cities, factories } from "helpers/globals"
+>>>>>>> f8c5af692af795a9605abc53e4e2910d3739829d
 import { useContext, Fragment, useState, useMemo } from "react"
 import MetaTags from "react-meta-tags"
 import { Container } from "reactstrap"

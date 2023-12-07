@@ -19,7 +19,7 @@ import {
   CitySelect,
   FactoryList,
   MachineClassSelect,
-} from "components/Common/Select"
+} from "../../../components/Common/Select"
 
 import {
   mcRule as rule,

@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react"
-import { cities, factories } from "../../../helpers/globals"
+// import { cities, factories } from "../../../helpers/globals"
 import { useState } from "react"
 import MetaTags from "react-meta-tags"
 import {

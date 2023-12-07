@@ -5,10 +5,10 @@ import {
   Container, Modal, ModalHeader, ModalBody, ModalFooter, Button
 } from "reactstrap"
 import "./style.scss"
-import { getProducts } from '../../../actions/timer';
-import { getUsers } from '../../../actions/auth';
+// import { getProducts } from '../../../../actions/timer';
+// import { getUsers } from '../../../actions/auth';
 
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 
 const Safety101 = (props) => {
   // authUser loading
@@ -32,7 +32,7 @@ const Safety101 = (props) => {
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </Container>

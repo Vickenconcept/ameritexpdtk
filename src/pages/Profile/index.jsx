@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { cities, factories } from '../../helpers/globals.js';
+// import { cities, factories } from '../../helpers/globals.js';
 import MetaTags from 'react-meta-tags';
 import {
   Container, Modal, ModalHeader, ModalBody, ModalFooter, Button

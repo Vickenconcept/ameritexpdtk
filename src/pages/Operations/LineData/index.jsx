@@ -1,14 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
+<<<<<<< HEAD
 import { cities, factories } from '../../../helpers/globals';
+=======
+// // // import { cities, factories } from 'helpers/globals';
+>>>>>>> f8c5af692af795a9605abc53e4e2910d3739829d
 import MetaTags from 'react-meta-tags';
 import {
   Container, Modal, ModalHeader, ModalBody, ModalFooter, Button
 } from "reactstrap"
 import "./style.scss"
+<<<<<<< HEAD
 import { getProducts } from '../../../actions/timer';
 import { getUsers } from '../../../actions/auth';
+=======
+// // import { getProducts } from '../../../../actions/timer';
+// // import { getUsers } from '../../../actions/auth';
+>>>>>>> f8c5af692af795a9605abc53e4e2910d3739829d
 
-import { useMemo } from 'react';
+// // import { useMemo } from 'react';
 
 const LineData = (props) => {
   // authUser loading

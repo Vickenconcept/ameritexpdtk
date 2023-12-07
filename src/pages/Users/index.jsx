@@ -14,15 +14,16 @@ import { Link, useHistory, useParams } from "react-router-dom"
 import axios from 'axios';
 import decode from "jwt-decode"
 
-import "../../assets/scss/chartist.scss";
+// import "../../assets/scss/chartist.scss";
+import "../../chartist/dist/scss/chartist.scss";
 import "./style.scss"
 //i18n
 import { withTranslation } from "react-i18next"
 import SweetAlert from 'react-bootstrap-sweetalert';
-import { removeUser, updateUser } from '../../actions/auth';
+import { removeUser, updateUser } from '../../../actions/auth';
 import Select from "react-select"
-import Pagination from '../../components/Common/Pagination';
-import { LoadingContext } from "../../context/loading"
+import Pagination from '../../../components/Common/Pagination';
+import { LoadingContext } from "../../../context/loading"
 
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"

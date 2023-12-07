@@ -1,4 +1,4 @@
-import { avatar2url } from "helpers/functions"
+import { avatar2url } from "../../../helpers/functions"
 import sampleAvatar from "assets/images/users/avatar-2.jpg"
 
 export default ({user, name = null}) => {

@@ -13,7 +13,7 @@ import { Link } from "react-router-dom"
 import axios from 'axios';
 import decode from "jwt-decode"
 
-import "../../assets/scss/chartist.scss";
+import "../../chartist/dist/scss/chartist.scss";
 
 //i18n
 import { withTranslation } from "react-i18next"

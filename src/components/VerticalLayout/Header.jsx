@@ -31,7 +31,7 @@ import './scss/header.scss'
 //i18n
 import { withTranslation } from "react-i18next"
 
-import { useNetStatus } from "context/net"
+import { useNetStatus } from "../../../context/net"
 
 // Redux Store
 import {

@@ -15,7 +15,7 @@ import { withRouter, Link } from "react-router-dom"
 import sampleAvatar from "../../../assets/images/person.svg"
 
 // users
-import { avatar2url } from "helpers/functions"
+import { avatar2url } from "../../../helpers/functions"
 import {setLockStatues} from "../../../store/auth/login/actions"
 
 const ProfileMenu = props => {

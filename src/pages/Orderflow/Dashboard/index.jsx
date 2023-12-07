@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { cities, factories } from '../../../helpers/globals';
+// // import { cities, factories } from 'helpers/globals';
 import MetaTags from 'react-meta-tags';
 import {
   Container, Modal, ModalHeader, ModalBody, ModalFooter, Button
 } from "reactstrap"
 import "./style.scss"
-import { getProducts } from '../../../actions/timer';
-import { getUsers } from '../../../actions/auth';
+// import { getProducts } from '../../../../actions/timer';
+// import { getUsers } from '../../../actions/auth';
 
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 const OrderFlowDashboard = (props) => {
   // authUser loading
   return <div className="page-content orderflow-dashboard">
@@ -35,8 +35,8 @@ const OrderFlowDashboard = (props) => {
             </div>
           </div>
           <div>
-            {props.user.role == 'Personnel' ? 
-            <h4 className='mt-5'>Not authorized to see content</h4> :""}
+            {props.user.role == 'Personnel' ?
+              <h4 className='mt-5'>Not authorized to see content</h4> : ""}
           </div>
         </div>
       </div>
@@ -50,4 +50,4 @@ const mapStatetoProps = state => {
   return { user }
 }
 
-export default withRouter(connect(mapStatetoProps,{})(OrderFlowDashboard))
+export default withRouter(connect(mapStatetoProps, {})(OrderFlowDashboard))
