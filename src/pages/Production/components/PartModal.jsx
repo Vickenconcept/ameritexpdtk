@@ -15,7 +15,7 @@ import { useState } from "react";
 import "components//modal.scss";
 import MediaPreview from "./MediaPreview";
 
-import {useNetStatus} from "context/net"
+import {useNetStatus} from "../../../context/net"
 
 const PartModal = (props) => {
   const { item, createItem, updateItem, toggle, isOpen, id, reload, idx } = props;

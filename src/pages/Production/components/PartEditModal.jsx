@@ -18,7 +18,7 @@ import {
     CitySelect,
     FactoryList,
     MachineClassSelect,
-} from "components/Common/Select"
+} from "../../../components/Common/Select"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 

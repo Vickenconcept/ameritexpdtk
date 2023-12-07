@@ -1,5 +1,5 @@
 import moment from "moment"
-import { BACKEND, FILE_BACKEND } from "./helpers/axiosConfig"
+import { BACKEND, FILE_BACKEND } from "./axiosConfig"
 
 export const formatMSeconds = val => {
   val = Math.floor(val * 1000);

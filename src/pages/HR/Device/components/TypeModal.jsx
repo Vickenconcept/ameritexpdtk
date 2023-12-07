@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { createModal } from "react-modal-promise";
 
-import { useLoading } from "context/loading";
+import { useLoading } from "../../../context/loading";
 import Toggle from './Toggle.component.jsx'
 import './switch.scss'
 

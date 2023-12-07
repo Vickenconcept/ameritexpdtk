@@ -1,5 +1,5 @@
 import { useDevice } from "../../context/device.js"
-import {getFormattedDate} from "helpers/functions"
+import {getFormattedDate} from "../../../helpers/functions"
 import { memo, useEffect, useMemo, useState } from "react"
 import moment from "moment"
 import { Row, Col } from "reactstrap"

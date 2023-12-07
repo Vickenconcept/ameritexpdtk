@@ -21,8 +21,8 @@ import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import SweetAlert from 'react-bootstrap-sweetalert'
 
-import { LoadingContext } from "context/loading"
-import { avatar2url } from "helpers/functions"
+import { LoadingContext } from "../../../context/loading"
+import { avatar2url } from "../../../helpers/functions"
 
 //Import Breadcrumb
 

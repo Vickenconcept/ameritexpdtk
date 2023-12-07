@@ -16,14 +16,14 @@ import {
 import Dropzone from "components/Common/Dropzone"
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { Link } from "react-router-dom"
-import "components/modal.scss"
+import "../../../components/modal.scss"
 import axios from "axios"
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
-import {formatBytes} from "helpers/functions"
+import {formatBytes} from "../../../helpers/functions"
 import PhotoItem from "./PhotoItem"
-import { useModal } from "components/Common/Modal/promise-modal/index.js"
-import {AlertModal} from "components/Common/Modal/AlertModal"
-import {ConfirmModal} from "components/Common/Modal/ConfirmModal"
+import { useModal } from "../../../../components/Common/Modal/promise-modal/index.js"
+import {AlertModal} from "../../../components/Common/Modal/AlertModal"
+import {ConfirmModal} from "../../../components/Common/Modal/ConfirmModal"
 
 import {FILE_BACKEND} from "./helpers/axiosConfig.js"
 

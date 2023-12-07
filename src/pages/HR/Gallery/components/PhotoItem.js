@@ -1,8 +1,8 @@
 import {Card, Row, Col} from "reactstrap"
 
-import { useModal } from "components/Common/Modal/promise-modal/index.js"
-import {AlertModal} from "components/Common/Modal/AlertModal"
-import {ConfirmModal} from "components/Common/Modal/ConfirmModal"
+import { useModal } from "../../../../components/Common/Modal/promise-modal/index.js"
+import {AlertModal} from "../../../components/Common/Modal/AlertModal"
+import {ConfirmModal} from "../../../components/Common/Modal/ConfirmModal"
 
 const PhotoItem = ({name, image, tag, removeItem, updateItem, edit=true, removed=false, modified=false, idx, redoItem, uploading=false}) => {
 

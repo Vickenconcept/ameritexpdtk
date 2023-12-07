@@ -4,7 +4,7 @@ import { mc2factory, classifyCategory } from "helpers/globals"
 
 import Timer from "pages/Production/components/Timer"
 import TimerLogs from "./TimerLogs"
-import { useLoading } from "context/loading"
+import { useLoading } from "../../../context/loading"
 
 import { useTimerContext } from "../context"
 

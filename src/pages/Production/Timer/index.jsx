@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react"
-import { cities, factories, classify, factory2mc, mc2factory, checkMcRule, machineClasses } from "helpers/globals"
+import { cities, factories, classify, factory2mc, mc2factory, checkMcRule, machineClasses } from "../../../helpers/globals"
 import { useState } from "react"
 import MetaTags from "react-meta-tags"
 import {
@@ -20,36 +20,36 @@ import {
   getProducts,
   updateTimerAction,
   createPartAction,
-} from "actions/timer"
+} from "../../../actions/timer"
 import { useMemo, useCallback } from "react"
 import SweetAlert from "react-bootstrap-sweetalert"
 
-import AutoCompleteSelect from "components/Common/AutoCompleteSelect"
-import { getCurrentTime } from "helpers/functions"
+import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
+import { getCurrentTime } from "../../../helpers/functions"
 import {
   CitySelect,
   CityVisualSelect,
   FactoryList,
-} from "components/Common/Select"
+} from "../../../components/Common/Select"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import TimerLogs from "./component/TimerLogs"
-import Pagination from "components/Common/Pagination"
+import Pagination from "../../../components/Common/Pagination"
 import ProductionClock from "./component/ProductionClock"
 
-import { LoadingContext } from "context/loading"
+import { LoadingContext } from "../../../context/loading"
 import PartEditModal from "../components/PartEditModal"
 
-import { useLocalDB } from "context/localDB"
-import { useNetStatus } from "context/net"
+import { useLocalDB } from "../../../context/localDB"
+import { useNetStatus } from "../../../context/net"
 
 import ControllerModal from "../components/ControllerModal"
-import { useTimerUser } from "context/timer"
+import { useTimerUser } from "../../../context/timer"
 
-import { getActiveCities, canGetAllCities, getActiveFactories, canGetAllFactories } from "helpers/user_role"
+import { getActiveCities, canGetAllCities, getActiveFactories, canGetAllFactories } from "../../../helpers/user_role"
 
-import "components/modal.scss"
-import {offset} from 'helpers/globals.js'
+import "../../../components/modal.scss"
+import {offset} from '../../../helpers/globals.js'
 import FactoryFilter from "../components/FactoryFilter"
 import TimerEditModal from "./component/TimerEditModal"
 import TimerList from "./component/TimerList"

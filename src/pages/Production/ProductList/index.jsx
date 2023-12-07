@@ -3,8 +3,8 @@ import {
   CityVisualSelect,
   FactoryList,
   MachineClassSelect,
-} from "components/Common/Select"
-import { cities, factories } from "helpers/globals"
+} from "../../../components/Common/Select"
+// import { cities, factories } from "helpers/globals"
 import { useContext, Fragment, useState, useMemo } from "react"
 import MetaTags from "react-meta-tags"
 import { Container } from "reactstrap"
@@ -16,13 +16,13 @@ import {
   createPartAction,
   editProductAction,
   getProducts,
-} from "actions/timer"
+} from "../../../actions/timer"
 import { useEffect } from "react"
 import SweetAlert from "react-bootstrap-sweetalert"
 
-import Pagination from "components/Common/Pagination"
+import Pagination from "../../../components/Common/Pagination"
 
-import { LoadingContext } from "context/loading"
+import { LoadingContext } from "../../../context/loading"
 
 import PartModal from "../components/PartModal"
 import MachineModal from "../components/MachineModal"
@@ -33,14 +33,14 @@ import PartEditModal from "../components/PartEditModal"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
-import { useNetStatus } from "context/net"
-import { useLocalDB } from "context/localDB"
+import { useNetStatus } from "../../../context/net"
+import { useLocalDB } from "../../../context/localDB"
 import {
   getActiveCities,
   canGetAllCities,
   getActiveFactories,
   canGetAllFactories,
-} from "helpers/user_role"
+} from "../../../helpers/user_role"
 import FactoryFilter from "../components/FactoryFilter"
 
 const ProductList = props => {

@@ -17,15 +17,15 @@ import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
 import AlbumEditModal from "./components/AlbumModal"
-import { useLoading } from "context/loading"
+import { useLoading } from "../../../context/loading"
 import { SortableContainer, SortableElement } from "react-sortable-hoc"
-import { BACKEND } from "./helpers/axiosConfig"
+// import { BACKEND } from "./helpers/axiosConfig"
 
 import PhotoList from "./components/PhotoList"
 
-import { useModal } from "components/Common/Modal/promise-modal/index.js"
-import { AlertModal } from "components/Common/Modal/AlertModal"
-import { ConfirmModal } from "components/Common/Modal/ConfirmModal"
+import { useModal } from "../../../components/Common/Modal/promise-modal/index.jsx"
+import { AlertModal } from "../../../components/Common/Modal/AlertModal"
+import { ConfirmModal } from "../../../components/Common/Modal/ConfirmModal"
 
 function clearGallery() {
   if (document.querySelector(".lg-backdrop"))

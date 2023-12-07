@@ -3,18 +3,18 @@ import {
   startTimerAction,
   stopTimerAction,
   updateTimerAction,
-} from "actions/timer"
+} from "../../../../actions/timer"
 import { BACKEND } from "./helpers/axiosConfig"
 import { useState, useEffect, forwardRef, useRef, useMemo, useCallback } from "react"
 
-import { formatMSeconds, formatSeconds } from "../../../helpers/functions"
-import { lbsToTons } from "../../../helpers/functions"
+import { formatMSeconds, formatSeconds } from "../../../../../../helpers/functions"
+import { lbsToTons } from "../../../../../../helpers/functions"
 
 import { getJobsForTimer } from "actions/job"
 
-import { useLocalDB } from "context/localDB"
-import { useNetStatus } from "context/net"
-import {useTimerUser} from 'context/timer'
+import { useLocalDB } from "../../../context/localDB"
+import { useNetStatus } from "../../../context/net"
+import {useTimerUser} from '../../../context/timer'
 import { useTimerContext } from "../Timer/context"
 import { StoppingReason } from "pages/Production/components/type"
 

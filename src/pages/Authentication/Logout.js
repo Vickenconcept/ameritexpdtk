@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
 import { logoutUser } from "../../store/actions"
-import { useNetStatus } from 'context/net'
+import { useNetStatus } from '../../../context/net'
 
 const Logout = props => {
   const history = props.history

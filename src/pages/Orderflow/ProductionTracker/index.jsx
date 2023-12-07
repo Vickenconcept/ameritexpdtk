@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react"
-import { cities, factories } from "helpers/globals"
+import { cities, factories } from "../../../helpers/globals"
 import MetaTags from "react-meta-tags"
 import {
   Container,
@@ -11,37 +11,37 @@ import {
   Label,
 } from "reactstrap"
 import "./style.scss"
-import { CitySelect, FactoryList } from "components/Common/Select"
-import { getProducts } from "actions/timer"
-import AutoCompleteSelect from "components/Common/AutoCompleteSelect"
+import { CitySelect, FactoryList } from "../../../components/Common/Select"
+import { getProducts } from "../../../actions/timer"
+import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
 import { array } from "prop-types"
 import { arraySplice } from "redux-form"
-import { getUsers } from "actions/auth"
+import { getUsers } from "../../../actions/auth"
 
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
-import { avatar2url } from "helpers/functions"
+import { avatar2url } from "../../../helpers/functions"
 
 import {
   createJobAction,
   deleteJobAction,
   editJobAction,
   getJobsAction,
-} from "actions/job"
+} from "../../../actions/job"
 import sampleAvatar from "../../../assets/images/person.svg"
 
 import "../../Production/Timer/style.scss"
 
-import { LoadingContext } from "context/loading"
+import { LoadingContext } from "../../../context/loading"
 import { useMemo } from "react"
-import { useNetStatus } from "context/net"
+import { useNetStatus } from "../../../context/net"
 import {
   getActiveCities,
   canGetAllCities,
   getActiveFactories,
   canGetAllFactories,
-} from "helpers/user_role"
+} from "../../../helpers/user_role"
 
 const ProductionTracker = props => {
   const { user } = props

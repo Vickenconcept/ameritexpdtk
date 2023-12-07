@@ -6,8 +6,8 @@ import moment from "moment";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { createModal } from "react-modal-promise";
 
-import { useLoading } from "context/loading";
-import "components/modal.scss"
+import { useLoading } from "../../../context/loading";
+import "../../../components/modal.scss"
 import { connect } from "react-redux"
 
 import { cities } from "helpers/globals";

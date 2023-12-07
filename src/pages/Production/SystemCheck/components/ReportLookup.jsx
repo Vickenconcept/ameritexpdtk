@@ -8,8 +8,8 @@ import {
 } from "helpers/globals"
 import {
   getProducts,
-} from "actions/timer"
-import { updateReport } from "actions/auth.js"
+} from "../../../../actions/timer"
+import { updateReport } from "../../../actions/auth.js"
 import Multiselect from 'multiselect-react-dropdown';
 import DateRangePicker from "react-bootstrap-daterangepicker"
 import NewWindow from 'react-new-window'

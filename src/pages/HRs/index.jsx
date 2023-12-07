@@ -13,12 +13,12 @@ import { Link } from "react-router-dom"
 import axios from 'axios';
 import decode from "jwt-decode"
 
-import "chartist/dist/scss/chartist.scss";
+import "../../chartist/dist/scss/chartist.scss";
 
 //i18n
 import { withTranslation } from "react-i18next"
 import SweetAlert from 'react-bootstrap-sweetalert';
-import { removeUser, updateUser } from 'actions/auth';
+import { removeUser, updateUser } from '../../actions/auth';
 
 const Users = props => {
 

@@ -1,9 +1,9 @@
 import {createContext, useContext, useState, useEffect, useMemo} from 'react';
 import { machineClasses, classifyCategory, mc2factory, mc2category, factory2mc } from 'helpers/globals';
-import { getProducts, deleteProductAction, refreshTimerAction, updateTimerAction } from 'actions/timer';
-import { useNetStatus } from 'context/net';
+import { getProducts, deleteProductAction, refreshTimerAction, updateTimerAction } from '../../../../actions/timer';
+import { useNetStatus } from '../../../context/net';
 import { socket, event_source } from "./helpers/axiosConfig"
-import { useLoading } from 'context/loading';
+import { useLoading } from '../../../context/loading';
 
 const TimerContext = createContext();
 export default TimerContext;

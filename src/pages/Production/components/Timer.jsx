@@ -1,5 +1,5 @@
 import "./style.scss"
-import { formatSeconds } from "../../../helpers/functions"
+import { formatSeconds } from "../../../../../../helpers/functions"
 import { Fragment, useState } from "react"
 import {
   Dropdown,
@@ -13,7 +13,7 @@ import {
   startTimerAction,
   updateTimerAction,
   deleteProductAction,
-} from "actions/timer"
+} from "../../../../actions/timer"
 import { useEffect, useMemo, useCallback, useRef, forwardRef } from "react"
 
 import { createPortal } from "react-dom"
@@ -21,19 +21,19 @@ import { createPortal } from "react-dom"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
-import { lbsToTons } from "../../../helpers/functions"
+import { lbsToTons } from "../../../../../../helpers/functions"
 import Editable from "react-bootstrap-editable"
 
-import AutoCompleteSelect from "components/Common/AutoCompleteSelect"
+import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
 // import { NewWindow } from "react-window-open"
 
 import TimerController from "./TimerController"
 import { BACKEND } from "./helpers/axiosConfig"
 
 import "./timer.scss"
-import { useNetStatus } from "context/net"
-import { useTimerUser } from "context/timer"
-import { canChangeJob, canChangePart } from "helpers/user_role"
+import { useNetStatus } from "../../../context/net"
+import { useTimerUser } from "../../../context/timer"
+import { canChangeJob, canChangePart } from "../../../helpers/user_role"
 import { useTimerContext } from "../Timer/context"
 
 const NewWindow = props => {

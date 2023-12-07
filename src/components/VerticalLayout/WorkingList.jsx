@@ -6,8 +6,8 @@ import {
   TabContent,
   TabPane,
 } from 'reactstrap';
-import { useTimerUser } from "context/timer"
-import { avatar2url } from "helpers/functions"
+import { useTimerUser } from "../../../context/timer"
+import { avatar2url } from "../../../helpers/functions"
 import sampleAvatar from "../../assets/images/person.svg"
 
 const WorkingList = (props) => {

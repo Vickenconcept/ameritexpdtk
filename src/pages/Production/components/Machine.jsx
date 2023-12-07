@@ -1,13 +1,13 @@
 import "./style.scss"
-import { formatSeconds } from "../../../helpers/functions"
+import { formatSeconds } from "../../../../../../helpers/functions"
 import { useState } from "react"
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { deleteProductAction } from "actions/timer";
+import { deleteProductAction } from "../../../../actions/timer";
 
 import {getMediaType, getMediaPreview, getMediaUrl} from "./MediaUtils"
 
 import { connect } from "react-redux"
-import {useNetStatus} from "context/net"
+import {useNetStatus} from "../../../context/net"
 
 const Machine = (props) => {
 

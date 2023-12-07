@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useMemo } from "react"
-import { cities, factories } from "helpers/globals"
+// import { cities, factories } from "helpers/globals"
 import MetaTags from "react-meta-tags"
 import {
   Container,
@@ -15,7 +15,7 @@ import {
   CardTitle
 } from "reactstrap"
 import "./style.scss"
-import { getReports as getUserReport } from "actions/auth"
+import { getReports as getUserReport } from "../../../helpers/functions"
 
 import "./style.scss"
 import { connect } from "react-redux"

@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react"
-import { cities, factories } from "helpers/globals"
+// import { cities, factories } from "helpers/globals"
 import { useState } from "react"
 import MetaTags from "react-meta-tags"
 import {
@@ -21,19 +21,19 @@ import {
   getProducts,
   startTimerAction,
   updateTimerAction,
-} from "actions/timer"
+} from "../../../../actions/timer"
 import { useMemo } from "react"
 import "./style.scss"
-import AutoCompleteSelect from "components/Common/AutoCompleteSelect"
-import { getCurrentTime, lbsToTons } from "helpers/functions"
-import { CitySelect, FactoryList } from "components/Common/Select"
+import AutoCompleteSelect from "../../../components/Common/AutoCompleteSelect"
+import { getCurrentTime, lbsToTons } from "../../../helpers/functions"
+import { CitySelect, FactoryList } from "../../../components/Common/Select"
 
-import { LoadingContext } from "context/loading"
+import { LoadingContext } from "../../../context/loading"
 // import logodarkImg from "../../../assets/images/logo-dark.png"
 import logoLightImg from "../../../assets/images/logo-light.png"
 import { control } from "leaflet"
 
-import { formatMSeconds } from "../../../helpers/functions"
+import { formatMSeconds } from "../../../../../../helpers/functions"
 const ControlTimer = props => {
   const [timers, setTimers] = useState([])
   const { loading, setLoading } = useContext(LoadingContext)

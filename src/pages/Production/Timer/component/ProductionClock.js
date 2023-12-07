@@ -1,12 +1,12 @@
 import { getCityAction, updateCityAction } from "actions/city"
-import { startProductionTimeAction } from "actions/timer"
-import { formatSeconds, getCurrentTime } from "helpers/functions"
+import { startProductionTimeAction } from "../../../../actions/timer"
+import { formatSeconds, getCurrentTime } from "../../../helpers/functions"
 import { useEffect, useState } from "react"
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap"
-import { useNetStatus } from "context/net"
-import { useTimerUser } from "context/timer"
+import { useNetStatus } from "../../../context/net"
+import { useTimerUser } from "../../../context/timer"
 
-import {offset} from 'helpers/globals.js'
+import {offset} from '../../../helpers/globals.js'
 
 const ProductionClock = props => {
   const [now, setNow] = useState(new Date())

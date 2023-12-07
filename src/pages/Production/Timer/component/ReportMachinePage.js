@@ -1,6 +1,6 @@
-import { getTimerLogsOfMachine } from "actions/timer"
+import { getTimerLogsOfMachine } from "../../../../actions/timer"
 import { useEffect, useRef, useState, useMemo } from "react"
-import { formatSeconds, lbsToTons, formatSecondsLetter } from "helpers/functions"
+import { formatSeconds, lbsToTons, formatSecondsLetter } from "../../../helpers/functions"
 
 import { BACKEND } from "./helpers/axiosConfig"
 import moment from "moment"

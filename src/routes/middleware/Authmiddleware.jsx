@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import { Route, Redirect } from "react-router-dom"
 import decode from "jwt-decode"
-import { roleToNumber } from "common/functions"
+import { roleToNumber } from "../../common/functions"
 
 import { useEffect } from "react"
 

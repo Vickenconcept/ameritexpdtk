@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, createContext } from "react"
-import { socket, event_source } from "./helpers/axiosConfig"
+import { socket, event_source } from "../helpers/axiosConfig"
 
 const NetStatus = createContext({isOnline:true})
 

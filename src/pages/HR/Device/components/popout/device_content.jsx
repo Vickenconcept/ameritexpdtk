@@ -1,5 +1,5 @@
 import { useDevice } from "../../context/device"
-import {getFormattedDate} from "helpers/functions"
+import {getFormattedDate} from "../../../helpers/functions"
 import { memo, useMemo } from "react"
 
 import './style.scss'
