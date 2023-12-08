@@ -1,14 +1,14 @@
-import { useDevice } from "../../context/device.js"
-import {getFormattedDate} from "../../../helpers/functions"
+import { useDevice } from "../../context/device.jsx"
+// import {getFormattedDate} from "../../../helpers/functions"
 import { memo, useEffect, useMemo, useState } from "react"
 import moment from "moment"
 import { Row, Col } from "reactstrap"
 
-import DeviceContent from './device_content.jsx'
+// import DeviceContent from './device_content.jsx'
 
 import './style.scss'
 
-export default ({item}) => {
+export default ({ item }) => {
 
     const {
         consts,
@@ -22,14 +22,14 @@ export default ({item}) => {
 
     const [loading, setLoading] = useState(false)
 
-    let device = {...item}
+    let device = { ...item }
     const device_type = getDeviceType(item?.type)
 
     const onDecommission = async () => {
         setDeviceLoading(true)
         await deviceAction.decommissionDevice(device?._id)
         reloadAll()
-        setLoading (true)
+        setLoading(true)
         await getLogs()
         setLoading(false)
     }
@@ -38,7 +38,7 @@ export default ({item}) => {
         setDeviceLoading(true)
         await deviceAction.recommissionDevice(device?._id)
         reloadAll()
-        setLoading (true)
+        setLoading(true)
         await getLogs()
         setLoading(false)
     }
@@ -47,7 +47,7 @@ export default ({item}) => {
         setDeviceLoading(true)
         await deviceAction.deleteDevice(device?._id)
         reloadAll()
-        setLoading (true)
+        setLoading(true)
         await getLogs()
         setLoading(false)
     }
@@ -76,10 +76,10 @@ export default ({item}) => {
     }
 
     useEffect(async () => {
-        setLoading (true)
+        setLoading(true)
         await getLogs()
         setLoading(false)
-    },[device?._id])
+    }, [device?._id])
 
     // useEffect(() => {
     //     setPage(0)
@@ -90,13 +90,13 @@ export default ({item}) => {
             return log?.note?.toLowerCase().includes(search.toLowerCase())
         })
         return res?.slice(page * pageOption, (page + 1) * pageOption)
-    },[logs, page, pageOption, search])
+    }, [logs, page, pageOption, search])
 
     const totalPages = useMemo(() => {
         const tmp = Math.ceil(logs.length / pageOption)
         if (page > tmp) setPage(tmp)
         return tmp
-    },[logs, pageOption])
+    }, [logs, pageOption])
 
     const onPagePrev = () => {
         if (page > 0) {
@@ -191,21 +191,21 @@ export default ({item}) => {
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div className="pagination">
                     <div className="pagination-item" onClick={onPagePrev}>
                         <i className="mdi mdi-chevron-left"></i>
                     </div>
-                    {totalPages > 0 && 
-                    <div className="pagination-info">
-                        <div className="pagination-item active">
-                            {page + 1}
+                    {totalPages > 0 &&
+                        <div className="pagination-info">
+                            <div className="pagination-item active">
+                                {page + 1}
+                            </div>
+                            of
+                            <div className="pagination-item">
+                                {totalPages}
+                            </div>
                         </div>
-                        of
-                        <div className="pagination-item">
-                            {totalPages}
-                        </div>
-                    </div>
                     }
                     <div className="pagination-item" onClick={onPageNext}>
                         <i className="mdi mdi-chevron-right"></i>
@@ -215,24 +215,24 @@ export default ({item}) => {
                 <div className="dropdown-item-action">
                     <div className="dropdown-item-action-item">
                         {device?.status == consts['DEVICE_STATUS_PENDING'] ? (
-                            <button className="btn btn-error" disabled={deviceLoading} onClick={() => {onRecommission()}}>
+                            <button className="btn btn-error" disabled={deviceLoading} onClick={() => { onRecommission() }}>
                                 Recommission
                             </button>
                         ) : (
-                            <button className="btn btn-error" disabled={deviceLoading || device?.status !== consts['DEVICE_STATUS_IDLE']} onClick={() => {onDecommission()}} >
+                            <button className="btn btn-error" disabled={deviceLoading || device?.status !== consts['DEVICE_STATUS_IDLE']} onClick={() => { onDecommission() }} >
                                 Decommission
                             </button>
                         )}
                     </div>
                     <div className="dropdown-item-action-item">
-                        {!device?.history && 
-                            <button className="btn btn-gray" disabled={deviceLoading} onClick={() => {onDeleteDevice()}}>
+                        {!device?.history &&
+                            <button className="btn btn-gray" disabled={deviceLoading} onClick={() => { onDeleteDevice() }}>
                                 Delete Device
                             </button>
                         }
                     </div>
                     <div className="dropdown-item-action-item">
-                        <button className="btn btn-primary" disabled={deviceLoading} onClick={() => {openEdit()}}>
+                        <button className="btn btn-primary" disabled={deviceLoading} onClick={() => { openEdit() }}>
                             Edit Device
                         </button>
                     </div>

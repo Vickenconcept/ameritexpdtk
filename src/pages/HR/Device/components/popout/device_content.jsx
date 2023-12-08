@@ -1,10 +1,10 @@
 import { useDevice } from "../../context/device"
-import {getFormattedDate} from "../../../helpers/functions"
+import { getFormattedDate } from "../../../../../helpers/functions"
 import { memo, useMemo } from "react"
 
 import './style.scss'
 
-export default ({device}) => {
+export default ({ device }) => {
 
     const {
         consts,
@@ -24,7 +24,7 @@ export default ({device}) => {
         // if (isNaN(t)) return null
         // let tobj = new Date(t)
         // return `${tobj.getFullYear()}-${tobj.getMonth()}-${tobj.getDate()}`
-    },[device.createdAt])
+    }, [device.createdAt])
 
     return (
         <>

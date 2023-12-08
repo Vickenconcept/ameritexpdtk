@@ -1,14 +1,14 @@
-import { useDevice } from "../../context/device.js"
-import {getFormattedDate} from "../../../helpers/functions"
+import { useDevice } from "../../context/device.jsx"
+// import {getFormattedDate} from "../../../helpers/functions"
 import { memo, useEffect, useMemo } from "react"
 
 import { Row, Col } from "reactstrap"
 
-import DeviceContent from './device_content.jsx'
+// import DeviceContent from './device_content.jsx'
 
 import './style.scss'
 
-export default ({item}) => {
+export default ({ item }) => {
 
     const {
         consts,
@@ -38,28 +38,28 @@ export default ({item}) => {
                             </span>
                             {device?.type?.name}
                         </Col>
-                        
+
                         <Col xs={12} md={6} className="dropdown-item-body-item">
                             <span className="dropdown-item-body-item-title">
                                 Device Serial:
                             </span>
                             {device?.sn}
                         </Col>
-                        
+
                         <Col xs={12} md={6} className="dropdown-item-body-item">
                             <span className="dropdown-item-body-item-title">
                                 Device Name:
                             </span>
                             {device?.name}
                         </Col>
-                        
+
                         <Col xs={12} md={6} className="dropdown-item-body-item">
                             <span className="dropdown-item-body-item-title">
                                 Last Updated:
                             </span>
-                            {device?.updatedAt?.substring(0,10) || ""}
+                            {device?.updatedAt?.substring(0, 10) || ""}
                         </Col>
-                        
+
                         <Col xs={12} md={6} className="dropdown-item-body-item">
                             <div className="dropdown-item-body-item-title text-second">
                                 Last Known User:
@@ -80,10 +80,10 @@ export default ({item}) => {
                                     <>CHECK-IN REQUESTED</>
                                 )}
                                 {` `}
-                                {device?.history?.createdAt?.substring(0,10) || ""}
+                                {device?.history?.createdAt?.substring(0, 10) || ""}
                             </div>
                         </Col>
-                        
+
                         <Col xs={12} md={6} className="dropdown-item-body-item">
                             <div className="dropdown-item-body-item-image">
                                 <img src={device?.type?.image} />

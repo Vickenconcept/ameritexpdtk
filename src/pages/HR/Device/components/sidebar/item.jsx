@@ -1,13 +1,13 @@
-import { TimeDiffText } from "../util/index.js"
-import ItemUser from './user.js'
+import { TimeDiffText } from "../util/index.jsx"
+import ItemUser from './user.jsx'
 import Dropdown from './dropdown.jsx'
-import RequestPopout from '../popout/request.js'
-import DevicePopout from '../popout/device.js'
-import DeviceManagePopout from '../popout/deviceManage.js'
+import RequestPopout from '../popout/request.jsx'
+import DevicePopout from '../popout/device.jsx'
+import DeviceManagePopout from '../popout/deviceManage.jsx'
 import { useMemo, useState, forwardRef, useImperativeHandle } from "react"
-import { useDevice } from "../../context/device.js"
+import { useDevice } from "../../context/device.jsx"
 
-export default forwardRef(({now, item, status, entry, user, type}, ref) => {
+export default forwardRef(({ now, item, status, entry, user, type }, ref) => {
 
     const entry_date = useMemo(() => {
         let t = Date.parse(entry)
@@ -21,7 +21,7 @@ export default forwardRef(({now, item, status, entry, user, type}, ref) => {
             minute: tobj.getMinutes(),
             second: tobj.getSeconds()
         }
-    },[entry])
+    }, [entry])
 
     const {
         device_types,
@@ -33,7 +33,7 @@ export default forwardRef(({now, item, status, entry, user, type}, ref) => {
     } = useDevice()
 
     const onClickApprove = async (e) => {
-        console.log ({
+        console.log({
             status: item.device?.status,
             consts
         })
@@ -89,89 +89,88 @@ export default forwardRef(({now, item, status, entry, user, type}, ref) => {
 
     return (
         <>
-        <div className={`sidebar-item-context-item ${
-            type=='device_manage' ? (
-            (item?.status === consts['DEVICE_STATUS_PENDING']) ? 'pending':
-            (item?.status === consts['DEVICE_STATUS_USING']) ? 'using':
-            (item?.status === consts['DEVICE_STATUS_IDLE']) ? 'idle':
-            (item?.status === consts['DEVICE_STATUS_BROKEN']) ? 'broken':
-            (item?.status === consts['DEVICE_STATUS_LOST']) ? 'lost':
-            ''
+            <div className={`sidebar-item-context-item ${type == 'device_manage' ? (
+                (item?.status === consts['DEVICE_STATUS_PENDING']) ? 'pending' :
+                    (item?.status === consts['DEVICE_STATUS_USING']) ? 'using' :
+                        (item?.status === consts['DEVICE_STATUS_IDLE']) ? 'idle' :
+                            (item?.status === consts['DEVICE_STATUS_BROKEN']) ? 'broken' :
+                                (item?.status === consts['DEVICE_STATUS_LOST']) ? 'lost' :
+                                    ''
             ) : ('')
-        }`} ref={ref}>
-            <Dropdown 
-            disabled={ type === 'device_manage'}
-            toggler={
-                (user && type !== 'device_manage')?
-                <ItemUser user={user} name={item?.status==consts['DEVICE_STATUS_USING'] ? item.name : null}/>
-                :
-                <div className='device-user' onClick={()=>setMenu(!menu)}>
-                    <div className='avatar d-flex justify-content-center align-items-center'>
-                        <i className={`fas fa-chevron-${menu?'down':'right'}`} style={{opacity: type !== 'device_manage' ? 0 : 1}}></i>
-                    </div>
-                    <div className='name'>
-                        {item?.name}
-                    </div>
-                </div>
-            }>
-                {type=='device' && (
-                    <DevicePopout item={item} />
+                }`} ref={ref}>
+                <Dropdown
+                    disabled={type === 'device_manage'}
+                    toggler={
+                        (user && type !== 'device_manage') ?
+                            <ItemUser user={user} name={item?.status == consts['DEVICE_STATUS_USING'] ? item.name : null} />
+                            :
+                            <div className='device-user' onClick={() => setMenu(!menu)}>
+                                <div className='avatar d-flex justify-content-center align-items-center'>
+                                    <i className={`fas fa-chevron-${menu ? 'down' : 'right'}`} style={{ opacity: type !== 'device_manage' ? 0 : 1 }}></i>
+                                </div>
+                                <div className='name'>
+                                    {item?.name}
+                                </div>
+                            </div>
+                    }>
+                    {type == 'device' && (
+                        <DevicePopout item={item} />
+                    )}
+                    {type == 'request' && (
+                        <RequestPopout item={item} />
+                    )}
+                </Dropdown>
+
+                {type == 'device' && (
+                    (user && item.status == consts['DEVICE_STATUS_USING']) ?
+                        <div className='info'>
+                            <div className='info-status'>
+                                <div className=''>0</div>
+                                <div className='me-1'>
+                                    <i className='fas fa-comments'></i>
+                                </div>
+                            </div>
+                            <div className='info-timer'>
+                                <TimeDiffText now={now} entry={entry} />
+                            </div>
+                        </div>
+                        :
+                        <div className='info'>
+                            <div className='info-status'>
+                                {item?.sn}
+                            </div>
+                        </div>
                 )}
-                {type=='request' && (
-                    <RequestPopout item={item} />
-                )}
-            </Dropdown>
-            
-            {type=='device' && (
-                (user && item.status == consts['DEVICE_STATUS_USING']) ?
-                <div className='info'>
-                    <div className='info-status'>
-                        <div className=''>0</div>
-                        <div className='me-1'>
-                            <i className='fas fa-comments'></i>
+
+                {type == 'device_manage' && (
+                    <div className='info'>
+                        <div className='info-status'>
+                            {item?.sn}
                         </div>
                     </div>
-                    <div className='info-timer'>
-                        <TimeDiffText now={now} entry={entry} />
+                )}
+                {type == 'request' && (
+                    <div className='info'>
+                        <div className='info-timer'>
+                            <a onClick={onClickApprove}>Approve</a>
+                            <span style={{ margin: '0 5px' }}>||</span>
+                            <a onClick={onClickDeny}>Deny</a>
+                        </div>
                     </div>
-                </div>
-                :
-                <div className='info'>
-                    <div className='info-status'>
-                        {item?.sn}
-                    </div>
-                </div>
-            )}
-            
-            {type=='device_manage' && (
-                <div className='info'>
-                    <div className='info-status'>
-                        {item?.sn}
-                    </div>
-                </div>
-            )}
-            {type=='request' && (
-                <div className='info'>
-                    <div className='info-timer'>
-                        <a onClick={onClickApprove}>Approve</a>
-                        <span style={{margin: '0 5px'}}>||</span>
-                        <a onClick={onClickDeny}>Deny</a>
-                    </div>
-                </div>
-            )}
-        </div>
-        {type=='device_manage' && (
-            <div className={`dropdown-menu dropdown-menu-lg p-0 sidebar-header-dropdown device-manage-popup ${menu?'show':''}`}
-                
-            >
-                <a className="close-popout" onClick={() => {setMenu(false)}}>
-                    &times;
-                </a>
-                {menu &&
-                <DeviceManagePopout item={item} />
-                }
+                )}
             </div>
-        )}
+            {type == 'device_manage' && (
+                <div className={`dropdown-menu dropdown-menu-lg p-0 sidebar-header-dropdown device-manage-popup ${menu ? 'show' : ''}`}
+
+                >
+                    <a className="close-popout" onClick={() => { setMenu(false) }}>
+                        &times;
+                    </a>
+                    {menu &&
+                        <DeviceManagePopout item={item} />
+                    }
+                </div>
+            )}
         </>
     )
 })
