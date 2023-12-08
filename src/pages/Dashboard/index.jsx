@@ -40,7 +40,10 @@ import SparkLine from "../AllCharts/sparkline/sparkline";
 import SparkLine1 from "../AllCharts/sparkline/sparkline1";
 import Salesdonut from "../AllCharts/apex/salesdonut";
 
-import "../../chartist/dist/scss/chartist.scss";
+// import "../../chartist/dist/scss/chartist.scss";
+
+import "../../assets/scss/chartist.scss"
+
 
 //i18n
 import { withTranslation } from "react-i18next"

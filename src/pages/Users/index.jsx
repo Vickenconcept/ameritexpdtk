@@ -14,8 +14,9 @@ import { Link, useHistory, useParams } from "react-router-dom"
 import axios from 'axios';
 import decode from "jwt-decode"
 
-// import "../../assets/scss/chartist.scss";
-import "../../chartist/dist/scss/chartist.scss";
+import "../../assets/scss/chartist.scss";
+// import "../../chartist/dist/scss/chartist.scss";
+
 import "./style.scss"
 //i18n
 import { withTranslation } from "react-i18next"

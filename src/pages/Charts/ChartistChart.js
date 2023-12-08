@@ -15,7 +15,8 @@ import LineAreaChart from "../AllCharts/chartist/lineareachart"
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 
-import "../../chartist/dist/scss/chartist.scss"
+// import "../../chartist/dist/scss/chartist.scss"
+
 import "../../assets/scss/chartist.scss"
 
 const ChartistChart = () => {

@@ -414,7 +414,7 @@ const ProductList = props => {
   return (
     <div
       className="page-content"
-    // style={{ padding: "86px calc(0.5rem / 2) 60px calc(11.5rem / 2)" }}
+    // style={{ padding: "86px calc(0.5rem / 2) 60px calc(1math.div(1.5rem, 2))" }}
     >
       <MetaTags>
         <title>Timer Page</title>

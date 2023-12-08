@@ -55,7 +55,9 @@ export const TimerUserProvider = (props) => {
 	},[timerValue])
 
 	const setTimerValueCtx = (city, tid, status, time, ctx) => {
-		if (!time || time == NaN) return
+		// if (!time || time == NaN) return
+		if (!time || isNaN(time)) return;
+
 		let newTimerValue = {...timerValue}
 		if (!newTimerValue[city]) newTimerValue[city] = {}
 		newTimerValue[city][tid] = {status, time, ...ctx}
@@ -66,7 +68,8 @@ export const TimerUserProvider = (props) => {
 
 	const setProductionTime = (city, t, start) => {
 		console.log ("TIMER: Set production time", city, t, start)
-		if (!city || !t || t == NaN) return
+		// if (!city || !t || t == NaN) return
+		if (!city || !t || isNaN(t)) return;
 		setProdTime (prev=>{
 			let newState = {...prev}
 			newState[city] = {productionTime:t, start}
